@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CaféFlow">
+<meta name="theme-color" content="#e8a04a">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQ2Fmw6lGbG93IFBPUyIsInNob3J0X25hbWUiOiJDYWbDqUZsb3ciLCJzdGFydF91cmwiOiJjYWZlZmxvd192NC5odG1sIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzFhMTkxNiIsInRoZW1lX2NvbG9yIjoiI2U4YTA0YSIsIm9yaWVudGF0aW9uIjoibGFuZHNjYXBlIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0F4T1RJZ01Ua3lJajRLSUNBOGNtVmpkQ0IzYVdSMGFEMGlNVGt5SWlCb1pXbG5hSFE5SWpFNU1pSWdjbmc5SWpNMklpQm1hV3hzUFNJak1XRXhPVEUySWk4K0NpQWdQSEpsWTNRZ2QybGtkR2c5SWpFNU1pSWdhR1ZwWjJoMFBTSXhPVElpSUhKNFBTSXpOaUlnWm1sc2JEMGlkWEpzS0NObmNtRmtLU0l2UGdvZ0lEeGtaV1p6UGdvZ0lDQWdQSEpoWkdsaGJFZHlZV1JwWlc1MElHbGtQU0puY21Ga0lpQmplRDBpTlRBbElpQmplVDBpTkRBbElpQnlQU0kyTUNVaVBnb2dJQ0FnSUNBOGMzUnZjQ0J2Wm1aelpYUTlJakFsSWlCemRHOXdMV052Ykc5eVBTSWpNbUV5T0RJMUlpOCtDaUFnSUNBZ0lEeHpkRzl3SUc5bVpuTmxkRDBpTVRBd0pTSWdjM1J2Y0MxamIyeHZjajBpSXpCbU1HVXdZeUl2UGdvZ0lDQWdQQzl5WVdScFlXeEhjbUZrYVdWdWRENEtJQ0E4TDJSbFpuTStDaUFnUENFdExTQkRkWEFnWW05a2VTQXRMVDRLSUNBOGNHRjBhQ0JrUFNKTk5UUWdPREFnVVRVeUlERXpNQ0E1TmlBeE16VWdVVEUwTUNBeE16QWdNVE00SURnd0lGb2lJR1pwYkd3OUlpTmxPR0V3TkdFaUx6NEtJQ0E4Y0dGMGFDQmtQU0pOTlRZZ09EQWdVVFUwSURFeU9DQTVOaUF4TXpNZ1VURXpPQ0F4TWpnZ01UTTJJRGd3SUZvaUlHWnBiR3c5SWlOak5EZGhNakFpTHo0S0lDQThJUzB0SUVOMWNDQnlhVzBnTFMwK0NpQWdQR1ZzYkdsd2MyVWdZM2c5SWprMklpQmplVDBpT0RBaUlISjRQU0kwTWlJZ2NuazlJakV3SWlCbWFXeHNQU0lqWlRoaE1EUmhJaTgrQ2lBZ1BHVnNiR2x3YzJVZ1kzZzlJamsySWlCamVUMGlPREFpSUhKNFBTSXpPQ0lnY25rOUlqZ2lJR1pwYkd3OUlpTXhZVEJoTURBaUx6NEtJQ0E4SVMwdElFTnZabVpsWlNCemRYSm1ZV05sSUMwdFBnb2dJRHhsYkd4cGNITmxJR040UFNJNU5pSWdZM2s5SWpnd0lpQnllRDBpTXpZaUlISjVQU0kzSWlCbWFXeHNQU0lqTTJReFlUQXdJaTgrQ2lBZ1BDRXRMU0JUZEdWaGJTQnNhVzVsY3lBdExUNEtJQ0E4Y0dGMGFDQmtQU0pOT0RBZ05qSWdVVGM0SURVeUlEZ3lJRFEwSUZFNE5pQXpOaUE0TkNBeU9DSWdjM1J5YjJ0bFBTSWpaVGhoTURSaElpQnpkSEp2YTJVdGQybGtkR2c5SWpNaUlHWnBiR3c5SW01dmJtVWlJSE4wY205clpTMXNhVzVsWTJGd1BTSnliM1Z1WkNJZ2IzQmhZMmwwZVQwaUxqY2lMejRLSUNBOGNHRjBhQ0JrUFNKTk9UWWdOVGdnVVRrMElEUTRJRGs0SURRd0lGRXhNRElnTXpJZ01UQXdJREkwSWlCemRISnZhMlU5SWlObE9HRXdOR0VpSUhOMGNtOXJaUzEzYVdSMGFEMGlNeUlnWm1sc2JEMGlibTl1WlNJZ2MzUnliMnRsTFd4cGJtVmpZWEE5SW5KdmRXNWtJaUJ2Y0dGamFYUjVQU0l1TnlJdlBnb2dJRHh3WVhSb0lHUTlJazB4TVRJZ05qSWdVVEV4TUNBMU1pQXhNVFFnTkRRZ1VURXhPQ0F6TmlBeE1UWWdNamdpSUhOMGNtOXJaVDBpSTJVNFlUQTBZU0lnYzNSeWIydGxMWGRwWkhSb1BTSXpJaUJtYVd4c1BTSnViMjVsSWlCemRISnZhMlV0YkdsdVpXTmhjRDBpY205MWJtUWlJRzl3WVdOcGRIazlJaTQzSWk4K0NpQWdQQ0V0TFNCSVlXNWtiR1VnTFMwK0NpQWdQSEJoZEdnZ1pEMGlUVEV6T0NBNU1DQlJNVFl5SURrd0lERTJNaUF4TURnZ1VURTJNaUF4TWpZZ01UTTRJREV5TmlJZ2MzUnliMnRsUFNJalpUaGhNRFJoSWlCemRISnZhMlV0ZDJsa2RHZzlJamdpSUdacGJHdzlJbTV2Ym1VaUlITjBjbTlyWlMxc2FXNWxZMkZ3UFNKeWIzVnVaQ0l2UGdvZ0lEd2hMUzBnVTJGMVkyVnlJQzB0UGdvZ0lEeGxiR3hwY0hObElHTjRQU0k1TmlJZ1kzazlJakUwTUNJZ2NuZzlJalV5SWlCeWVUMGlNVEFpSUdacGJHdzlJaU5qTkRkaE1qQWlMejRLSUNBOFpXeHNhWEJ6WlNCamVEMGlPVFlpSUdONVBTSXhNemdpSUhKNFBTSTFNaUlnY25rOUlqa2lJR1pwYkd3OUlpTmxPR0V3TkdFaUx6NEtJQ0E4Wld4c2FYQnpaU0JqZUQwaU9UWWlJR041UFNJeE16Y2lJSEo0UFNJME5DSWdjbms5SWpZaUlHWnBiR3c5SWlOak5EZGhNakFpTHo0S0lDQThJUzB0SUVGd2NDQnVZVzFsSUMwdFBnb2dJRHgwWlhoMElIZzlJamsySWlCNVBTSXhOeklpSUhSbGVIUXRZVzVqYUc5eVBTSnRhV1JrYkdVaUlHWnZiblF0Wm1GdGFXeDVQU0pIWlc5eVoybGhMSE5sY21sbUlpQm1iMjUwTFhOcGVtVTlJakU0SWlCbWIyNTBMWGRsYVdkb2REMGlZbTlzWkNJZ1ptbHNiRDBpSTJVNFlUQTBZU0lnYkdWMGRHVnlMWE53WVdOcGJtYzlJaklpUGtOQlJzT0pSa3hQVnp3dmRHVjRkRDRLUEM5emRtYysiLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCIsInB1cnBvc2UiOiJhbnkgbWFza2FibGUifV19">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj4KICA8cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjM2IiBmaWxsPSIjMWExOTE2Ii8+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSIzNiIgZmlsbD0idXJsKCNncmFkKSIvPgogIDxkZWZzPgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBjeD0iNTAlIiBjeT0iNDAlIiByPSI2MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmEyODI1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBmMGUwYyIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPCEtLSBDdXAgYm9keSAtLT4KICA8cGF0aCBkPSJNNTQgODAgUTUyIDEzMCA5NiAxMzUgUTE0MCAxMzAgMTM4IDgwIFoiIGZpbGw9IiNlOGEwNGEiLz4KICA8cGF0aCBkPSJNNTYgODAgUTU0IDEyOCA5NiAxMzMgUTEzOCAxMjggMTM2IDgwIFoiIGZpbGw9IiNjNDdhMjAiLz4KICA8IS0tIEN1cCByaW0gLS0+CiAgPGVsbGlwc2UgY3g9Ijk2IiBjeT0iODAiIHJ4PSI0MiIgcnk9IjEwIiBmaWxsPSIjZThhMDRhIi8+CiAgPGVsbGlwc2UgY3g9Ijk2IiBjeT0iODAiIHJ4PSIzOCIgcnk9IjgiIGZpbGw9IiMxYTBhMDAiLz4KICA8IS0tIENvZmZlZSBzdXJmYWNlIC0tPgogIDxlbGxpcHNlIGN4PSI5NiIgY3k9IjgwIiByeD0iMzYiIHJ5PSI3IiBmaWxsPSIjM2QxYTAwIi8+CiAgPCEtLSBTdGVhbSBsaW5lcyAtLT4KICA8cGF0aCBkPSJNODAgNjIgUTc4IDUyIDgyIDQ0IFE4NiAzNiA4NCAyOCIgc3Ryb2tlPSIjZThhMDRhIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iLjciLz4KICA8cGF0aCBkPSJNOTYgNTggUTk0IDQ4IDk4IDQwIFExMDIgMzIgMTAwIDI0IiBzdHJva2U9IiNlOGEwNGEiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNyIvPgogIDxwYXRoIGQ9Ik0xMTIgNjIgUTExMCA1MiAxMTQgNDQgUTExOCAzNiAxMTYgMjgiIHN0cm9rZT0iI2U4YTA0YSIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii43Ii8+CiAgPCEtLSBIYW5kbGUgLS0+CiAgPHBhdGggZD0iTTEzOCA5MCBRMTYyIDkwIDE2MiAxMDggUTE2MiAxMjYgMTM4IDEyNiIgc3Ryb2tlPSIjZThhMDRhIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gU2F1Y2VyIC0tPgogIDxlbGxpcHNlIGN4PSI5NiIgY3k9IjE0MCIgcng9IjUyIiByeT0iMTAiIGZpbGw9IiNjNDdhMjAiLz4KICA8ZWxsaXBzZSBjeD0iOTYiIGN5PSIxMzgiIHJ4PSI1MiIgcnk9IjkiIGZpbGw9IiNlOGEwNGEiLz4KICA8ZWxsaXBzZSBjeD0iOTYiIGN5PSIxMzciIHJ4PSI0NCIgcnk9IjYiIGZpbGw9IiNjNDdhMjAiLz4KICA8IS0tIEFwcCBuYW1lIC0tPgogIDx0ZXh0IHg9Ijk2IiB5PSIxNzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2U4YTA0YSIgbGV0dGVyLXNwYWNpbmc9IjIiPkNBRsOJRkxPVzwvdGV4dD4KPC9zdmc+">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj4KICA8cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjM2IiBmaWxsPSIjMWExOTE2Ii8+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSIzNiIgZmlsbD0idXJsKCNncmFkKSIvPgogIDxkZWZzPgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBjeD0iNTAlIiBjeT0iNDAlIiByPSI2MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmEyODI1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBmMGUwYyIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPCEtLSBDdXAgYm9keSAtLT4KICA8cGF0aCBkPSJNNTQgODAgUTUyIDEzMCA5NiAxMzUgUTE0MCAxMzAgMTM4IDgwIFoiIGZpbGw9IiNlOGEwNGEiLz4KICA8cGF0aCBkPSJNNTYgODAgUTU0IDEyOCA5NiAxMzMgUTEzOCAxMjggMTM2IDgwIFoiIGZpbGw9IiNjNDdhMjAiLz4KICA8IS0tIEN1cCByaW0gLS0+CiAgPGVsbGlwc2UgY3g9Ijk2IiBjeT0iODAiIHJ4PSI0MiIgcnk9IjEwIiBmaWxsPSIjZThhMDRhIi8+CiAgPGVsbGlwc2UgY3g9Ijk2IiBjeT0iODAiIHJ4PSIzOCIgcnk9IjgiIGZpbGw9IiMxYTBhMDAiLz4KICA8IS0tIENvZmZlZSBzdXJmYWNlIC0tPgogIDxlbGxpcHNlIGN4PSI5NiIgY3k9IjgwIiByeD0iMzYiIHJ5PSI3IiBmaWxsPSIjM2QxYTAwIi8+CiAgPCEtLSBTdGVhbSBsaW5lcyAtLT4KICA8cGF0aCBkPSJNODAgNjIgUTc4IDUyIDgyIDQ0IFE4NiAzNiA4NCAyOCIgc3Ryb2tlPSIjZThhMDRhIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iLjciLz4KICA8cGF0aCBkPSJNOTYgNTggUTk0IDQ4IDk4IDQwIFExMDIgMzIgMTAwIDI0IiBzdHJva2U9IiNlOGEwNGEiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNyIvPgogIDxwYXRoIGQ9Ik0xMTIgNjIgUTExMCA1MiAxMTQgNDQgUTExOCAzNiAxMTYgMjgiIHN0cm9rZT0iI2U4YTA0YSIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii43Ii8+CiAgPCEtLSBIYW5kbGUgLS0+CiAgPHBhdGggZD0iTTEzOCA5MCBRMTYyIDkwIDE2MiAxMDggUTE2MiAxMjYgMTM4IDEyNiIgc3Ryb2tlPSIjZThhMDRhIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gU2F1Y2VyIC0tPgogIDxlbGxpcHNlIGN4PSI5NiIgY3k9IjE0MCIgcng9IjUyIiByeT0iMTAiIGZpbGw9IiNjNDdhMjAiLz4KICA8ZWxsaXBzZSBjeD0iOTYiIGN5PSIxMzgiIHJ4PSI1MiIgcnk9IjkiIGZpbGw9IiNlOGEwNGEiLz4KICA8ZWxsaXBzZSBjeD0iOTYiIGN5PSIxMzciIHJ4PSI0NCIgcnk9IjYiIGZpbGw9IiNjNDdhMjAiLz4KICA8IS0tIEFwcCBuYW1lIC0tPgogIDx0ZXh0IHg9Ijk2IiB5PSIxNzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2U4YTA0YSIgbGV0dGVyLXNwYWNpbmc9IjIiPkNBRsOJRkxPVzwvdGV4dD4KPC9zdmc+">
+<title>CaféFlow POS</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0e0c;--bg2:#1a1916;--bg3:#242220;
+  --surface:#2a2825;--surface2:#323028;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --text:#f0ece4;--text2:#a09890;--text3:#6a6258;
+  --accent:#e8a04a;--green:#4caf7d;--red:#e05252;
+  --r:12px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;}
+body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
+.screen{display:none;width:100vw;height:100vh;}
+.screen.active{display:flex;}
+
+/* WELCOME */
+#sw{flex-direction:column;background:var(--bg);}
+.sw-top{display:flex;align-items:center;justify-content:space-between;padding:32px 56px 0;flex-shrink:0;}
+.sw-logo{font-family:'DM Serif Display',serif;font-size:56px;color:var(--accent);letter-spacing:1px;}
+.sw-langs{display:flex;gap:8px;}
+.sw-cards{flex:1;display:flex;align-items:center;justify-content:center;gap:48px;padding:32px 80px 48px;}
+.wcard{flex:1;max-width:500px;height:360px;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;cursor:pointer;transition:all .22s;border:2px solid var(--border2);}
+.wcard.server{background:var(--bg2);}
+.wcard.server:hover{border-color:var(--accent);background:var(--bg3);transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.5);}
+.wcard.owner{background:var(--surface);}
+.wcard.owner:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.5);}
+.wcard-icon{font-size:80px;line-height:1;pointer-events:none;}
+.wcard-title{font-family:'DM Serif Display',serif;font-size:30px;color:var(--text);pointer-events:none;}
+.wcard-sub{font-size:15px;color:var(--text2);pointer-events:none;}
+.wcard-arrow{padding:10px 36px;border-radius:30px;border:2px solid var(--accent);color:var(--accent);font-size:16px;font-weight:700;pointer-events:none;transition:all .2s;}
+.wcard:hover .wcard-arrow{background:var(--accent);color:#1a1400;}
+.lbtn{padding:5px 12px;border-radius:16px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.lbtn.on{background:var(--accent);border-color:var(--accent);color:#1a1400;font-weight:700;}
+@media(max-width:700px){.sw-cards{flex-direction:column;gap:20px;padding:20px 24px 32px;}.wcard{height:auto;padding:32px 24px;width:100%;max-width:100%;}.sw-top{padding:20px 24px 0;}.sw-logo{font-size:38px;}}
+
+
+/* HISTORY PANEL */
+.hist-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;}
+.hist-overlay.open{display:flex;}
+.top-item-row{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);}
+.top-item-row:last-child{border-bottom:none;}
+.top-rank{font-size:20px;font-weight:800;color:var(--text3);min-width:32px;text-align:center;}
+.top-rank.r1{color:#ffd700;}.top-rank.r2{color:#c0c0c0;}.top-rank.r3{color:#cd7f32;}
+.top-item-name{flex:1;font-size:15px;font-weight:600;}
+.top-item-name .ar{font-size:12px;color:var(--text2);display:block;margin-top:2px;}
+.top-bar-wrap{flex:2;background:var(--surface);border-radius:4px;overflow:hidden;height:8px;}
+.top-bar{height:8px;background:linear-gradient(90deg,#4cff7a,var(--accent));border-radius:4px;transition:width .4s;}
+.top-qty{font-size:14px;font-weight:700;color:#4cff7a;min-width:48px;text-align:right;}
+.top-rev{font-size:13px;color:var(--accent);min-width:70px;text-align:right;}
+
+.hist-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;width:680px;max-width:95vw;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;}
+.hist-hdr{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);}
+.hist-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--accent);}
+.hist-close{background:transparent;border:none;color:var(--text2);font-size:22px;cursor:pointer;padding:4px 8px;}
+.hist-close:hover{color:var(--text);}
+.hist-filters{display:flex;gap:10px;padding:16px 24px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.hist-filters input,.hist-filters select{padding:8px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:13px;outline:none;}
+.hist-filters input:focus,.hist-filters select:focus{border-color:var(--accent);}
+.hfbtn{padding:8px 16px;border-radius:var(--rs);border:none;background:var(--accent);color:#1a1400;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;}
+.hist-body{flex:1;overflow-y:auto;padding:20px 24px;}
+.hist-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.hist-stat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:14px 18px;}
+.hist-stat h4{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+.hist-stat .hval{font-size:24px;font-weight:700;color:var(--accent);}
+.hist-by-srv{display:flex;flex-direction:column;gap:8px;}
+.hbs-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);}
+.hbs-name{font-size:14px;font-weight:600;color:var(--text);}
+.hbs-info{font-size:13px;color:var(--text2);}
+.hbs-total{font-size:15px;font-weight:700;color:var(--green);}
+.hist-nodata{color:var(--text3);font-size:14px;text-align:center;padding:32px;}
+
+/* PIN */
+#sp{flex-direction:column;align-items:center;justify-content:center;gap:20px;position:relative;}
+.pin-back{position:absolute;top:20px;left:20px;background:transparent;border:1px solid var(--border2);color:var(--text2);padding:8px 16px;border-radius:var(--rs);cursor:pointer;font-family:inherit;font-size:14px;}
+body.ar .pin-back{left:auto;right:20px;}
+.pin-back:hover{background:var(--surface);}
+.pin-title{font-family:'DM Serif Display',serif;font-size:26px;}
+.pin-sub{font-size:14px;color:var(--text2);}
+.dots{display:flex;gap:14px;}
+.dot{width:14px;height:14px;border-radius:50%;background:var(--surface2);border:2px solid var(--border2);transition:all .15s;}
+.dot.on{background:var(--accent);border-color:var(--accent);}
+.pin-err{color:var(--red);font-size:14px;min-height:18px;text-align:center;}
+.numpad{display:grid;grid-template-columns:repeat(3,76px);gap:10px;}
+.nb{height:76px;border-radius:var(--r);border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-size:22px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;justify-content:center;}
+.nb:hover{background:var(--surface);}
+.nb:active{transform:scale(.93);}
+.nb.del{font-size:18px;color:var(--text2);}
+.nb.z{grid-column:2;}
+
+/* OWNER LOGIN */
+#sol{flex-direction:column;align-items:center;justify-content:center;}
+.lbox{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:48px 40px;width:380px;}
+.lbox-logo{font-family:'DM Serif Display',serif;font-size:26px;color:var(--accent);text-align:center;margin-bottom:4px;}
+.lbox-sub{text-align:center;color:var(--text2);font-size:14px;margin-bottom:28px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:11px;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
+.fg input,.fg select{width:100%;padding:11px 13px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;}
+.fg input:focus,.fg select:focus{border-color:var(--accent);}
+.fg select option{background:var(--bg3);}
+.btn-p{width:100%;padding:13px;background:var(--accent);color:#1a1400;border:none;border-radius:var(--rs);font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
+.btn-p:hover{background:#f0b060;}
+.lerr{color:var(--red);font-size:13px;text-align:center;margin-top:10px;min-height:18px;}
+.back-lnk{display:block;text-align:center;margin-top:14px;color:var(--text3);font-size:13px;cursor:pointer;}
+.back-lnk:hover{color:var(--text2);}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 22px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;}
+.tbar-logo{font-family:'DM Serif Display',serif;font-size:32px;color:var(--accent);}
+.tbar-info{font-size:13px;color:var(--text2);}
+.tbar-info span{color:var(--text);font-weight:500;}
+#srv-name{color:#4cff7a;font-size:20px;font-weight:700;font-family:'DM Serif Display',serif;letter-spacing:0.3px;}
+#tp-srv-info{font-size:13px;color:var(--text2);}
+.tbar-r{display:flex;gap:8px;align-items:center;}
+.tbar-langs{display:flex;gap:3px;}
+.btn-sm{padding:8px 14px;border-radius:var(--rs);border:1px solid var(--border2);background:transparent;color:var(--text);font-family:inherit;font-size:13px;cursor:pointer;transition:all .15s;}
+.btn-sm:hover{background:var(--surface);}
+.btn-sm.red:hover{background:rgba(224,82,82,.12);border-color:var(--red);color:var(--red);}
+.btn-sm.acc{background:var(--accent);border-color:var(--accent);color:#1a1400;font-weight:600;}
+.btn-sm.acc:hover{background:#f0b060;}
+#clk,#clk2{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+.clk-date{font-size:15px;color:var(--accent);font-weight:700;white-space:nowrap;letter-spacing:.3px;}
+.clk-time{font-size:13px;color:#4cff7a;font-variant-numeric:tabular-nums;font-weight:600;letter-spacing:.5px;}
+
+/* POS */
+#spos{flex-direction:column;}
+.pos-body{display:flex;flex:1;overflow:hidden;}
+.menu-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.mgrid{flex:1;overflow-y:auto;padding:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;align-content:start;scrollbar-width:thin;}
+.mi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .18s;display:flex;flex-direction:column;overflow:hidden;}
+.mi:hover{border-color:var(--accent);transform:translateY(-2px);}
+.mi:active{transform:scale(.96);}
+.mi-body{padding:10px 14px 14px;}
+.mi-emoji{font-size:34px;text-align:center;padding:18px 14px 8px;}
+.mi-name{font-size:13px;font-weight:600;margin-bottom:4px;line-height:1.3;}
+.mi-price{font-size:15px;color:var(--accent);font-weight:600;}
+.mi-desc{font-size:11px;color:var(--text3);margin-top:3px;line-height:1.4;}
+.mi-name-ar{font-size:11px;color:var(--text2);font-weight:400;}
+
+/* ORDER */
+.opanel{width:320px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;}
+body.ar .opanel{border-left:none;border-right:1px solid var(--border);}
+.op-hdr{padding:16px 18px 12px;border-bottom:1px solid var(--border);}
+.op-title{font-family:'DM Serif Display',serif;font-size:20px;}
+.oi-list{flex:1;overflow-y:auto;padding:10px 14px;scrollbar-width:thin;}
+.oi{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--border);}
+.oi:last-child{border-bottom:none;}
+.qbtn{width:26px;height:26px;border-radius:6px;border:1px solid var(--border2);background:var(--surface);color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.qbtn:hover{background:var(--surface2);}
+.oi-qn{font-size:14px;font-weight:600;min-width:18px;text-align:center;}
+.oi-name{flex:1;font-size:13px;font-weight:500;}
+.oi-price{font-size:13px;color:var(--accent);font-weight:600;white-space:nowrap;}
+.oi-rm{color:var(--text3);font-size:15px;cursor:pointer;padding:2px 4px;border:none;background:none;}
+.oi-rm:hover{color:var(--red);}
+.oempty{text-align:center;color:var(--text3);font-size:14px;padding:36px 16px;line-height:1.6;}
+.op-foot{padding:14px 18px;border-top:1px solid var(--border);}
+.tot-row{display:flex;justify-content:space-between;font-size:18px;font-weight:600;color:var(--text);padding:6px 0;}
+.tot-row span:last-child{color:var(--accent);}
+.onote{width:100%;padding:9px 11px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:13px;resize:none;outline:none;margin:10px 0;}
+.onote:focus{border-color:var(--accent);}
+.oact{display:flex;gap:8px;}
+.obtn{flex:1;padding:13px;border-radius:var(--rs);border:none;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;}
+.obtn.cl{background:var(--surface);color:var(--text2);}
+.obtn.cl:hover{background:var(--surface2);}
+.obtn.pr{background:var(--accent);color:#1a1400;}
+.obtn.pr:hover{background:#f0b060;}
+
+/* LOCK */
+#slk{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:50;flex-direction:row;}
+.lk-left{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:var(--bg);padding:40px;}
+.lk-av{width:76px;height:76px;border-radius:50%;background:var(--surface2);border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:var(--accent);}
+.lk-name{font-family:'DM Serif Display',serif;font-size:24px;}
+.lk-sub{font-size:14px;color:var(--text2);}
+.lk-dots{display:flex;gap:14px;}
+.lk-dot{width:14px;height:14px;border-radius:50%;background:var(--surface2);border:2px solid var(--border2);transition:all .15s;}
+.lk-dot.on{background:var(--accent);border-color:var(--accent);}
+.lk-err{color:var(--red);font-size:13px;min-height:18px;text-align:center;}
+.lk-numpad{display:grid;grid-template-columns:repeat(3,72px);gap:10px;}
+.lkb{height:72px;border-radius:var(--r);border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-size:22px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;justify-content:center;}
+.lkb:hover{background:var(--surface);}
+.lkb:active{transform:scale(.93);}
+.lkb.z{grid-column:2;}
+.lk-end{color:var(--text3);font-size:13px;cursor:pointer;border:none;background:none;font-family:inherit;margin-top:4px;}
+.lk-end:hover{color:var(--red);}
+.lk-right{width:200px;background:var(--bg2);border-left:1px solid var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;flex-direction:column;gap:14px;padding:24px;text-align:center;}
+.lk-right:hover{background:var(--surface);}
+.lk-right-icon{font-size:44px;}
+.lk-right-title{font-size:15px;font-weight:600;color:var(--accent);}
+.lk-right-sub{font-size:12px;color:var(--text2);}
+body.ar .lk-right{border-left:none;border-right:1px solid var(--border2);}
+.lk-timer{position:absolute;top:16px;right:16px;font-size:12px;color:var(--text3);}
+body.ar .lk-timer{right:auto;left:16px;}
+
+/* RECEIPT OVERLAY */
+#src{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;background:rgba(0,0,0,.85);align-items:center;justify-content:center;display:none;}
+#src.active{display:flex;}
+.rc-wrap{background:#fff;color:#111;width:320px;border-radius:4px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.rc-body{padding:22px 18px;font-family:'Courier New',monospace;font-size:12px;}
+.rc-logo{text-align:center;font-size:22px;font-weight:bold;letter-spacing:3px;font-family:serif;margin-bottom:2px;}
+.rc-sub{text-align:center;font-size:10px;color:#777;margin-bottom:14px;}
+.rc-hr{border:none;border-top:1px dashed #bbb;margin:8px 0;}
+.rc-meta{font-size:11px;color:#444;margin-bottom:12px;}
+.rc-meta div{display:flex;justify-content:space-between;padding:1px 0;}
+.rc-item{display:flex;justify-content:space-between;padding:2px 0;}
+.rc-item .rn{flex:1;}
+.rc-tot{display:flex;justify-content:space-between;font-size:15px;font-weight:bold;padding:4px 0;}
+.rc-note{font-style:italic;font-size:11px;margin-top:6px;}
+.rc-wifi{text-align:center;font-size:11px;color:#555;margin-top:12px;line-height:2;letter-spacing:.3px;}
+.rc-act{display:flex;gap:10px;padding:14px 18px;border-top:1px solid #eee;background:#f7f7f7;}
+.rcbtn{flex:1;padding:11px;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+.rcbtn.bk{background:#eee;color:#333;}
+.rcbtn.pr{background:#111;color:#fff;}
+
+/* OWNER DASHBOARD */
+#sow{flex-direction:column;}
+.ow-body{flex:1;overflow-y:auto;padding:26px 30px;}
+.sec{margin-bottom:32px;}
+.sec h2{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:14px;color:var(--accent);}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px;}
+.stat-card h3{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+.stat-card .val{font-size:26px;font-weight:600;}
+.log-filter{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
+.log-filter input,.log-filter select{padding:9px 14px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:border-color .2s;}
+.log-filter input:focus,.log-filter select:focus{border-color:var(--accent);}
+.log-filter input{flex:1;min-width:160px;}
+.log-filter select{min-width:160px;}
+.log-filter-btn{padding:9px 18px;border-radius:var(--rs);border:none;background:var(--accent);color:#1a1400;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;}
+.log-filter-btn.reset{background:var(--surface);color:var(--text2);border:1px solid var(--border2);}
+.log-summary{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
+.log-sum-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:10px 18px;font-size:13px;color:var(--text2);}
+.log-sum-card strong{color:var(--accent);font-size:16px;display:block;margin-top:2px;}
+.srv-group{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;display:flex;align-items:stretch;}
+.srv-group-hdr{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:16px 20px;border-right:1px solid var(--border);min-width:160px;max-width:160px;flex-shrink:0;background:var(--bg3);border-radius:var(--r) 0 0 var(--r);}
+.srv-group-name{font-size:16px;font-weight:700;color:var(--accent);}
+.srv-group-meta{font-size:12px;color:var(--text3);}
+.srv-group-total{font-size:15px;font-weight:700;color:var(--green);}
+.orders-row{display:flex;flex-direction:row;gap:10px;padding:14px 16px;overflow-x:auto;flex:1;align-items:flex-start;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;}
+.order-chip{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);padding:10px 14px;min-width:150px;max-width:180px;flex-shrink:0;}
+.chip-top{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:5px;}
+.chip-num{font-size:12px;font-weight:600;color:var(--text);}
+.chip-time{font-size:11px;color:var(--text3);}
+.chip-items{font-size:12px;color:var(--text2);line-height:1.4;}
+.chip-total{font-size:14px;font-weight:700;color:var(--green);margin-top:6px;}
+.chip-cancel{margin-top:7px;width:100%;padding:4px 0;border-radius:5px;border:1px solid var(--red);background:transparent;color:var(--red);font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;}
+.chip-cancel:hover{background:rgba(224,82,82,.15);}
+.order-chip.cancelled{background:rgba(224,82,82,.06);border-color:rgba(224,82,82,.3);opacity:.8;}
+.chip-cancelled-lbl{font-size:11px;color:var(--red);font-weight:600;margin-top:5px;}
+.chip-items.struck{text-decoration:line-through;color:var(--text3);}
+.chip-total.struck{text-decoration:line-through;color:var(--text3);}
+.nodata{color:var(--text3);font-size:14px;}
+.staff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.sc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.sc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px;}
+.sc-av{width:40px;height:40px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--accent);flex-shrink:0;}
+.sc-info{flex:1;min-width:0;}
+.sc-name{font-size:14px;font-weight:600;}
+.sc-pin{font-size:12px;color:var(--text3);}
+.sc-dot{width:8px;height:8px;border-radius:50%;background:var(--text3);flex-shrink:0;}
+.sc-dot.on{background:var(--green);}
+.delbtn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.delbtn:hover{background:rgba(224,82,82,.12);border-color:var(--red);color:var(--red);}
+.add-form{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:20px;margin-bottom:14px;}
+.add-form h3{font-size:14px;font-weight:600;margin-bottom:14px;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;}
+.frow{display:grid;gap:12px;margin-bottom:12px;}
+.frow.c2{grid-template-columns:1fr 1fr;}
+.frow.c3{grid-template-columns:1fr 1fr 1fr;}
+.ferr{color:var(--red);font-size:13px;font-weight:500;min-height:18px;margin-bottom:6px;}
+.menu-row{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.mr-emoji{font-size:22px;flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center;}
+.mr-thumb{width:48px;height:48px;border-radius:6px;object-fit:cover;flex-shrink:0;}
+.mi-img{width:100%;height:110px;object-fit:cover;border-radius:var(--r) var(--r) 0 0;display:block;}
+.dz{border:2px dashed var(--border2);border-radius:var(--rs);padding:16px;text-align:center;cursor:pointer;background:var(--bg3);position:relative;transition:all .2s;margin-bottom:12px;}
+.dz:hover,.dz.over{border-color:var(--accent);background:rgba(232,160,74,.06);}
+.dz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.dz-icon{font-size:28px;margin-bottom:4px;}
+.dz-text{font-size:12px;color:var(--text2);}
+.dz-preview{width:72px;height:72px;border-radius:8px;object-fit:cover;margin:8px auto 0;display:none;border:1px solid var(--border2);}
+.mr-info{flex:1;}
+.mr-name{font-size:13px;font-weight:600;}
+.mr-meta{font-size:12px;color:var(--text3);}
+.email-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;}
+.tgl-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);}
+.tgl-row:last-of-type{border-bottom:none;}
+.tgl-lbl{font-size:14px;}
+.tgl-sub{font-size:12px;color:var(--text3);}
+.tgl{position:relative;width:44px;height:24px;flex-shrink:0;}
+.tgl input{opacity:0;width:0;height:0;}
+.tgl-sl{position:absolute;cursor:pointer;inset:0;background:var(--surface2);border-radius:24px;transition:.2s;}
+.tgl-sl:before{content:"";position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s;}
+.tgl input:checked+.tgl-sl{background:var(--accent);}
+.tgl input:checked+.tgl-sl:before{transform:translateX(20px);}
+.settings-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px;}
+.settings-box h3{font-size:14px;font-weight:600;margin-bottom:14px;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border2);border-radius:var(--rs);padding:11px 20px;font-size:14px;color:var(--text);z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+.toast.on{opacity:1;}
+
+@media print{body>*:not(#pa){display:none!important;}#pa{display:block!important;}}
+#pa{display:none;}
+@media(max-width:800px){.stat-grid{grid-template-columns:1fr 1fr;}.opanel{width:270px;}.mgrid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));}}
+</style>
+</head>
+<body class="">
+
+<!-- WELCOME -->
+<div id="sw" class="screen active">
+  <!-- Top bar: café name + language -->
+  <div class="sw-top">
+    <div class="sw-logo" id="logo-welcome">CaféFlow</div>
+    <div class="sw-langs">
+      <button class="lbtn on" data-l="fr" onclick="setLang('fr')">FR</button>
+      <button class="lbtn" data-l="ar" onclick="setLang('ar')">ع</button>
+    </div>
+  </div>
+  <!-- Two cards -->
+  <div class="sw-cards">
+    <div class="wcard server" onclick="goPin()">
+      <div class="wcard-icon">☕</div>
+      <div class="wcard-title" id="wt-srv">Je suis serveur</div>
+      <div class="wcard-sub" id="wt-srv2">Entrez votre code PIN</div>
+      <div class="wcard-arrow">→</div>
+    </div>
+    <div class="wcard owner" onclick="goOwner()">
+      <div class="wcard-icon">🔑</div>
+      <div class="wcard-title" id="wt-own">Je suis le propriétaire</div>
+      <div class="wcard-sub" id="wt-own2">Gérer et suivre tout</div>
+      <div class="wcard-arrow">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- PIN PAD -->
+<div id="sp" class="screen">
+  <button class="pin-back" onclick="goWelcome()">←</button>
+  <div class="pin-title" id="pt-title">Entrez votre PIN</div>
+  <div class="pin-sub" id="pt-sub">Code à 4 chiffres</div>
+  <div class="dots">
+    <div class="dot" id="d0"></div><div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div><div class="dot" id="d3"></div>
+  </div>
+  <div class="pin-err" id="pin-err"></div>
+  <div class="numpad">
+    <button class="nb" onclick="pb('1')">1</button>
+    <button class="nb" onclick="pb('2')">2</button>
+    <button class="nb" onclick="pb('3')">3</button>
+    <button class="nb" onclick="pb('4')">4</button>
+    <button class="nb" onclick="pb('5')">5</button>
+    <button class="nb" onclick="pb('6')">6</button>
+    <button class="nb" onclick="pb('7')">7</button>
+    <button class="nb" onclick="pb('8')">8</button>
+    <button class="nb" onclick="pb('9')">9</button>
+    <button class="nb del z" onclick="pdel()">⌫</button>
+    <button class="nb" onclick="pb('0')">0</button>
+  </div>
+</div>
+
+<!-- OWNER LOGIN -->
+<div id="sol" class="screen">
+  <div class="lbox">
+    <div class="lbox-logo" id="logo-login">CaféFlow</div>
+    <div class="lbox-sub" id="olt-sub">Accès propriétaire</div>
+    <div class="fg"><label id="olt-user">Identifiant</label>
+      <input type="text" id="o-user" autocomplete="off" onkeydown="if(event.key==='Enter')doOwnerLogin()"/>
+    </div>
+    <div class="fg"><label id="olt-pass">Mot de passe</label>
+      <input type="password" id="o-pass" onkeydown="if(event.key==='Enter')doOwnerLogin()"/>
+    </div>
+    <button class="btn-p" id="olt-btn" onclick="doOwnerLogin()">Se connecter</button>
+    <div class="lerr" id="o-err"></div>
+    <span class="back-lnk" onclick="goWelcome()">← Retour</span>
+  </div>
+</div>
+
+<!-- POS -->
+<div id="spos" class="screen">
+  <div class="topbar">
+    <!-- Left: café name -->
+    <div style="flex:1;">
+      <div class="tbar-logo" id="logo-pos">CaféFlow</div>
+    </div>
+    <!-- Center: server name + countdown + lock -->
+    <div style="display:flex;align-items:center;gap:14px;justify-content:center;flex:1;">
+      <div class="tbar-info" id="tp-srv-info">Serveur: <span id="srv-name">—</span></div>
+      <span id="lock-countdown" style="font-size:18px;font-weight:700;color:var(--accent);min-width:52px;font-variant-numeric:tabular-nums;text-align:center;"></span>
+      <button style="background:rgba(224,82,82,0.15);border:1.5px solid #e05252;cursor:pointer;padding:6px 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all .2s;" id="tp-lock" onclick="doLock()" title="Verrouiller" onmouseover="this.style.background='rgba(224,82,82,0.3)'" onmouseout="this.style.background='rgba(224,82,82,0.15)'">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e05252" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" fill="rgba(224,82,82,0.2)" stroke="#e05252"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Right: langs + end shift -->
+    <div class="tbar-r" style="flex:1;justify-content:flex-end;">
+      <div id="clk"></div>
+      <div class="tbar-langs">
+        <button class="lbtn" data-l="fr" onclick="setLang('fr')">FR</button>
+        <button class="lbtn" data-l="ar" onclick="setLang('ar')">ع</button>
+      </div>
+      <button style="background:#e05252;border:none;color:#fff;font-family:inherit;font-size:13px;font-weight:700;padding:10px 18px;border-radius:var(--rs);cursor:pointer;letter-spacing:0.5px;box-shadow:0 0 14px rgba(224,82,82,0.5);transition:all .2s;" id="tp-end" onclick="endShift()" onmouseover="this.style.background='#ff5555';this.style.boxShadow='0 0 22px rgba(224,82,82,0.8)'" onmouseout="this.style.background='#e05252';this.style.boxShadow='0 0 14px rgba(224,82,82,0.5)'">⏹ Fin de service</button>
+    </div>
+  </div>
+  <div class="pos-body">
+    <div class="menu-panel">
+      <div class="mgrid" id="mgrid"></div>
+    </div>
+    <div class="opanel">
+      <div class="op-hdr"><div class="op-title" id="op-title">Commande</div></div>
+      <div class="oi-list" id="oi-list"></div>
+      <div class="op-foot">
+        <div id="op-tot-row" style="display:none">
+          <div class="tot-row"><span id="op-tot-lbl">Total</span><span id="op-tot-val">0 DH</span></div>
+        </div>
+        <textarea class="onote" id="onote" rows="2"></textarea>
+        <div class="oact">
+          <button class="obtn cl" id="op-clear" onclick="clearOrder()">Effacer</button>
+          <button class="obtn pr" id="op-print" onclick="printTicket()">🖨 Imprimer</button>
+        </div>
+      </div>
+      <!-- Server today history -->
+      <div style="border-top:1px solid var(--border);flex-shrink:0;">
+        <button onclick="toggleSrvHistory()" id="srv-hist-toggle" style="width:100%;padding:10px 18px;background:transparent;border:none;color:var(--text2);font-family:inherit;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .15s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='transparent'">
+          <span id="srv-hist-lbl">📋 Mes commandes aujourd'hui</span>
+          <span id="srv-hist-arrow">▾</span>
+        </button>
+        <div id="srv-hist-body" style="display:none;max-height:220px;overflow-y:auto;padding:0 12px 12px;scrollbar-width:thin;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOCK -->
+<div id="slk" class="screen" style="position:fixed;">
+  <div class="lk-timer" id="lk-timer"></div>
+  <div class="lk-left">
+    <!-- Normal resume mode -->
+    <div id="lk-resume-mode" style="display:flex;flex-direction:column;align-items:center;gap:18px;width:100%;">
+      <div class="lk-av" id="lk-av">?</div>
+      <div class="lk-name" id="lk-name">—</div>
+      <div class="lk-sub" id="lk-sub">Entrez votre PIN</div>
+      <div class="lk-dots">
+        <div class="lk-dot" id="ld0"></div><div class="lk-dot" id="ld1"></div>
+        <div class="lk-dot" id="ld2"></div><div class="lk-dot" id="ld3"></div>
+      </div>
+      <div class="lk-err" id="lk-err"></div>
+      <div class="lk-numpad">
+        <button class="lkb" onclick="lkb('1')">1</button>
+        <button class="lkb" onclick="lkb('2')">2</button>
+        <button class="lkb" onclick="lkb('3')">3</button>
+        <button class="lkb" onclick="lkb('4')">4</button>
+        <button class="lkb" onclick="lkb('5')">5</button>
+        <button class="lkb" onclick="lkb('6')">6</button>
+        <button class="lkb" onclick="lkb('7')">7</button>
+        <button class="lkb" onclick="lkb('8')">8</button>
+        <button class="lkb" onclick="lkb('9')">9</button>
+        <button class="lkb del z" onclick="lkdel()">⌫</button>
+        <button class="lkb" onclick="lkb('0')">0</button>
+      </div>
+      <button class="lk-end" id="lk-switch-btn" onclick="showSwitchServer()" style="color:var(--accent);font-size:13px;border:1px solid var(--border2);padding:7px 18px;border-radius:20px;background:transparent;cursor:pointer;font-family:inherit;transition:all .2s;" onmouseover="this.style.background='rgba(232,160,74,.1)'" onmouseout="this.style.background='transparent'">
+        🔄 <span id="lk-switch-lbl">Changer de serveur</span>
+      </button>
+      <button class="lk-end" id="lk-end-btn" style="display:none;"></button>
+    </div>
+    <!-- Switch server mode -->
+    <div id="lk-switch-mode" style="display:none;flex-direction:column;align-items:center;gap:18px;width:100%;">
+      <div style="font-size:36px;">👤</div>
+      <div class="lk-name" id="lk-switch-title">Quel serveur êtes-vous ?</div>
+      <div class="lk-sub" id="lk-switch-sub">Entrez votre PIN</div>
+      <div class="lk-dots">
+        <div class="lk-dot" id="sw-d0"></div><div class="lk-dot" id="sw-d1"></div>
+        <div class="lk-dot" id="sw-d2"></div><div class="lk-dot" id="sw-d3"></div>
+      </div>
+      <div class="lk-err" id="sw-err"></div>
+      <div class="lk-numpad">
+        <button class="lkb" onclick="swPin('1')">1</button>
+        <button class="lkb" onclick="swPin('2')">2</button>
+        <button class="lkb" onclick="swPin('3')">3</button>
+        <button class="lkb" onclick="swPin('4')">4</button>
+        <button class="lkb" onclick="swPin('5')">5</button>
+        <button class="lkb" onclick="swPin('6')">6</button>
+        <button class="lkb" onclick="swPin('7')">7</button>
+        <button class="lkb" onclick="swPin('8')">8</button>
+        <button class="lkb" onclick="swPin('9')">9</button>
+        <button class="lkb del z" onclick="swDel()">⌫</button>
+        <button class="lkb" onclick="swPin('0')">0</button>
+      </div>
+      <button class="lk-end" onclick="hideSwitchServer()" style="color:var(--text3);font-size:13px;cursor:pointer;background:none;border:none;font-family:inherit;" id="lk-cancel-switch">← Annuler</button>
+    </div>
+  </div>
+  <div class="lk-right" onclick="ownerFromLock()">
+    <div class="lk-right-icon">🔑</div>
+    <div class="lk-right-title" id="lk-own-title">Accès propriétaire</div>
+    <div class="lk-right-sub" id="lk-own-sub">Touchez pour vous connecter</div>
+  </div>
+</div>
+
+<!-- RECEIPT -->
+<div id="src" class="screen">
+  <div class="rc-wrap">
+    <div class="rc-body" id="rc-body"></div>
+    <div class="rc-act">
+      <button class="rcbtn bk" onclick="closeReceipt()">← Retour</button>
+      <button class="rcbtn pr" onclick="window.print()">🖨 Imprimer</button>
+    </div>
+    <div style="padding:0 14px 14px;background:#f7f7f7;">
+      <button id="rc-cancel-btn" onclick="cancelLastOrder()" style="width:100%;padding:10px;border:1.5px solid #e05252;background:transparent;color:#e05252;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">✕ Annuler cette commande</button>
+    </div>
+  </div>
+</div>
+<div id="pa"></div>
+
+<!-- OWNER DASHBOARD -->
+<div id="sow" class="screen">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div class="tbar-logo" id="logo-owner">CaféFlow</div>
+      <span style="color:var(--text2);font-size:14px;" id="ow-dash-lbl">Tableau de bord</span>
+    </div>
+    <div id="clk2"></div>
+    <div class="tbar-r">
+      <div class="tbar-langs">
+        <button class="lbtn" data-l="fr" onclick="setLang('fr')">FR</button>
+        <button class="lbtn" data-l="ar" onclick="setLang('ar')">ع</button>
+      </div>
+      <button class="btn-sm red" id="ow-logout" onclick="ownerLogout()">Déconnexion</button>
+    </div>
+  </div>
+  <div class="ow-body">
+
+    <div class="sec">
+      <h2 id="ow-h1">Résumé du jour</h2>
+      <div class="stat-grid">
+        <div class="stat-card"><h3 id="ow-s1">Commandes</h3><div class="val" id="st-ord">0</div></div>
+        <div class="stat-card"><h3 id="ow-s2">Revenus</h3><div class="val" id="st-rev">0 DH</div></div>
+        <div class="stat-card"><h3 id="ow-s3">Articles</h3><div class="val" id="st-itm">0</div></div>
+        <div class="stat-card"><h3 id="ow-s4">Serveurs actifs</h3><div class="val" id="st-stf">0</div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <!-- Total sales banner + history + top items buttons -->
+      <div style="display:flex;align-items:stretch;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;" id="lbl-today-sales">Ventes du jour</div>
+            <div style="font-size:28px;font-weight:700;color:var(--green);" id="today-total">0 DH</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;" id="lbl-orders-count">Commandes</div>
+            <div style="font-size:28px;font-weight:700;color:var(--accent);" id="today-count">0</div>
+          </div>
+        </div>
+        <button onclick="openHistory()" style="background:var(--bg2);border:2px solid var(--accent);color:var(--accent);border-radius:var(--r);padding:16px 22px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;" onmouseover="this.style.background='var(--accent)';this.style.color='#1a1400'" onmouseout="this.style.background='var(--bg2)';this.style.color='var(--accent)'">
+<span id="lbl-hist-btn">📅 Historique</span><br><span style="font-size:11px;font-weight:400;opacity:.8;" id="lbl-hist-sub">Toutes les périodes</span>
+        </button>
+        <button onclick="openTopItems()" style="background:var(--bg2);border:2px solid #4cff7a;color:#4cff7a;border-radius:var(--r);padding:16px 22px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;" onmouseover="this.style.background='#4cff7a';this.style.color='#0f0e0c'" onmouseout="this.style.background='var(--bg2)';this.style.color='#4cff7a'">
+<span id="lbl-top-btn">🏆 Top articles</span><br><span style="font-size:11px;font-weight:400;opacity:.8;" id="lbl-top-sub">Les plus vendus</span>
+        </button>
+      </div>
+      <h2 id="ow-h2">Journal du jour</h2>
+      <!-- Server filter -->
+      <div class="log-filter" style="margin-bottom:14px;">
+        <select id="filter-server" onchange="renderLog()" style="min-width:180px;">
+          <option value="">Tous les serveurs</option>
+        </select>
+        <button class="log-filter-btn reset" onclick="resetFilter()">✕ Tout</button>
+      </div>
+      <!-- Grouped log (today only) -->
+      <div id="log-list"></div>
+    </div>
+
+    <!-- HISTORY OVERLAY -->
+    <div class="hist-overlay" id="hist-overlay">
+      <div class="hist-box">
+        <div class="hist-hdr">
+          <div class="hist-title" id="lbl-hist-title">📅 Historique des ventes</div>
+          <button class="hist-close" onclick="closeHistory()">✕</button>
+        </div>
+        <div class="hist-filters">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;" id="lbl-period1">Période</label>
+            <select id="hist-mode" onchange="histModeChanged()" style="min-width:180px;">
+              <option value="today" id="hopt-today">Aujourd'hui</option>
+              <option value="week" id="hopt-week">Cette semaine</option>
+              <option value="month" id="hopt-month">Ce mois</option>
+              <option value="custom" id="hopt-custom">Dates personnalisées</option>
+            </select>
+          </div>
+          <div id="hist-custom-dates" style="display:none;gap:10px;align-items:flex-end;">
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;" id="lbl-from1">Du</label>
+              <input type="date" id="hist-from" onchange="renderHistory()"/>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;" id="lbl-to1">Au</label>
+              <input type="date" id="hist-to" onchange="renderHistory()"/>
+            </div>
+          </div>
+        </div>
+        <div class="hist-body" id="hist-body"></div>
+      </div>
+    </div>
+
+    <!-- TOP ITEMS OVERLAY -->
+
+
+
+        <!-- END SHIFT PIN OVERLAY -->
+    <div class="hist-overlay" id="endshift-overlay">
+      <div class="hist-box" style="width:340px;max-width:95vw;">
+        <div class="hist-hdr">
+          <div class="hist-title" id="es-title">⏹ Fin de service</div>
+          <button class="hist-close" onclick="cancelEndShift()">✕</button>
+        </div>
+        <div style="padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px;">
+          <div style="font-size:14px;color:var(--text2);text-align:center;" id="es-sub">Entrez votre PIN pour confirmer la fin de service</div>
+          <div style="display:flex;gap:12px;">
+            <div class="lk-dot" id="es-d0"></div>
+            <div class="lk-dot" id="es-d1"></div>
+            <div class="lk-dot" id="es-d2"></div>
+            <div class="lk-dot" id="es-d3"></div>
+          </div>
+          <div style="color:var(--red);font-size:13px;min-height:18px;" id="es-err"></div>
+          <div class="lk-numpad">
+            <button class="lkb" onclick="esPin('1')">1</button>
+            <button class="lkb" onclick="esPin('2')">2</button>
+            <button class="lkb" onclick="esPin('3')">3</button>
+            <button class="lkb" onclick="esPin('4')">4</button>
+            <button class="lkb" onclick="esPin('5')">5</button>
+            <button class="lkb" onclick="esPin('6')">6</button>
+            <button class="lkb" onclick="esPin('7')">7</button>
+            <button class="lkb" onclick="esPin('8')">8</button>
+            <button class="lkb" onclick="esPin('9')">9</button>
+            <button class="lkb del z" onclick="esDel()">⌫</button>
+            <button class="lkb" onclick="esPin('0')">0</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hist-overlay" id="top-overlay">
+      <div class="hist-box">
+        <div class="hist-hdr">
+          <div class="hist-title" id="lbl-top-title">🏆 Articles les plus vendus</div>
+          <button class="hist-close" onclick="closeTopItems()">✕</button>
+        </div>
+        <div class="hist-filters">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;" id="lbl-period2">Période</label>
+            <select id="top-mode" onchange="topModeChanged()" style="min-width:180px;">
+              <option value="today" id="topt-today">Aujourd'hui</option>
+              <option value="week" id="topt-week">Cette semaine</option>
+              <option value="month" id="topt-month">Ce mois</option>
+              <option value="custom" id="topt-custom">Dates personnalisées</option>
+            </select>
+          </div>
+          <div id="top-custom-dates" style="display:none;gap:10px;align-items:flex-end;">
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;" id="lbl-from2">Du</label>
+              <input type="date" id="top-from" onchange="renderTopItems()"/>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;" id="lbl-to2">Au</label>
+              <input type="date" id="top-to" onchange="renderTopItems()"/>
+            </div>
+          </div>
+        </div>
+        <div class="hist-body" id="top-body"></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2 id="ow-h3">Personnel</h2>
+      <div class="add-form">
+        <h3 id="ow-add-srv">Ajouter un serveur</h3>
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px;">
+          <div class="fg" style="flex:2;min-width:140px;margin:0;">
+            <label id="fg-sname">Nom (Français)</label>
+            <input type="text" id="ns-name" autocomplete="off" autocorrect="off" placeholder="Jane Dupont" style="width:100%;padding:10px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:14px;font-family:inherit;outline:none;"/>
+          </div>
+          <div class="fg" style="flex:2;min-width:140px;margin:0;">
+            <label>الاسم (عربي)</label>
+            <input type="text" id="ns-name-ar" autocomplete="off" autocorrect="off" placeholder="جان دوبون" dir="rtl" style="width:100%;padding:10px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:14px;font-family:'Noto Sans Arabic','DM Sans',sans-serif;outline:none;"/>
+          </div>
+          <div class="fg" style="flex:1;min-width:110px;margin:0;">
+            <label id="fg-spin">PIN (4 chiffres)</label>
+            <input type="tel" id="ns-pin" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234" style="width:100%;padding:10px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:15px;letter-spacing:6px;font-family:inherit;outline:none;"/>
+          </div>
+          <button class="btn-sm acc" onclick="addServer()" id="ow-add-srv-btn" style="padding:10px 20px;font-size:14px;white-space:nowrap;">+ Ajouter</button>
+        </div>
+        <div class="ferr" id="srv-err"></div>
+      </div>
+      <div class="staff-grid" id="staff-grid"></div>
+    </div>
+
+    <div class="sec">
+      <h2 id="ow-h4">Menu</h2>
+      <div class="add-form">
+        <h3 id="ow-add-item">Ajouter un article</h3>
+        <!-- Image upload -->
+        <div class="dz" id="img-dz" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+          <input type="file" id="img-file" accept="image/*" onchange="imgChosen(event)"/>
+          <div class="dz-icon">📷</div>
+          <div class="dz-text" id="dz-text">Glissez une photo ici ou cliquez pour choisir</div>
+          <img class="dz-preview" id="dz-preview"/>
+        </div>
+        <div class="frow c3">
+          <div class="fg"><label>Nom (FR)</label><input type="text" id="ni-namefr" placeholder="Latte"/></div>
+          <div class="fg"><label>اسم (AR)</label><input type="text" id="ni-namear" placeholder="لاتيه" dir="rtl"/></div>
+        </div>
+        <div class="frow c3">
+          <div class="fg"><label id="fg-price">Prix (DH)</label><input type="number" id="ni-price" step="0.01" min="0" placeholder="4.50"/></div>
+        </div>
+        <div class="frow c2">
+        </div>
+        <button class="btn-sm acc" onclick="addMenuItem()" id="ow-add-item-btn">+ Ajouter au menu</button>
+      </div>
+      <div id="menu-list"></div>
+    </div>
+
+    <div class="sec">
+      <h2 id="ow-h5">Notifications email</h2>
+      <div class="email-box">
+        <div class="frow c2" style="margin-bottom:14px;">
+          <div class="fg"><label id="fg-email">Email propriétaire</label><input type="email" id="ow-email" placeholder="vous@example.com"/></div>
+          <div class="fg"><label id="fg-rtime">Heure du rapport</label>
+            <select id="ow-rtime">
+              <option value="eod">Fin de journée (23h59)</option>
+              <option value="10">10h00</option>
+              <option value="14">14h00</option>
+              <option value="18">18h00</option>
+            </select>
+          </div>
+        </div>
+        <div class="tgl-row"><div><div class="tgl-lbl" id="tgl1l">Résumé quotidien</div><div class="tgl-sub" id="tgl1s">Commandes, revenus</div></div><label class="tgl"><input type="checkbox" id="tgl-daily" checked/><span class="tgl-sl"></span></label></div>
+        <div class="tgl-row"><div><div class="tgl-lbl" id="tgl2l">Alerte par commande</div><div class="tgl-sub" id="tgl2s">Email à chaque ticket</div></div><label class="tgl"><input type="checkbox" id="tgl-per"/><span class="tgl-sl"></span></label></div>
+        <div class="tgl-row"><div><div class="tgl-lbl" id="tgl3l">Alertes connexion</div><div class="tgl-sub" id="tgl3s">Email à la connexion serveur</div></div><label class="tgl"><input type="checkbox" id="tgl-staff"/><span class="tgl-sl"></span></label></div>
+        <button class="btn-sm acc" style="margin-top:14px;" onclick="saveEmail()" id="ow-save-email">Sauvegarder</button>
+        <button class="btn-sm" style="margin-top:8px;margin-left:8px;" onclick="testEmail()" id="ow-test-email">Test</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2 id="ow-h6">Paramètres</h2>
+
+      <div class="settings-box">
+        <h3>☕ Café &amp; Reçu</h3>
+        <div class="frow c2" style="margin-bottom:10px;">
+          <div class="fg"><label>Nom du café (affiché sur le reçu)</label>
+            <input type="text" id="inp-shopname" placeholder="Mon Café" autocomplete="off" autocorrect="off"/>
+          </div>
+          <div class="fg"><label>Nom WiFi</label>
+            <input type="text" id="inp-wifi-name" placeholder="CafeAtlas" autocomplete="off"/>
+          </div>
+          <div class="fg"><label>Mot de passe WiFi</label>
+            <input type="text" id="inp-wifi-pass" placeholder="1234" autocomplete="off"/>
+          </div>
+        </div>
+        <button class="btn-sm acc" style="font-size:14px;padding:10px 22px;" onclick="saveShopInfo()">💾 Sauvegarder</button>
+        <div id="shop-save-msg" style="color:var(--green);font-size:13px;margin-top:8px;min-height:18px;"></div>
+      </div>
+
+      <div class="settings-box">
+        <h3>🔑 Compte propriétaire</h3>
+        <div class="frow c3">
+          <div class="fg"><label>Identifiant</label><input type="text" id="inp-ouser" autocomplete="off"/></div>
+          <div class="fg"><label>Nouveau mot de passe</label><input type="password" id="inp-opass" placeholder="Laisser vide pour garder"/></div>
+          <div class="fg"><label>Confirmer</label><input type="password" id="inp-opass2"/></div>
+        </div>
+        <button class="btn-sm acc" style="font-size:14px;padding:10px 22px;" onclick="saveAccount()">💾 Sauvegarder</button>
+        <div id="acc-save-msg" style="color:var(--green);font-size:13px;margin-top:8px;min-height:18px;"></div>
+      </div>
+
+      <div class="settings-box">
+        <h3 style="color:var(--red);">⚠ Réinitialisation</h3>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Efface toutes les données (personnel, menu, commandes, paramètres).</p>
+        <button class="btn-sm" style="border-color:var(--red);color:var(--red);" onclick="resetAll()">Effacer toutes les données</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════
+// TRANSLATIONS
+// ════════════════════════════════════════════════
+const TR = {
+fr:{
+  posTitle:'Point de Vente',
+  wSrv:'Je suis serveur', wSrv2:'Entrez votre code PIN',
+  wOwn:'Je suis le propriétaire', wOwn2:'Gérer et suivre tout',
+  ptTitle:'Entrez votre PIN', ptSub:'Code à 4 chiffres',
+  wrongPin:'PIN incorrect. Réessayez.',
+  oltSub:'Accès propriétaire', oltUser:'Identifiant', oltPass:'Mot de passe', oltBtn:'Se connecter',
+  wrongOwner:'Identifiant ou mot de passe invalide.',
+  tpSrv:'Serveur', endShift:'Fin de service', endShiftQ:'Terminer le service de',
+  opTitle:'Commande', opTot:'Total',
+  notePlaceholder:'Notes (allergies, demandes…)',
+  clearBtn:'Effacer', printBtn:'🖨 Imprimer',
+  noItems:'Ajoutez des articles.', clearQ:'Effacer la commande ?',
+  lkSub:'Entrez votre PIN', lkEnd:'Fin de service →',
+  lkOwnTitle:'Accès propriétaire', lkOwnSub:'Touchez pour vous connecter',
+  rcBack:'← Retour',
+  thankYou:'Merci pour votre commande !',
+  orderNum:'Commande n°', date:'Date', time:'Heure', server:'Serveur', total:'TOTAL',
+  owDash:'Tableau de bord', owLogout:'Déconnexion',
+  owH1:"Résumé du jour", owH2:'Journal', owH3:'Personnel', owH4:'Menu',
+  owH5:'Notifications email', owH6:'Paramètres',
+  owS1:'Commandes', owS2:'Revenus', owS3:'Articles', owS4:'Serveurs actifs',
+  noOrders:'Aucune commande.',
+  addSrv:'Ajouter un serveur', fgSname:'Nom complet', fgSpin:'PIN (4 chiffres)',
+  addSrvBtn:'+ Ajouter',
+  fillFields:'Remplissez tous les champs.', pinInvalid:'PIN doit avoir 4 chiffres.',
+  pinExists:'Ce PIN est déjà utilisé.', srvAdded:'Serveur ajouté ✓', srvRemoved:'Serveur supprimé.',
+  removeSrvQ:'Supprimer ce serveur ?',
+  addItemH:'Ajouter un article', fgPrice:'Prix (DH)', addItemBtn:'+ Ajouter au menu',
+  itemAdded:'Ajouté au menu ✓', itemRemoved:'Article supprimé.', removeItemQ:'Retirer cet article ?',
+  fgEmail:'Email propriétaire', fgRtime:'Heure du rapport',
+  tgl1l:'Résumé quotidien', tgl1s:'Commandes, revenus',
+  tgl2l:'Alerte par commande', tgl2s:'Email à chaque ticket',
+  tgl3l:'Alertes connexion', tgl3s:'Email à la connexion serveur',
+  owSaveEmail:'Sauvegarder', owTestEmail:'Test',
+  emailSaved:'Email sauvegardé ✓', noEmail:"Entrez d'abord un email.",
+  owH6:'Paramètres',
+  shopSaved:'Nom du café sauvegardé ✓',
+  accSaved:'Compte sauvegardé ✓',
+  passMismatch:'Les mots de passe ne correspondent pas.',
+  todaySales:'Ventes du jour', ordersCount:'Commandes',
+  histBtn:'📅 Historique', histSub:'Toutes les périodes',
+  topBtn:'🏆 Top articles', topSub:'Les plus vendus',
+  histTitle:'📅 Historique des ventes', topTitle:'🏆 Articles les plus vendus',
+  periodLabel:'Période', optToday:"Aujourd\'hui", optWeek:'Cette semaine',
+  optMonth:'Ce mois', optCustom:'Dates personnalisées',
+  fromLabel:'Du', toLabel:'Au',
+  labelToday:"Aujourd\'hui", labelWeek:'Cette semaine',
+  labelMonth:'Ce mois',
+  diffItems:'articles différents', noSales:'Aucune vente pour cette période.',
+  qtyLabel:'Qté', revenueLabel:'Revenus',
+  totalOrders:'Total commandes', totalSales:'Total ventes', totalItems:'Articles vendus',
+  noPeriodOrders:'Aucune commande pour cette période.',
+  statusActive:'● Actif', statusInactive:'● Inactif',
+  cancelOrder:'✕ Annuler cette commande', cancelledLbl:'✕ ANNULÉE',
+  cancelConfirm:'Annuler la commande #', cancelConfirm2:' ? Cette action est irréversible.',
+  cancelReason:'Raison (optionnel) :', cancelDone:'Commande annulée.',
+  cancelPin:'Entrez votre PIN pour annuler',
+  ownerCancelBtn:'✕ Annuler',
+  switchServer:'Changer de serveur', switchTitle:'Quel serveur êtes-vous ?',
+  switchSub:'Entrez votre PIN', switchCancel:'← Annuler',
+  wrongPinSwitch:'PIN inconnu. Essayez encore.',
+  endShiftTitle:'⏹ Fin de service', endShiftPinSub:'Entrez votre PIN pour confirmer la fin de service',
+  wrongPinEnd:'PIN incorrect. Essayez encore.',
+  welcomeBack:'Bienvenue,', shiftEnded:'Service terminé.',
+  all:'Tout',
+},
+ar:{
+  posTitle:'نقطة البيع',
+  wSrv:'أنا نادل', wSrv2:'أدخل رمز PIN',
+  wOwn:'أنا المالك', wOwn2:'إدارة وتتبع كل شيء',
+  ptTitle:'أدخل رمز PIN', ptSub:'رمز مكون من 4 أرقام',
+  wrongPin:'رمز PIN غير صحيح.',
+  oltSub:'وصول المالك', oltUser:'اسم المستخدم', oltPass:'كلمة المرور', oltBtn:'دخول',
+  wrongOwner:'اسم المستخدم أو كلمة المرور غير صحيحة.',
+  tpSrv:'النادل', endShift:'إنهاء الوردية', endShiftQ:'إنهاء وردية',
+  opTitle:'الطلب', opTot:'الإجمالي',
+  notePlaceholder:'ملاحظات (حساسية، طلبات خاصة…)',
+  clearBtn:'مسح', printBtn:'🖨 طباعة',
+  noItems:'أضف عناصر أولاً.', clearQ:'مسح الطلب الحالي؟',
+  lkSub:'أدخل PIN للمتابعة', lkEnd:'إنهاء الوردية →',
+  lkOwnTitle:'وصول المالك', lkOwnSub:'اضغط لتسجيل الدخول',
+  rcBack:'→ رجوع',
+  thankYou:'شكراً لطلبك!',
+  orderNum:'طلب رقم', date:'التاريخ', time:'الوقت', server:'النادل', total:'الإجمالي',
+  owDash:'لوحة التحكم', owLogout:'تسجيل الخروج',
+  owH1:'ملخص اليوم', owH2:'سجل الطلبات', owH3:'الموظفون', owH4:'القائمة',
+  owH5:'إشعارات البريد', owH6:'الإعدادات',
+  owS1:'الطلبات', owS2:'الإيرادات', owS3:'المبيعات', owS4:'الموظفون النشطون',
+  noOrders:'لا توجد طلبات.',
+  addSrv:'إضافة نادل', fgSname:'الاسم الكامل', fgSpin:'رمز PIN (4 أرقام)',
+  addSrvBtn:'+ إضافة',
+  fillFields:'يرجى تعبئة جميع الحقول.', pinInvalid:'PIN يجب أن يكون 4 أرقام.',
+  pinExists:'رمز PIN مستخدم بالفعل.', srvAdded:'تمت الإضافة ✓', srvRemoved:'تمت الإزالة.',
+  removeSrvQ:'إزالة هذا النادل؟',
+  addItemH:'إضافة عنصر', fgPrice:'السعر (DH)', addItemBtn:'+ إضافة للقائمة',
+  itemAdded:'أضيف للقائمة ✓', itemRemoved:'تمت إزالة العنصر.', removeItemQ:'إزالة هذا العنصر؟',
+  fgEmail:'بريد المالك', fgRtime:'وقت التقرير',
+  tgl1l:'ملخص يومي', tgl1s:'الطلبات والإيرادات',
+  tgl2l:'تنبيه لكل طلب', tgl2s:'بريد عند كل تذكرة',
+  tgl3l:'تنبيهات الموظفين', tgl3s:'بريد عند تسجيل الدخول',
+  owSaveEmail:'حفظ', owTestEmail:'تجريبي',
+  emailSaved:'تم حفظ البريد ✓', noEmail:'أدخل بريداً إلكترونياً أولاً.',
+  shopSaved:'تم حفظ اسم المقهى ✓',
+  accSaved:'تم حفظ الحساب ✓',
+  passMismatch:'كلمتا المرور غير متطابقتين.',
+  todaySales:'مبيعات اليوم', ordersCount:'الطلبات',
+  histBtn:'📅 السجل', histSub:'جميع الفترات',
+  topBtn:'🏆 الأكثر مبيعاً', topSub:'المنتجات الرائجة',
+  histTitle:'📅 سجل المبيعات', topTitle:'🏆 الأكثر مبيعاً',
+  periodLabel:'الفترة', optToday:'اليوم', optWeek:'هذا الأسبوع',
+  optMonth:'هذا الشهر', optCustom:'تواريخ مخصصة',
+  fromLabel:'من', toLabel:'إلى',
+  labelToday:'اليوم', labelWeek:'هذا الأسبوع',
+  labelMonth:'هذا الشهر',
+  diffItems:'أصناف مختلفة', noSales:'لا توجد مبيعات لهذه الفترة.',
+  qtyLabel:'الكمية', revenueLabel:'الإيرادات',
+  totalOrders:'إجمالي الطلبات', totalSales:'إجمالي المبيعات', totalItems:'الأصناف المباعة',
+  noPeriodOrders:'لا توجد طلبات لهذه الفترة.',
+  statusActive:'● نشط', statusInactive:'● غير نشط',
+  cancelOrder:'✕ إلغاء هذا الطلب', cancelledLbl:'✕ ملغى',
+  cancelConfirm:'إلغاء الطلب #', cancelConfirm2:' ؟ هذا الإجراء لا يمكن التراجع عنه.',
+  cancelReason:'السبب (اختياري) :', cancelDone:'تم إلغاء الطلب.',
+  cancelPin:'أدخل PIN للإلغاء',
+  ownerCancelBtn:'✕ إلغاء',
+  switchServer:'تغيير النادل', switchTitle:'من أنت؟',
+  switchSub:'أدخل رمز PIN', switchCancel:'→ إلغاء',
+  wrongPinSwitch:'رمز PIN غير معروف. حاول مجدداً.',
+  endShiftTitle:'⏹ إنهاء الوردية', endShiftPinSub:'أدخل رمز PIN لتأكيد إنهاء الوردية',
+  wrongPinEnd:'رمز PIN غير صحيح. حاول مجدداً.',
+  welcomeBack:'مرحباً،', shiftEnded:'انتهت الوردية.',
+  all:'الكل',
+}
+};
+
+let lang = 'fr';
+function t(k){ return (TR[lang]&&TR[lang][k]) || TR.fr[k] || k; }
+
+function setLang(l){
+  lang = l;
+  document.documentElement.lang = l;
+  document.documentElement.dir = l==='ar'?'rtl':'ltr';
+  document.body.classList.toggle('ar', l==='ar')
+  applyT();
+  renderMenu(); renderOrder();
+  document.querySelectorAll('[data-l]').forEach(b=>b.classList.toggle('on', b.getAttribute('data-l')===l));
+  if(typeof tick==='function') tick(); // update date language immediately
+}
+
+// All translatable element IDs
+const TID = {
+'wt-srv':'wSrv','wt-srv2':'wSrv2','wt-own':'wOwn','wt-own2':'wOwn2',
+  'pt-title':'ptTitle','pt-sub':'ptSub',
+  'olt-sub':'oltSub','olt-user':'oltUser','olt-pass':'oltPass','olt-btn':'oltBtn',
+  'tp-end':'endShift','op-title':'opTitle','op-tot-lbl':'opTot',
+  'op-clear':'clearBtn','op-print':'printBtn',
+  'lk-sub':'lkSub','lk-own-title':'lkOwnTitle','lk-own-sub':'lkOwnSub',
+  'ow-dash-lbl':'owDash','ow-logout':'owLogout',
+  'ow-h1':'owH1','ow-h2':'owH2','ow-h3':'owH3','ow-h4':'owH4','ow-h5':'owH5','ow-h6':'owH6',
+  'ow-s1':'owS1','ow-s2':'owS2','ow-s3':'owS3','ow-s4':'owS4',
+  'ow-add-srv':'addSrv','fg-sname':'fgSname','fg-spin':'fgSpin','ow-add-srv-btn':'addSrvBtn',
+  'ow-add-item':'addItemH','fg-price':'fgPrice','ow-add-item-btn':'addItemBtn',
+  'fg-email':'fgEmail','fg-rtime':'fgRtime',
+  'tgl1l':'tgl1l','tgl1s':'tgl1s','tgl2l':'tgl2l','tgl2s':'tgl2s','tgl3l':'tgl3l','tgl3s':'tgl3s',
+  'ow-save-email':'owSaveEmail','ow-test-email':'owTestEmail',
+  'lbl-today-sales':'todaySales','lbl-orders-count':'ordersCount',
+  'lbl-hist-btn':'histBtn','lbl-hist-sub':'histSub',
+  'lbl-top-btn':'topBtn','lbl-top-sub':'topSub',
+  'lbl-hist-title':'histTitle','lbl-top-title':'topTitle',
+  'es-title':'endShiftTitle','es-sub':'endShiftPinSub',
+  'lk-switch-lbl':'switchServer','lk-switch-title':'switchTitle',
+  'lk-switch-sub':'switchSub','lk-cancel-switch':'switchCancel',
+  'lbl-period1':'periodLabel','lbl-period2':'periodLabel',
+  'lbl-from1':'fromLabel','lbl-from2':'fromLabel',
+  'lbl-to1':'toLabel','lbl-to2':'toLabel',
+  'hopt-today':'optToday','hopt-week':'optWeek','hopt-month':'optMonth','hopt-custom':'optCustom',
+  'topt-today':'optToday','topt-week':'optWeek','topt-month':'optMonth','topt-custom':'optCustom',
+};
+function applyT(){
+  for(const[id,key] of Object.entries(TID)){
+    const el=document.getElementById(id);
+    if(el) el.textContent=t(key);
+  }
+  const on=document.getElementById('onote'); if(on) on.placeholder=t('notePlaceholder');
+  const si=document.getElementById('tp-srv-info');
+  if(si) si.innerHTML=t('tpSrv')+': <span id="srv-name">'+(S.server?srvName(S.server):'—')+'</span>';
+  // Keep logos updated (café name doesn't change with lang but ensures consistency)
+  if(typeof updateLogoDisplays==='function') updateLogoDisplays();
+  // Re-render staff grid so status badges translate
+  if(document.getElementById('sow')?.classList.contains('active') && typeof renderStaffGrid==='function') renderStaffGrid();
+}
+
+// ════════════════════════════════════════════════
+// STATE — single source of truth
+// ════════════════════════════════════════════════
+const STORE_KEY = 'cfpos_v1';
+
+const DEFAULTS = {
+  shopName: '',
+  wifiName: '',
+  wifiPass: '',
+  owner: { username:'owner', password:'admin123' },
+  servers: [
+    {id:1,name:'Maria G.',pin:'1111',online:false},
+    {id:2,name:'Jake L.',pin:'2222',online:false}
+  ],
+  nextSrvId: 10,
+  menu: [
+    {id:1,emoji:'☕',namefr:'Espresso',namear:'إسبريسو',price:2.50,cat:'Café',descfr:'Double shot',descar:'شوت مزدوج'},
+    {id:2,emoji:'🥛',namefr:'Latte',namear:'لاتيه',price:4.50,cat:'Café',descfr:'Espresso & lait',descar:'إسبريسو وحليب'},
+    {id:3,emoji:'🍵',namefr:'Cappuccino',namear:'كابتشينو',price:4.00,cat:'Café',descfr:'Espresso, mousse',descar:'إسبريسو وحليب مبخر'},
+    {id:4,emoji:'🧋',namefr:'Cold Brew',namear:'قهوة باردة',price:5.00,cat:'Café',descfr:'Infusion à froid',descar:'تخمير بارد'},
+    {id:5,emoji:'🍃',namefr:'Thé vert',namear:'شاي أخضر',price:3.00,cat:'Thé',descfr:'Feuilles entières',descar:'أوراق فضفاضة'},
+    {id:6,emoji:'🫖',namefr:'Chaï Latte',namear:'شاي لاتيه',price:4.50,cat:'Thé',descfr:'Thé épicé & lait',descar:'شاي متبل وحليب'},
+    {id:7,emoji:'🧃',namefr:"Jus d'orange",namear:'عصير برتقال',price:4.00,cat:'Froids',descfr:'Pressé frais',descar:'طازج'},
+    {id:8,emoji:'🍋',namefr:'Limonade',namear:'ليمونادا',price:3.50,cat:'Froids',descfr:'Pétillante ou plate',descar:'فوار أو عادي'},
+    {id:9,emoji:'🥐',namefr:'Croissant',namear:'كرواسان',price:3.00,cat:'Pâtisseries',descfr:'Au beurre, frais',descar:'زبدة وطازج'},
+    {id:10,emoji:'🍰',namefr:'Part de gâteau',namear:'قطعة كعكة',price:5.50,cat:'Pâtisseries',descfr:'Selon le jour',descar:'اسأل عن نكهة اليوم'},
+    {id:11,emoji:'🥪',namefr:'Sandwich',namear:'ساندويش',price:7.00,cat:'Food',descfr:'Grillé, au choix',descar:'محمص'},
+    {id:12,emoji:'🫙',namefr:'Lait d\'avoine',namear:'حليب الشوفان',price:0.80,cat:'Extras',descfr:'Supplément',descar:'إضافة'},
+  ],
+  nextMenuId: 100,
+  orderLog: [],
+  emailSettings: {email:'',daily:true,perOrder:false,staffAlerts:false,reportTime:'eod'},
+};
+
+// Runtime only (not persisted)
+let S = {
+  ...JSON.parse(JSON.stringify(DEFAULTS)),
+  order: [],
+  server: null,
+  fromLock: false,
+};
+
+function loadData(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return;
+    const saved = JSON.parse(raw);
+    // Merge only known keys
+    ['shopName','wifiName','wifiPass','owner','servers','nextSrvId','menu','nextMenuId','orderLog','emailSettings'].forEach(k=>{
+      if(saved[k] !== undefined) S[k] = saved[k];
+    });
+  }catch(e){ console.warn('Load failed',e); }
+}
+
+function saveData(){
+  try{
+    const toSave = {
+      shopName: S.shopName,
+      wifiName: S.wifiName,
+      wifiPass: S.wifiPass,
+      owner: S.owner,
+      servers: S.servers,
+      nextSrvId: S.nextSrvId,
+      menu: S.menu,
+      nextMenuId: S.nextMenuId,
+      orderLog: S.orderLog,
+      emailSettings: S.emailSettings,
+    };
+    localStorage.setItem(STORE_KEY, JSON.stringify(toSave));
+  }catch(e){ console.warn('Save failed',e); }
+}
+
+function iName(item){ return lang==='ar'&&item.namear ? item.namear : item.namefr||item.namear||'?'; }
+function iDesc(item){ return lang==='ar'&&item.descar ? item.descar : item.descfr||''; }
+
+// ════════════════════════════════════════════════
+// SCREEN MANAGEMENT
+// ════════════════════════════════════════════════
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function goWelcome(){ pinBuf=''; show('sw'); }
+function goPin(){ pinBuf=''; document.getElementById('pin-err').textContent=''; updateDots(); show('sp'); }
+function goOwner(){ document.getElementById('o-err').textContent=''; document.getElementById('o-user').value=''; document.getElementById('o-pass').value=''; show('sol'); }
+function ownerFromLock(){ S.fromLock=true; goOwner(); }
+
+// ════════════════════════════════════════════════
+// PIN
+// ════════════════════════════════════════════════
+let pinBuf = '';
+function pb(d){ if(pinBuf.length>=4)return; pinBuf+=d; updateDots(); if(pinBuf.length===4)setTimeout(checkPin,120); }
+function pdel(){ pinBuf=pinBuf.slice(0,-1); updateDots(); document.getElementById('pin-err').textContent=''; }
+function updateDots(){ for(let i=0;i<4;i++) document.getElementById('d'+i).classList.toggle('on',i<pinBuf.length); }
+function checkPin(){
+  const srv = S.servers.find(s=>s.pin===pinBuf);
+  if(srv){
+    S.server=srv; srv.online=true; saveData();
+    show('spos'); applyT(); renderMenu(); renderOrder();
+    startAutoLock();
+  // Reset server history panel on login
+  srvHistOpen = false;
+  const _hb = document.getElementById('srv-hist-body');
+  if(_hb){ _hb.style.display='none'; _hb.innerHTML=''; }
+  const _arr = document.getElementById('srv-hist-arrow');
+  if(_arr) _arr.textContent='▾';
+    toast(t('welcomeBack')+' '+srv.name+' ☕');
+  } else {
+    document.getElementById('pin-err').textContent=t('wrongPin');
+    pinBuf=''; updateDots();
+  }
+}
+
+// ════════════════════════════════════════════════
+// OWNER LOGIN
+// ════════════════════════════════════════════════
+function doOwnerLogin(){
+  const u = document.getElementById('o-user').value.trim();
+  const p = document.getElementById('o-pass').value;
+  if(u===S.owner.username && p===S.owner.password){
+    document.getElementById('o-err').textContent='';
+    loadOwnerDash(); show('sow'); applyT();
+  } else {
+    document.getElementById('o-err').textContent=t('wrongOwner');
+  }
+}
+function ownerLogout(){
+  if(S.fromLock && S.server){ S.fromLock=false; doLock(); }
+  else { S.fromLock=false; goWelcome(); }
+}
+
+// ════════════════════════════════════════════════
+// MENU RENDER
+// ════════════════════════════════════════════════
+function renderMenu(){
+  const items = S.menu;
+  document.getElementById('mgrid').innerHTML = items.map(item=>`
+    <div class="mi" onclick="addItem(${item.id})">
+      ${item.img
+        ? `<img class="mi-img" src="${item.img}" alt="${iName(item)}">`
+        : `<div class="mi-emoji">${item.emoji||'☕'}</div>`}
+      <div class="mi-body">
+        <div class="mi-name">${iName(item)}</div>
+        <div class="mi-price">${item.price.toFixed(2)} DH</div>
+        ${iDesc(item)?`<div class="mi-desc">${iDesc(item)}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════════════
+// ORDER
+// ════════════════════════════════════════════════
+function addItem(id){
+  const item=S.menu.find(i=>i.id===id); if(!item) return;
+  const ex=S.order.find(o=>o.id===id);
+  if(ex) ex.qty++; else S.order.push({...item,qty:1});
+  renderOrder(); resetAutoLock();
+}
+function chQty(id,d){
+  const ex=S.order.find(o=>o.id===id); if(!ex) return;
+  ex.qty+=d; if(ex.qty<=0) S.order=S.order.filter(o=>o.id!==id);
+  renderOrder();
+}
+function rmItem(id){ S.order=S.order.filter(o=>o.id!==id); renderOrder(); }
+function clearOrder(){
+  if(!S.order.length) return;
+  if(!confirm(t('clearQ'))) return;
+  S.order=[]; document.getElementById('onote').value=''; renderOrder();
+}
+function renderOrder(){
+  const el=document.getElementById('oi-list');
+  const te=document.getElementById('op-tot-row');
+  if(!S.order.length){
+    el.innerHTML=`<div class="oempty">${t('noItems')}</div>`; te.style.display='none'; return;
+  }
+  el.innerHTML=S.order.map(o=>`
+    <div class="oi">
+      <button class="qbtn" onclick="chQty(${o.id},-1)">−</button>
+      <span class="oi-qn">${o.qty}</span>
+      <button class="qbtn" onclick="chQty(${o.id},1)">+</button>
+      <span class="oi-name">${iName(o)}</span>
+      <span class="oi-price">${(o.price*o.qty).toFixed(2)} DH</span>
+      <button class="oi-rm" onclick="rmItem(${o.id})">✕</button>
+    </div>`).join('');
+  const sub=S.order.reduce((a,o)=>a+o.price*o.qty,0);
+  document.getElementById('op-tot-val').textContent=sub.toFixed(2)+' DH';
+  te.style.display='block';
+}
+
+// ════════════════════════════════════════════════
+// PRINT TICKET
+// ════════════════════════════════════════════════
+function printTicket(){
+  if(!S.order.length){ toast(t('noItems')); return; }
+  const note = document.getElementById('onote').value.trim();
+  const now = new Date();
+  const sub = S.order.reduce((a,o)=>a+o.price*o.qty,0);
+  const num = Math.floor(Math.random()*9000)+1000;
+
+  // Log order
+  S.orderLog.unshift({
+    time: now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),
+    dateKey: now.toISOString().slice(0,10),
+    server: S.server?.name||'—',
+    serverId: S.server?.id||null,
+    items: S.order.map(o=>({...o})),
+    sub, total:sub, num, note
+  });
+  saveData();
+
+  // Build receipt HTML — reads shopName and wifiText from S at this moment
+  const shopDisplay = (S.shopName && S.shopName.trim()) ? S.shopName.toUpperCase() : 'CAFÉFLOW';
+  const wifiDisplay = S.wifiName && S.wifiName.trim() ? true : false;
+
+  const rcHtml = `
+    <div class="rc-logo">${shopDisplay}</div>
+    <div class="rc-sub">${t('thankYou')}</div>
+    <hr class="rc-hr">
+    <div class="rc-meta">
+      <div><span>${t('orderNum')}</span><span>${num}</span></div>
+      <div><span>${t('date')}</span><span>${now.toLocaleDateString()}</span></div>
+      <div><span>${t('time')}</span><span>${now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span></div>
+      <div><span>${t('server')}</span><span>${S.server?.name||'—'}</span></div>
+    </div>
+    <hr class="rc-hr">
+    ${S.order.map(o=>`<div class="rc-item"><span>${o.qty}× </span><span class="rn">${iName(o)}</span><span>${(o.price*o.qty).toFixed(2)} DH</span></div>`).join('')}
+    <hr class="rc-hr">
+    <div class="rc-tot"><span>${t('total')}</span><span>${sub.toFixed(2)} DH</span></div>
+    ${note?`<div class="rc-note">${note}</div>`:''}
+    ${wifiDisplay?`<hr class="rc-hr"><div class="rc-wifi">📶 ${S.wifiName}<br>🔑 ${S.wifiPass}</div>`:''}`;
+
+  document.getElementById('rc-body').innerHTML = rcHtml;
+  document.getElementById('pa').innerHTML = `<div style="font-family:'Courier New',monospace;max-width:320px;padding:20px;color:#111">${rcHtml}</div>`;
+  document.getElementById('src').classList.add('active');
+  if(srvHistOpen) renderSrvHistory();
+}
+function closeReceipt(){
+  document.getElementById('src').classList.remove('active');
+  S.order=[]; document.getElementById('onote').value=''; renderOrder();
+}
+
+// ════════════════════════════════════════════════
+// LOCK SCREEN
+// ════════════════════════════════════════════════
+let lockBuf='', autoLockInterval=null, autoLockSecs=45;
+
+function doLock(){
+  if(!S.server) return;
+  clearInterval(autoLockInterval);
+  lockBuf=''; updateLkDots();
+  document.getElementById('lk-err').textContent='';
+  const initials=S.server.name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('lk-av').textContent=initials;
+  document.getElementById('lk-name').textContent=srvName(S.server);
+  document.getElementById('lk-sub').textContent=t('lkSub');
+  document.getElementById('lk-own-title').textContent=t('lkOwnTitle');
+  document.getElementById('lk-own-sub').textContent=t('lkOwnSub');
+  show('slk');
+}
+function lkb(d){ if(lockBuf.length>=4)return; lockBuf+=d; updateLkDots(); if(lockBuf.length===4)setTimeout(checkLockPin,120); }
+function lkdel(){ lockBuf=lockBuf.slice(0,-1); updateLkDots(); document.getElementById('lk-err').textContent=''; }
+function updateLkDots(){ for(let i=0;i<4;i++) document.getElementById('ld'+i).classList.toggle('on',i<lockBuf.length); }
+function checkLockPin(){
+  if(S.server && lockBuf===S.server.pin){
+    document.getElementById('lk-err').textContent='';
+    show('spos'); startAutoLock();
+    toast(t('welcomeBack')+' '+srvName(S.server)+' ☕');
+  } else {
+    document.getElementById('lk-err').textContent=t('wrongPin');
+    lockBuf=''; updateLkDots();
+  }
+}
+function endFromLock(){
+  // Route through PIN confirmation — same as endShift
+  endShift();
+}
+function endShift(){
+  // Require server PIN confirmation before ending shift
+  esBuf='';
+  updateEsDots();
+  document.getElementById('es-err').textContent='';
+  document.getElementById('endshift-overlay').classList.add('open');
+}
+function cancelEndShift(){
+  document.getElementById('endshift-overlay').classList.remove('open');
+  esBuf=''; updateEsDots();
+}
+let esBuf='';
+function esPin(d){
+  if(esBuf.length>=4) return;
+  esBuf+=d; updateEsDots();
+  if(esBuf.length===4) setTimeout(checkEsPin,120);
+}
+function esDel(){ esBuf=esBuf.slice(0,-1); updateEsDots(); document.getElementById('es-err').textContent=''; }
+function updateEsDots(){ for(let i=0;i<4;i++) document.getElementById('es-d'+i).classList.toggle('on',i<esBuf.length); }
+function checkEsPin(){
+  if(S.server && esBuf===S.server.pin){
+    document.getElementById('endshift-overlay').classList.remove('open');
+    clearInterval(autoLockInterval);
+    if(S.server){ S.server.online=false; S.server=null; } S.order=[]; saveData();
+    toast(t('shiftEnded')); goWelcome();
+  } else {
+    document.getElementById('es-err').textContent=t('wrongPinEnd');
+    esBuf=''; updateEsDots();
+  }
+}
+
+let secsLeft=45;
+function startAutoLock(){
+  clearInterval(autoLockInterval);
+  secsLeft=45;
+  updateCountdown();
+  autoLockInterval=setInterval(()=>{
+    secsLeft--;
+    updateCountdown();
+    if(secsLeft<=0){ clearInterval(autoLockInterval); doLock(); }
+  },1000);
+}
+function resetAutoLock(){
+  if(!document.getElementById('spos').classList.contains('active')) return;
+  secsLeft=45; updateCountdown();
+}
+function updateCountdown(){
+  const el=document.getElementById('lock-countdown');
+  if(el) el.textContent = secsLeft<=15 ? '🔒'+secsLeft+'s' : '';
+  if(el) el.style.color = secsLeft<=5 ? 'var(--red)' : 'var(--accent)';
+}
+['click','touchstart','keydown'].forEach(ev=>
+  document.addEventListener(ev,()=>{ if(document.getElementById('spos').classList.contains('active')) resetAutoLock(); },{passive:true})
+);
+
+// ════════════════════════════════════════════════
+// OWNER DASHBOARD
+// ════════════════════════════════════════════════
+function loadOwnerDash(){
+  const logs=S.orderLog.filter(o=>!o.cancelled);
+  document.getElementById('st-ord').textContent=logs.length;
+  document.getElementById('st-rev').textContent=logs.reduce((a,o)=>a+o.sub,0).toFixed(2)+' DH';
+  document.getElementById('st-itm').textContent=logs.reduce((a,o)=>a+o.items.reduce((b,i)=>b+i.qty,0),0);
+  document.getElementById('st-stf').textContent=S.servers.filter(s=>s.online).length;
+  // Populate server filter dropdown
+  const srvSel = document.getElementById('filter-server');
+  const prevSrv = srvSel.value;
+  srvSel.innerHTML = '<option value="">Tous les serveurs</option>' +
+    [...new Set(S.orderLog.map(o=>o.server))].map(n=>`<option value="${n}" ${n===prevSrv?'selected':''}>${n}</option>`).join('');
+
+  renderLog();
+  renderStaffGrid();
+  renderMenuList();
+  // Email
+  document.getElementById('ow-email').value=S.emailSettings.email||'';
+  document.getElementById('ow-rtime').value=S.emailSettings.reportTime||'eod';
+  document.getElementById('tgl-daily').checked=S.emailSettings.daily;
+  document.getElementById('tgl-per').checked=S.emailSettings.perOrder;
+  document.getElementById('tgl-staff').checked=S.emailSettings.staffAlerts;
+  // Shop info — show current saved values
+  document.getElementById('inp-shopname').value=S.shopName||'';
+  document.getElementById('inp-wifi-name').value=S.wifiName||'';
+  document.getElementById('inp-wifi-pass').value=S.wifiPass||'';
+  // Account
+  document.getElementById('inp-ouser').value=S.owner.username;
+  document.getElementById('inp-opass').value='';
+  document.getElementById('inp-opass2').value='';
+  document.getElementById('shop-save-msg').textContent='';
+  document.getElementById('acc-save-msg').textContent='';
+}
+
+
+// ── Top Items ──────────────────────────────────
+function openTopItems(){
+  const today = new Date().toISOString().slice(0,10);
+  document.getElementById('top-from').value = today;
+  document.getElementById('top-to').value   = today;
+  document.getElementById('top-mode').value = 'today';
+  document.getElementById('top-custom-dates').style.display = 'none';
+  renderTopItems();
+  document.getElementById('top-overlay').classList.add('open');
+}
+function closeTopItems(){
+  document.getElementById('top-overlay').classList.remove('open');
+}
+function topModeChanged(){
+  const mode = document.getElementById('top-mode').value;
+  document.getElementById('top-custom-dates').style.display = mode==='custom' ? 'flex' : 'none';
+  if(mode !== 'custom') renderTopItems();
+}
+function renderTopItems(){
+  const mode = document.getElementById('top-mode').value;
+  const now  = new Date();
+  const todayKey = now.toISOString().slice(0,10);
+  let fromKey, toKey, label;
+  if(mode==='today'){
+    fromKey=toKey=todayKey; label=t('labelToday');
+  } else if(mode==='week'){
+    const d=new Date(now); d.setDate(d.getDate()-d.getDay()+1);
+    fromKey=d.toISOString().slice(0,10); toKey=todayKey; label=t('labelWeek');
+  } else if(mode==='month'){
+    fromKey=todayKey.slice(0,7)+'-01'; toKey=todayKey; label=t('labelMonth');
+  } else {
+    fromKey=document.getElementById('top-from').value||todayKey;
+    toKey=document.getElementById('top-to').value||todayKey;
+    label=fromKey===toKey?fromKey:fromKey+' → '+toKey;
+  }
+
+  const logs=S.orderLog.filter(o=>o.dateKey&&o.dateKey>=fromKey&&o.dateKey<=toKey&&!o.cancelled);
+
+  // Aggregate items
+  const items={};
+  logs.forEach(o=>{
+    o.items.forEach(i=>{
+      const key=i.id||i.namefr||i.name;
+      if(!items[key]) items[key]={
+        namefr:i.namefr||i.name||'?',
+        namear:i.namear||'',
+        qty:0, rev:0
+      };
+      items[key].qty += i.qty||1;
+      items[key].rev += (i.price||0)*(i.qty||1);
+    });
+  });
+
+  const sorted=Object.values(items).sort((a,b)=>b.qty-a.qty);
+  const maxQty=sorted[0]?.qty||1;
+
+  const body=document.getElementById('top-body');
+  if(!sorted.length){
+    body.innerHTML=t('noSales');
+    return;
+  }
+
+  const medals=['🥇','🥈','🥉'];
+  body.innerHTML=`
+    <div style="font-size:13px;color:var(--text3);margin-bottom:16px;">${label} · ${sorted.length} ${t('diffItems')}</div>
+    <div style="display:flex;justify-content:flex-end;gap:16px;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;padding-right:4px;">
+      <span style="min-width:48px;text-align:right;">${t('qtyLabel')}</span>
+      <span style="min-width:70px;text-align:right;">${t('revenueLabel')}</span>
+    </div>
+    ${sorted.map((item,i)=>`
+      <div class="top-item-row">
+        <div class="top-rank ${i===0?'r1':i===1?'r2':i===2?'r3':''}">${i<3?medals[i]:i+1}</div>
+        <div class="top-item-name">
+          ${item.namefr}
+          ${item.namear?`<span class="ar">${item.namear}</span>`:''}
+        </div>
+        <div class="top-bar-wrap"><div class="top-bar" style="width:${Math.round(item.qty/maxQty*100)}%"></div></div>
+        <div class="top-qty">${item.qty}</div>
+        <div class="top-rev">${item.rev.toFixed(2)} DH</div>
+      </div>`).join('')}`;
+}
+
+
+
+
+// ── Server Today History ───────────────────────
+let srvHistOpen = false;
+function toggleSrvHistory(){
+  srvHistOpen = !srvHistOpen;
+  document.getElementById('srv-hist-body').style.display = srvHistOpen ? 'block' : 'none';
+  document.getElementById('srv-hist-arrow').textContent = srvHistOpen ? '▴' : '▾';
+  if(srvHistOpen) renderSrvHistory();
+}
+function renderSrvHistory(){
+  const el = document.getElementById('srv-hist-body');
+  if(!el || !S.server) return;
+  const today = new Date().toISOString().slice(0,10);
+  const myId   = S.server.id;
+  const myName = S.server.name;
+
+  // Strict match: serverId must match OR (no serverId AND server name matches exactly)
+  const myOrders = S.orderLog.filter(o=>{
+    if(o.dateKey !== today) return false;
+    if(o.serverId != null) return o.serverId === myId;   // ID match (preferred)
+    return o.server === myName;                           // name fallback for old orders
+  });
+
+  if(!myOrders.length){
+    el.innerHTML=`<div style="color:var(--text3);font-size:13px;padding:8px 4px;">Aucune commande aujourd'hui.</div>`;
+    return;
+  }
+  const active = myOrders.filter(o=>!o.cancelled);
+  const total  = active.reduce((a,o)=>a+o.total,0);
+  el.innerHTML=`
+    <div style="font-size:12px;color:var(--text3);padding:6px 4px 8px;display:flex;justify-content:space-between;">
+      <span>${active.length} commande${active.length>1?'s':''}</span>
+      <span style="color:var(--green);font-weight:700;">${total.toFixed(2)} DH</span>
+    </div>
+    ${myOrders.map(o=>`
+      <div style="padding:7px 8px;border-radius:var(--rs);margin-bottom:6px;background:${o.cancelled?'rgba(224,82,82,.06)':'var(--bg3)'};border:1px solid ${o.cancelled?'rgba(224,82,82,.2)':'var(--border)'};font-size:12px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+          <span style="font-weight:600;color:${o.cancelled?'var(--red)':'var(--text)'};">#${o.num}</span>
+          <span style="color:var(--text3);">${o.time}</span>
+        </div>
+        <div style="color:var(--text2);${o.cancelled?'text-decoration:line-through;':''}">${o.items.map(i=>`${i.qty}× ${i.namefr||i.name||'?'}`).join(', ')}</div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;">
+          <span style="font-size:11px;color:${o.cancelled?'var(--red)':'var(--text3)'};">${o.cancelled?'✕ '+(o.cancelReason||'Annulée'):''}</span>
+          <span style="font-weight:700;color:${o.cancelled?'var(--text3)':'var(--green)'};">${o.total.toFixed(2)} DH</span>
+        </div>
+      </div>`).join('')}`;
+}
+
+// ── Order Cancellation ──────────────────────────────
+let _lastOrderNum = null;
+
+function cancelLastOrder(){
+  if(!S.orderLog.length) return;
+  const o = S.orderLog[0];
+  if(o.cancelled) return;
+  _lastOrderNum = o.num;
+  cancelPinBuf='';
+  updateCancelDots();
+  document.getElementById('cancel-err').textContent='';
+  document.getElementById('cancel-order-num').textContent='#'+o.num;
+  document.getElementById('cancel-reason-inp').value='';
+  document.getElementById('cancel-pin-label').textContent = t('cancelPin');
+  document.getElementById('cancel-overlay').classList.add('open');
+}
+
+function cancelOrderFromLog(num){
+  // Owner dashboard — no PIN, just a reason prompt
+  const idx = S.orderLog.findIndex(o=>o.num===num);
+  if(idx===-1) return;
+  if(S.orderLog[idx].cancelled) return;
+  const reason = window.prompt('Raison (optionnel) :') || '';
+  S.orderLog[idx].cancelled = true;
+  S.orderLog[idx].cancelReason = reason;
+  S.orderLog[idx].cancelledBy = 'Propriétaire';
+  saveData();
+  renderLog();
+  toast(t('cancelDone'));
+}
+
+function closeCancelOverlay(){
+  document.getElementById('cancel-overlay').classList.remove('open');
+  _lastOrderNum=null; cancelPinBuf=''; updateCancelDots();
+}
+
+let cancelPinBuf='';
+function cpPin(d){ if(cancelPinBuf.length>=4)return; cancelPinBuf+=d; updateCancelDots(); if(cancelPinBuf.length===4)setTimeout(checkCancelPin,120); }
+function cpDel(){ cancelPinBuf=cancelPinBuf.slice(0,-1); updateCancelDots(); document.getElementById('cancel-err').textContent=''; }
+function updateCancelDots(){ for(let i=0;i<4;i++) document.getElementById('cd'+i).classList.toggle('on',i<cancelPinBuf.length); }
+
+function checkCancelPin(){
+  // Server must enter their own PIN
+  if(!S.server || cancelPinBuf!==S.server.pin){
+    document.getElementById('cancel-err').textContent=t('wrongPin');
+    cancelPinBuf=''; updateCancelDots(); return;
+  }
+  const reason = document.getElementById('cancel-reason-inp').value.trim();
+  const idx = S.orderLog.findIndex(o=>o.num===_lastOrderNum);
+  if(idx>-1){
+    S.orderLog[idx].cancelled=true;
+    S.orderLog[idx].cancelReason=reason;
+    S.orderLog[idx].cancelledBy=srvName(S.server);
+  }
+  saveData();
+  closeCancelOverlay();
+  const rcScreen=document.getElementById('src');
+  if(rcScreen&&rcScreen.classList.contains('active')) closeReceipt();
+  if(srvHistOpen) renderSrvHistory();
+  toast(t('cancelDone'));
+}
+
+
+// ── Switch Server ──────────────────────────────
+let swBuf = '';
+function showSwitchServer(){
+  swBuf=''; updateSwDots();
+  document.getElementById('sw-err').textContent='';
+  document.getElementById('lk-resume-mode').style.display='none';
+  document.getElementById('lk-switch-mode').style.display='flex';
+}
+function hideSwitchServer(){
+  document.getElementById('lk-switch-mode').style.display='none';
+  document.getElementById('lk-resume-mode').style.display='flex';
+  swBuf=''; updateSwDots();
+}
+function swPin(d){
+  if(swBuf.length>=4) return;
+  swBuf+=d; updateSwDots();
+  if(swBuf.length===4) setTimeout(checkSwPin,120);
+}
+function swDel(){ swBuf=swBuf.slice(0,-1); updateSwDots(); document.getElementById('sw-err').textContent=''; }
+function updateSwDots(){ for(let i=0;i<4;i++) document.getElementById('sw-d'+i).classList.toggle('on',i<swBuf.length); }
+function checkSwPin(){
+  const newSrv = S.servers.find(s=>s.pin===swBuf);
+  if(!newSrv){
+    document.getElementById('sw-err').textContent=t('wrongPinSwitch');
+    swBuf=''; updateSwDots(); return;
+  }
+  if(S.server && S.server!==newSrv) S.server.online=false;
+  S.server=newSrv; newSrv.online=true; S.order=[];
+  saveData();
+  hideSwitchServer();
+  show('spos'); applyT(); renderMenu(); renderOrder();
+  startAutoLock();
+  // Reset server history panel on login
+  srvHistOpen = false;
+  const _hb = document.getElementById('srv-hist-body');
+  if(_hb){ _hb.style.display='none'; _hb.innerHTML=''; }
+  const _arr = document.getElementById('srv-hist-arrow');
+  if(_arr) _arr.textContent='▾';
+  toast(t('welcomeBack')+' '+srvName(newSrv)+' ☕');
+}
+
+function openHistory(){
+  const today = new Date().toISOString().slice(0,10);
+  document.getElementById('hist-from').value = today;
+  document.getElementById('hist-to').value   = today;
+  document.getElementById('hist-mode').value = 'today';
+  document.getElementById('hist-custom-dates').style.display = 'none';
+  renderHistory();
+  document.getElementById('hist-overlay').classList.add('open');
+}
+function closeHistory(){
+  document.getElementById('hist-overlay').classList.remove('open');
+}
+function histModeChanged(){
+  const mode = document.getElementById('hist-mode').value;
+  const customEl = document.getElementById('hist-custom-dates');
+  customEl.style.display = mode==='custom' ? 'flex' : 'none';
+  if(mode !== 'custom') renderHistory();
+}
+function renderHistory(){
+  const mode = document.getElementById('hist-mode').value;
+  const now  = new Date();
+  const todayKey = now.toISOString().slice(0,10);
+  let fromKey, toKey, label;
+  if(mode==='today'){
+    fromKey = toKey = todayKey;
+    label = "Aujourd\'hui";
+  } else if(mode==='week'){
+    const d = new Date(now);
+    d.setDate(d.getDate() - d.getDay() + 1);
+    fromKey = d.toISOString().slice(0,10);
+    toKey   = todayKey;
+    label   = t('labelWeek');
+  } else if(mode==='month'){
+    fromKey = todayKey.slice(0,7)+'-01';
+    toKey   = todayKey;
+    label   = t('labelMonth');
+  } else {
+    fromKey = document.getElementById('hist-from').value || todayKey;
+    toKey   = document.getElementById('hist-to').value   || todayKey;
+    label   = fromKey === toKey ? fromKey : fromKey + ' → ' + toKey;
+  }
+  const logs = S.orderLog.filter(o=> o.dateKey && o.dateKey >= fromKey && o.dateKey <= toKey);
+  const totalOrders = logs.length;
+  const totalRev    = logs.reduce((a,o)=>a+o.total, 0);
+  const totalItems  = logs.reduce((a,o)=>a+o.items.reduce((b,i)=>b+i.qty,0), 0);
+  const body = document.getElementById('hist-body');
+  body.innerHTML = `
+    <div style="font-size:13px;color:var(--text3);margin-bottom:18px;">${label}</div>
+    <div class="hist-stat-row">
+      <div class="hist-stat"><h4>${t('totalOrders')}</h4><div class="hval">${totalOrders}</div></div>
+      <div class="hist-stat"><h4>${t('totalSales')}</h4><div class="hval" style="color:var(--green);">${totalRev.toFixed(2)} DH</div></div>
+      <div class="hist-stat"><h4>${t('totalItems')}</h4><div class="hval">${totalItems}</div></div>
+    </div>
+    ${totalOrders===0 ? t('noPeriodOrders') : ''}`;
+}
+
+// ── Order Log ──────────────────────────────────
+function resetFilter(){
+  document.getElementById('filter-server').value='';
+  renderLog();
+}
+
+function renderLog(){
+  const today = new Date().toISOString().slice(0,10);
+  const filterServer = document.getElementById('filter-server').value;
+
+  // All today's orders (unfiltered) for the banner
+  const allToday = S.orderLog.filter(o=> o.dateKey === today && !o.cancelled);
+  const todayTotalEl = document.getElementById('today-total');
+  const todayCountEl = document.getElementById('today-count');
+  if(todayTotalEl) todayTotalEl.textContent = allToday.reduce((a,o)=>a+o.total,0).toFixed(2)+' DH';
+  if(todayCountEl) todayCountEl.textContent = allToday.length;
+
+  // Filtered for the log
+  let logs = S.orderLog.filter(o=>{
+    if(o.dateKey !== today) return false;
+    if(filterServer && o.server !== filterServer) return false;
+    return true; // include cancelled so they show with strikethrough
+  });
+
+  const lel = document.getElementById('log-list');
+  if(!logs.length){ lel.innerHTML=`<div class="nodata">${t('noOrders')}</div>`; return; }
+
+  // Group by server name only — one row per server
+  const groups = {};
+  logs.forEach(o=>{
+    const key = o.server||'?';
+    if(!groups[key]) groups[key]={ server:o.server, orders:[], total:0 };
+    groups[key].orders.push(o);
+    groups[key].total += o.total;
+  });
+  // Orders already in reverse-chronological (newest first) since orderLog uses unshift
+
+  lel.innerHTML = Object.values(groups).map(g=>`
+    <div class="srv-group">
+      <div class="srv-group-hdr">
+        <div class="srv-group-name">${g.server}</div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div class="srv-group-meta">${g.orders.length} commande${g.orders.length>1?'s':''}</div>
+          <div class="srv-group-total">${g.total.toFixed(2)} DH</div>
+        </div>
+      </div>
+      <div class="orders-row">
+        ${g.orders.map(o=>`
+          <div class="order-chip ${o.cancelled?'cancelled':''}" id="chip-${o.num}">
+            <div class="chip-top">
+              <span class="chip-num">#${o.num}</span>
+              <span class="chip-time">${o.dateKey||''} ${o.time}</span>
+            </div>
+            <div class="chip-items ${o.cancelled?'struck':''}">${o.items.map(i=>`${i.qty}× ${i.namefr||i.name||'?'}`).join(', ')}</div>
+            ${o.cancelled
+              ? `<div class="chip-cancelled-lbl">${t('cancelledLbl')}${o.cancelReason?' — '+o.cancelReason:''}</div>`
+              : `<div class="chip-total">${o.total.toFixed(2)} DH</div>
+                 <button class="chip-cancel" onclick="cancelOrderFromLog(${o.num})">${t('ownerCancelBtn')}</button>`
+            }
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// ── Staff ──────────────────────────────────────
+function srvName(s){ return lang==='ar' && s.nameAr ? s.nameAr : s.name; }
+
+function renderStaffGrid(){
+  const el = document.getElementById('staff-grid');
+  if(!el) return;
+  if(!S.servers || S.servers.length===0){
+    el.innerHTML='<div class="nodata" style="padding:16px;color:var(--text3);font-size:14px;">Aucun serveur ajouté.</div>';
+    return;
+  }
+  el.innerHTML=S.servers.map((s,i)=>{
+    if(!s||!s.name) return '';
+    const active = !!s.online;
+    const statusStyle = active
+      ? 'padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(76,255,122,0.15);color:#4cff7a;border:1.5px solid #4cff7a;white-space:nowrap;'
+      : 'padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(224,82,82,0.12);color:#e05252;border:1.5px solid #e05252;white-space:nowrap;';
+    const statusText = active ? t('statusActive') : t('statusInactive');
+    const initials = s.name.split(' ').map(n=>n[0]||'').join('').slice(0,2).toUpperCase();
+    const names = s.name + (s.nameAr ? ' / '+s.nameAr : '');
+    return `
+    <div class="sc">
+      <div class="sc-av">${initials}</div>
+      <div class="sc-info">
+        <div class="sc-name">${names}</div>
+        <div class="sc-pin">PIN: ${s.pin||'—'}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+        <div style="${statusStyle}">${statusText}</div>
+        <button class="delbtn" onclick="removeServer(${i})">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function addServer(){
+  const nameEl  = document.getElementById('ns-name');
+  const nameArEl = document.getElementById('ns-name-ar');
+  const pinEl   = document.getElementById('ns-pin');
+  const errEl   = document.getElementById('srv-err');
+  const name    = (nameEl.value||'').trim();
+  const nameAr  = (nameArEl.value||'').trim();
+  const pin     = (pinEl.value||'').trim();
+  errEl.textContent = '';
+  if(!name||!pin){ errEl.textContent=t('fillFields'); return; }
+  if(!/^\d{4}$/.test(pin)){ errEl.textContent=t('pinInvalid'); return; }
+  if(S.servers.find(s=>s.pin===pin)){ errEl.textContent=t('pinExists'); return; }
+  S.servers.push({id:S.nextSrvId++, name, nameAr, pin, online:false});
+  saveData(); renderStaffGrid();
+  nameEl.value=''; nameArEl.value=''; pinEl.value='';
+  toast(name+' — '+t('srvAdded'));
+}
+function removeServer(i){
+  if(!confirm(S.servers[i].name+' — '+t('removeSrvQ'))) return;
+  S.servers.splice(i,1); saveData(); renderStaffGrid(); toast(t('srvRemoved'));
+}
+
+// ── Image upload ───────────────────────────────
+let pendingImg = null;
+function dzOver(e){ e.preventDefault(); document.getElementById('img-dz').classList.add('over'); }
+function dzLeave(){ document.getElementById('img-dz').classList.remove('over'); }
+function dzDrop(e){
+  e.preventDefault(); dzLeave();
+  const file=e.dataTransfer.files[0];
+  if(file&&file.type.startsWith('image/')) readImg(file);
+}
+function imgChosen(e){ const file=e.target.files[0]; if(file) readImg(file); }
+function readImg(file){
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    pendingImg=ev.target.result;
+    const prev=document.getElementById('dz-preview');
+    prev.src=pendingImg; prev.style.display='block';
+    document.getElementById('dz-text').textContent=file.name;
+  };
+  reader.readAsDataURL(file);
+}
+function clearImg(){
+  pendingImg=null;
+  const prev=document.getElementById('dz-preview');
+  prev.src=''; prev.style.display='none';
+  document.getElementById('dz-text').textContent='Glissez une photo ici ou cliquez pour choisir';
+  document.getElementById('img-file').value='';
+}
+
+// ── Menu ───────────────────────────────────────
+function renderMenuList(){
+  document.getElementById('menu-list').innerHTML=S.menu.map(item=>`
+    <div class="menu-row">
+      ${item.img
+        ? `<img class="mr-thumb" src="${item.img}" alt="${item.namefr}">`
+        : `<div class="mr-emoji">${item.emoji||'☕'}</div>`}
+      <div class="mr-info">
+        <div class="mr-name">${item.namefr}${item.namear?` / ${item.namear}`:''}</div>
+        <div class="mr-meta">${item.price.toFixed(2)} DH</div>
+      </div>
+      <button class="delbtn" onclick="removeMenuItem(${item.id})">✕</button>
+    </div>`).join('');
+}
+function addMenuItem(){
+  const namefr=document.getElementById('ni-namefr').value.trim();
+  const namear=document.getElementById('ni-namear').value.trim();
+  const price=parseFloat(document.getElementById('ni-price').value);
+  if(!namefr||isNaN(price)){ toast(t('fillFields')); return; }
+  S.menu.push({id:S.nextMenuId++,emoji:'☕',namefr,namear,price,cat:'',descfr:'',descar:'',img:pendingImg||null});
+  saveData(); renderMenuList(); renderMenu();
+  ['ni-namefr','ni-namear','ni-price'].forEach(id=>document.getElementById(id).value='');
+  clearImg();
+  toast(namefr+' — '+t('itemAdded'));
+}
+function removeMenuItem(id){
+  const item=S.menu.find(i=>i.id===id);
+  if(!confirm(`"${item?.namefr}" — ${t('removeItemQ')}`)) return;
+  S.menu=S.menu.filter(i=>i.id!==id);
+  S.order=S.order.filter(o=>o.id!==id);
+  saveData(); renderMenuList(); renderMenu(); toast(t('itemRemoved'));
+}
+
+// ── Shop Info ──────────────────────────────────
+function saveShopInfo(){
+  const name = (document.getElementById('inp-shopname').value||'').trim();
+  const wifiName = (document.getElementById('inp-wifi-name').value||'').trim();
+  const wifiPass = (document.getElementById('inp-wifi-pass').value||'').trim();
+  S.shopName = name;
+  S.wifiName = wifiName;
+  S.wifiPass = wifiPass;
+  saveData();
+  // Update all logo displays
+  updateLogoDisplays();
+  document.getElementById('shop-save-msg').textContent = '✓ ' + t('shopSaved');
+  setTimeout(()=>{ const el=document.getElementById('shop-save-msg'); if(el) el.textContent=''; }, 3000);
+}
+function updateLogoDisplays(){
+  const n = S.shopName && S.shopName.trim() ? S.shopName : 'CaféFlow';
+  ['logo-welcome','logo-pos','logo-owner','logo-login'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.textContent=n;
+  });
+}
+
+// ── Account ────────────────────────────────────
+function saveAccount(){
+  const u=(document.getElementById('inp-ouser').value||'').trim();
+  const p=document.getElementById('inp-opass').value;
+  const p2=document.getElementById('inp-opass2').value;
+  const msgEl=document.getElementById('acc-save-msg');
+  if(!u){ msgEl.textContent=t('fillFields'); msgEl.style.color='var(--red)'; return; }
+  if(p||p2){
+    if(p!==p2){ msgEl.textContent=t('passMismatch'); msgEl.style.color='var(--red)'; return; }
+    S.owner.password=p;
+  }
+  S.owner.username=u;
+  saveData();
+  msgEl.style.color='var(--green)';
+  msgEl.textContent='✓ '+t('accSaved');
+  setTimeout(()=>{ if(msgEl) msgEl.textContent=''; },3000);
+  document.getElementById('inp-opass').value='';
+  document.getElementById('inp-opass2').value='';
+}
+
+// ── Email ──────────────────────────────────────
+function saveEmail(){
+  S.emailSettings.email=document.getElementById('ow-email').value.trim();
+  S.emailSettings.reportTime=document.getElementById('ow-rtime').value;
+  S.emailSettings.daily=document.getElementById('tgl-daily').checked;
+  S.emailSettings.perOrder=document.getElementById('tgl-per').checked;
+  S.emailSettings.staffAlerts=document.getElementById('tgl-staff').checked;
+  saveData(); toast(t('emailSaved'));
+}
+function testEmail(){
+  const email=document.getElementById('ow-email').value.trim()||S.emailSettings.email;
+  if(!email){ toast(t('noEmail')); return; }
+  alert(`📧 → ${email}\n\n${S.shopName||'CaféFlow'} — Rapport\nCommandes: ${S.orderLog.length}\nRevenus: ${S.orderLog.reduce((a,o)=>a+o.sub,0).toFixed(2)} DH\n\n(Connectez SendGrid ou Mailgun pour les vrais emails.)`);
+}
+
+// ── Reset ──────────────────────────────────────
+function resetAll(){
+  if(!confirm('Effacer TOUTES les données ? Cette action est irréversible.')) return;
+  localStorage.removeItem(STORE_KEY);
+  toast('Données effacées. Rechargement…');
+  setTimeout(()=>location.reload(),1200);
+}
+
+// ════════════════════════════════════════════════
+// CLOCK & TOAST
+// ════════════════════════════════════════════════
+function tick(){
+  const now=new Date();
+  const timeStr=now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const names={
+    fr:{
+      days:['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+      months:['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc']
+    },
+    ar:{
+      days:['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],
+      months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
+    }
+  };
+  const n = names[lang] || names.fr;
+  const dateStr = n.days[now.getDay()]+' '+now.getDate()+' '+n.months[now.getMonth()]+' '+now.getFullYear();
+  ['clk','clk2'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.innerHTML=`<span class="clk-date">${dateStr}</span><span class="clk-time">${timeStr}</span>`;
+  });
+}
+setInterval(tick,1000); tick();
+
+let _toastT;
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('on');
+  clearTimeout(_toastT); _toastT=setTimeout(()=>el.classList.remove('on'),2800);
+}
+
+// ════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════
+loadData();
+// Reset all online flags on fresh load
+S.servers.forEach(s=>s.online=false);
+S.server=null; S.order=[];
+setLang('fr');
+updateLogoDisplays();
+show('sw');
+</script>
+
+<!-- CANCEL ORDER OVERLAY (global) -->
+<!-- CANCEL ORDER OVERLAY -->
+    <div class="hist-overlay" id="cancel-overlay">
+      <div class="hist-box" style="width:340px;max-width:95vw;">
+        <div class="hist-hdr">
+          <div class="hist-title" style="color:var(--red);">✕ Annuler commande <span id="cancel-order-num"></span></div>
+          <button class="hist-close" onclick="closeCancelOverlay()">✕</button>
+        </div>
+        <div style="padding:20px;display:flex;flex-direction:column;align-items:center;gap:14px;">
+          <div style="font-size:14px;color:var(--text2);text-align:center;" id="cancel-pin-label">Entrez votre PIN pour annuler</div>
+          <div style="display:flex;gap:12px;">
+            <div class="lk-dot" id="cd0"></div>
+            <div class="lk-dot" id="cd1"></div>
+            <div class="lk-dot" id="cd2"></div>
+            <div class="lk-dot" id="cd3"></div>
+          </div>
+          <div style="color:var(--red);font-size:13px;min-height:18px;" id="cancel-err"></div>
+          <div class="lk-numpad">
+            <button class="lkb" onclick="cpPin('1')">1</button>
+            <button class="lkb" onclick="cpPin('2')">2</button>
+            <button class="lkb" onclick="cpPin('3')">3</button>
+            <button class="lkb" onclick="cpPin('4')">4</button>
+            <button class="lkb" onclick="cpPin('5')">5</button>
+            <button class="lkb" onclick="cpPin('6')">6</button>
+            <button class="lkb" onclick="cpPin('7')">7</button>
+            <button class="lkb" onclick="cpPin('8')">8</button>
+            <button class="lkb" onclick="cpPin('9')">9</button>
+            <button class="lkb del z" onclick="cpDel()">⌫</button>
+            <button class="lkb" onclick="cpPin('0')">0</button>
+          </div>
+          <div style="width:100%;">
+            <label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;" id="cancel-reason-lbl">Raison (optionnel)</label>
+            <input type="text" id="cancel-reason-inp" placeholder="Ex: client parti, erreur commande…" autocomplete="off"
+              style="width:100%;margin-top:5px;padding:9px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:13px;font-family:inherit;outline:none;"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>
