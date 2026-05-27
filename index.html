@@ -138,7 +138,7 @@ body.ar .pin-back{left:auto;right:20px;}
 
 /* POS */
 #spos{flex-direction:column;}
-.pos-body{display:flex;flex:1;overflow:hidden;}
+.pos-body{display:flex;flex:1;overflow:hidden;min-height:0;}
 .menu-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 .mgrid{flex:1;overflow-y:auto;padding:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;align-content:start;scrollbar-width:thin;}
 .mi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all .18s;display:flex;flex-direction:column;overflow:hidden;}
@@ -152,11 +152,11 @@ body.ar .pin-back{left:auto;right:20px;}
 .mi-name-ar{font-size:11px;color:var(--text2);font-weight:400;}
 
 /* ORDER */
-.opanel{width:320px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;}
+.opanel{width:320px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;min-height:0;}
 body.ar .opanel{border-left:none;border-right:1px solid var(--border);}
 .op-hdr{padding:16px 18px 12px;border-bottom:1px solid var(--border);}
 .op-title{font-family:'DM Serif Display',serif;font-size:20px;}
-.oi-list{flex:1;overflow-y:auto;padding:10px 14px;scrollbar-width:thin;}
+.oi-list{flex:1;min-height:0;overflow-y:auto;padding:10px 14px;scrollbar-width:thin;}
 .oi{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--border);}
 .oi:last-child{border-bottom:none;}
 .qbtn{width:26px;height:26px;border-radius:6px;border:1px solid var(--border2);background:var(--surface);color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -167,10 +167,10 @@ body.ar .opanel{border-left:none;border-right:1px solid var(--border);}
 .oi-rm{color:var(--text3);font-size:15px;cursor:pointer;padding:2px 4px;border:none;background:none;}
 .oi-rm:hover{color:var(--red);}
 .oempty{text-align:center;color:var(--text3);font-size:14px;padding:36px 16px;line-height:1.6;}
-.op-foot{padding:14px 18px;border-top:1px solid var(--border);}
+.op-foot{padding:10px 14px;border-top:1px solid var(--border);flex-shrink:0;}
 .tot-row{display:flex;justify-content:space-between;font-size:18px;font-weight:600;color:var(--text);padding:6px 0;}
 .tot-row span:last-child{color:var(--accent);}
-.onote{width:100%;padding:9px 11px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:13px;resize:none;outline:none;margin:10px 0;}
+.onote{width:100%;padding:7px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:13px;resize:none;outline:none;margin:6px 0;}
 .onote:focus{border-color:var(--accent);}
 .oact{display:flex;gap:8px;}
 .obtn{flex:1;padding:13px;border-radius:var(--rs);border:none;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;}
@@ -241,6 +241,9 @@ body.ar .lk-timer{right:auto;left:16px;}
 .log-filter select{min-width:160px;}
 .log-filter-btn{padding:9px 18px;border-radius:var(--rs);border:none;background:var(--accent);color:#1a1400;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;}
 .log-filter-btn.reset{background:var(--surface);color:var(--text2);border:1px solid var(--border2);}
+.log-period-btn{padding:7px 16px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;font-size:13px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.log-period-btn.on{background:var(--accent);border-color:var(--accent);color:#1a1400;font-weight:600;}
+.date-group-hdr{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;padding:4px 8px;margin-bottom:4px;margin-top:6px;}
 .log-summary{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
 .log-sum-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:10px 18px;font-size:13px;color:var(--text2);}
 .log-sum-card strong{color:var(--accent);font-size:16px;display:block;margin-top:2px;}
@@ -313,7 +316,99 @@ body.ar .lk-timer{right:auto;left:16px;}
 
 @media print{body>*:not(#pa){display:none!important;}#pa{display:block!important;}}
 #pa{display:none;}
-@media(max-width:800px){.stat-grid{grid-template-columns:1fr 1fr;}.opanel{width:270px;}.mgrid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));}}
+@media(max-width:800px){
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .opanel{width:260px;}
+  .mgrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
+  .obtn{padding:11px 6px;font-size:13px;}
+}
+@media(max-width:900px) and (min-width:481px){
+  /* Tablets — ensure footer always visible */
+  .op-foot{padding:8px 12px;}
+  .onote{margin:4px 0;}
+  .obtn{padding:10px 6px;font-size:13px;}
+}
+
+/* ── MOBILE (phone) ── */
+@media(max-width:480px){
+
+  /* Welcome */
+  #sw{flex-direction:column;}
+  .sw-top{padding:16px 16px 0;flex-wrap:wrap;gap:8px;}
+  .sw-logo{font-size:28px;}
+  .sw-cards{flex-direction:column;gap:14px;padding:14px 16px 24px;}
+  .wcard{height:auto;padding:24px 20px;min-height:140px;}
+  .wcard-icon{font-size:48px;}
+  .wcard-title{font-size:22px;}
+  .wcard-sub{font-size:13px;}
+
+  /* POS topbar */
+  .topbar{padding:8px 12px;flex-wrap:wrap;gap:6px;}
+  .tbar-logo{font-size:22px;}
+  #srv-name{font-size:15px;}
+  .tbar-r{gap:5px;}
+  .btn-sm{padding:6px 10px;font-size:12px;}
+
+  /* POS body — stack vertically on phone */
+  .pos-body{flex-direction:column;}
+  .menu-panel{flex:none;height:55vh;}
+  .opanel{width:100%;border-left:none;border-top:1px solid var(--border);height:45vh;}
+  body.ar .opanel{border-right:none;border-top:1px solid var(--border);}
+  .mgrid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));padding:10px;}
+
+  /* Lock screen */
+  .lk-right{width:100px;}
+  .lk-right-icon{font-size:28px;}
+  .lk-right-title{font-size:12px;}
+  .lk-right-sub{display:none;}
+  .lk-numpad{grid-template-columns:repeat(3,64px);gap:8px;}
+  .lkb{height:64px;font-size:20px;}
+
+  /* Owner dashboard */
+  .ow-body{padding:14px 14px;}
+  .stat-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .stat-card{padding:12px;}
+  .stat-card .val{font-size:20px;}
+
+  /* Top banner buttons — stack vertically */
+  div[style*="display:flex;align-items:stretch;gap:14px;margin-bottom:18px"]{flex-direction:column!important;}
+
+  /* Log filter */
+  .log-filter{flex-direction:column;gap:8px;}
+  .log-filter select,.log-filter input{min-width:0;width:100%;}
+
+  /* Server group — stack on mobile */
+  .srv-group{flex-direction:column;}
+  .srv-group-hdr{max-width:100%;border-right:none;border-bottom:1px solid var(--border);border-radius:var(--r) var(--r) 0 0;flex-direction:row;justify-content:space-between;align-items:center;padding:12px 14px;}
+  body.ar .srv-group-hdr{border-radius:var(--r) var(--r) 0 0;}
+  .orders-row{padding:10px 10px;}
+  .order-chip{min-width:130px;}
+
+  /* Staff grid */
+  .staff-grid{grid-template-columns:1fr;}
+
+  /* Add form rows */
+  .frow.c3{grid-template-columns:1fr;}
+  .frow.c2{grid-template-columns:1fr;}
+
+  /* Hist box full screen on mobile */
+  .hist-box{width:100vw;max-width:100vw;height:100vh;max-height:100vh;border-radius:0;}
+  .hist-stat-row{grid-template-columns:1fr;}
+
+  /* Receipt */
+  .rc-wrap{width:95vw;}
+
+  /* Pin pad */
+  .numpad{grid-template-columns:repeat(3,72px);gap:9px;}
+  .nb{height:72px;font-size:20px;}
+  .pin-title{font-size:22px;}
+
+  /* Owner login box */
+  .lbox{width:90vw;padding:28px 20px;}
+
+  /* Topbar clock */
+  #clk,#clk2{display:none;}
+}
 </style>
 </head>
 <body class="">
@@ -388,7 +483,7 @@ body.ar .lk-timer{right:auto;left:16px;}
 </div>
 
 <!-- POS -->
-<div id="spos" class="screen">
+<div id="spos" class="screen" style="flex-direction:column;overflow:hidden;">
   <div class="topbar">
     <!-- Left: café name -->
     <div style="flex:1;">
@@ -433,9 +528,9 @@ body.ar .lk-timer{right:auto;left:16px;}
         </div>
       </div>
       <!-- Server today history -->
-      <div style="border-top:1px solid var(--border);flex-shrink:0;">
+      <div style="border-top:1px solid var(--border);flex-shrink:0;max-height:35vh;display:flex;flex-direction:column;">
         <button onclick="toggleSrvHistory()" id="srv-hist-toggle" style="width:100%;padding:10px 18px;background:transparent;border:none;color:var(--text2);font-family:inherit;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .15s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='transparent'">
-          <span id="srv-hist-lbl">📋 Mes commandes aujourd'hui</span>
+          <span id="srv-hist-lbl">📋 Historique de mes commandes</span>
           <span id="srv-hist-arrow">▾</span>
         </button>
         <div id="srv-hist-body" style="display:none;max-height:220px;overflow-y:auto;padding:0 12px 12px;scrollbar-width:thin;"></div>
@@ -554,7 +649,7 @@ body.ar .lk-timer{right:auto;left:16px;}
 
     <div class="sec">
       <!-- Total sales banner + history + top items buttons -->
-      <div style="display:flex;align-items:stretch;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:stretch;gap:14px;margin-bottom:18px;flex-wrap:wrap;" class="banner-row">
         <div style="flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;">
           <div>
             <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;" id="lbl-today-sales">Ventes du jour</div>
@@ -572,15 +667,21 @@ body.ar .lk-timer{right:auto;left:16px;}
 <span id="lbl-top-btn">🏆 Top articles</span><br><span style="font-size:11px;font-weight:400;opacity:.8;" id="lbl-top-sub">Les plus vendus</span>
         </button>
       </div>
-      <h2 id="ow-h2">Journal du jour</h2>
-      <!-- Server filter -->
+      <h2 id="ow-h2">Journal des commandes</h2>
+      <!-- Period + Server filters -->
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+        <button class="log-period-btn on" data-period="today" onclick="setLogPeriod('today')" id="lp-today">Aujourd'hui</button>
+        <button class="log-period-btn" data-period="week" onclick="setLogPeriod('week')" id="lp-week">Cette semaine</button>
+        <button class="log-period-btn" data-period="month" onclick="setLogPeriod('month')" id="lp-month">Ce mois</button>
+        <button class="log-period-btn" data-period="all" onclick="setLogPeriod('all')" id="lp-all">Tout</button>
+      </div>
       <div class="log-filter" style="margin-bottom:14px;">
         <select id="filter-server" onchange="renderLog()" style="min-width:180px;">
           <option value="">Tous les serveurs</option>
         </select>
         <button class="log-filter-btn reset" onclick="resetFilter()">✕ Tout</button>
       </div>
-      <!-- Grouped log (today only) -->
+      <!-- Grouped log -->
       <div id="log-list"></div>
     </div>
 
@@ -616,42 +717,118 @@ body.ar .lk-timer{right:auto;left:16px;}
       </div>
     </div>
 
-    <!-- TOP ITEMS OVERLAY -->
 
-
-
-        <!-- END SHIFT PIN OVERLAY -->
-    <div class="hist-overlay" id="endshift-overlay">
-      <div class="hist-box" style="width:340px;max-width:95vw;">
-        <div class="hist-hdr">
-          <div class="hist-title" id="es-title">⏹ Fin de service</div>
-          <button class="hist-close" onclick="cancelEndShift()">✕</button>
-        </div>
-        <div style="padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px;">
-          <div style="font-size:14px;color:var(--text2);text-align:center;" id="es-sub">Entrez votre PIN pour confirmer la fin de service</div>
-          <div style="display:flex;gap:12px;">
-            <div class="lk-dot" id="es-d0"></div>
-            <div class="lk-dot" id="es-d1"></div>
-            <div class="lk-dot" id="es-d2"></div>
-            <div class="lk-dot" id="es-d3"></div>
+    <!-- STAFF SECTION -->
+    <div class="sec">
+      <h2 id="ow-h3">Personnel</h2>
+      <div class="add-form">
+        <h3 id="ow-add-srv">Ajouter un serveur</h3>
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px;">
+          <div class="fg" style="flex:2;min-width:140px;margin:0;">
+            <label id="fg-sname">Nom (Français)</label>
+            <input type="text" id="ns-name" autocomplete="off" autocorrect="off" placeholder="Jane Dupont" style="width:100%;padding:10px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:14px;font-family:inherit;outline:none;"/>
           </div>
-          <div style="color:var(--red);font-size:13px;min-height:18px;" id="es-err"></div>
-          <div class="lk-numpad">
-            <button class="lkb" onclick="esPin('1')">1</button>
-            <button class="lkb" onclick="esPin('2')">2</button>
-            <button class="lkb" onclick="esPin('3')">3</button>
-            <button class="lkb" onclick="esPin('4')">4</button>
-            <button class="lkb" onclick="esPin('5')">5</button>
-            <button class="lkb" onclick="esPin('6')">6</button>
-            <button class="lkb" onclick="esPin('7')">7</button>
-            <button class="lkb" onclick="esPin('8')">8</button>
-            <button class="lkb" onclick="esPin('9')">9</button>
-            <button class="lkb del z" onclick="esDel()">⌫</button>
-            <button class="lkb" onclick="esPin('0')">0</button>
+          <div class="fg" style="flex:2;min-width:140px;margin:0;">
+            <label>الاسم (عربي)</label>
+            <input type="text" id="ns-name-ar" autocomplete="off" placeholder="جان دوبون" dir="rtl" style="width:100%;padding:10px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:14px;font-family:'Noto Sans Arabic','DM Sans',sans-serif;outline:none;"/>
+          </div>
+          <div class="fg" style="flex:1;min-width:110px;margin:0;">
+            <label id="fg-spin">PIN (4 chiffres)</label>
+            <input type="tel" id="ns-pin" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234" style="width:100%;padding:10px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:15px;letter-spacing:6px;font-family:inherit;outline:none;"/>
+          </div>
+          <button class="btn-sm acc" onclick="addServer()" id="ow-add-srv-btn" style="padding:10px 20px;font-size:14px;white-space:nowrap;">+ Ajouter</button>
+        </div>
+        <div class="ferr" id="srv-err"></div>
+      </div>
+      <div class="staff-grid" id="staff-grid"></div>
+    </div>
+
+    <!-- MENU SECTION -->
+    <div class="sec">
+      <h2 id="ow-h4">Menu</h2>
+      <div class="add-form">
+        <h3 id="ow-add-item">Ajouter un article</h3>
+        <div class="dz" id="img-dz" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+          <input type="file" id="img-file" accept="image/*" onchange="imgChosen(event)"/>
+          <div class="dz-icon">📷</div>
+          <div class="dz-text" id="dz-text">Glissez une photo ici ou cliquez pour choisir</div>
+          <img class="dz-preview" id="dz-preview"/>
+        </div>
+        <div class="frow c3">
+          <div class="fg"><label>Nom (FR)</label><input type="text" id="ni-namefr" placeholder="Latte"/></div>
+          <div class="fg"><label>اسم (AR)</label><input type="text" id="ni-namear" placeholder="لاتيه" dir="rtl"/></div>
+          <div class="fg"><label id="fg-price">Prix (DH)</label><input type="number" id="ni-price" step="0.01" min="0" placeholder="4.50"/></div>
+        </div>
+        <div class="frow c2">
+          <div class="fg"><label id="fg-cat">Catégorie</label>
+            <select id="ni-cat"><option>Café</option><option>Thé</option><option>Froids</option><option>Food</option><option>Pâtisseries</option><option>Extras</option></select>
           </div>
         </div>
+        <button class="btn-sm acc" onclick="addMenuItem()" id="ow-add-item-btn">+ Ajouter au menu</button>
+      </div>
+      <div id="menu-list"></div>
+    </div>
+
+    <!-- EMAIL SECTION -->
+    <div class="sec">
+      <h2 id="ow-h5">Notifications email</h2>
+      <div class="email-box">
+        <div class="frow c2" style="margin-bottom:14px;">
+          <div class="fg"><label id="fg-email">Email propriétaire</label><input type="email" id="ow-email" placeholder="vous@example.com"/></div>
+          <div class="fg"><label id="fg-rtime">Heure du rapport</label>
+            <select id="ow-rtime">
+              <option value="eod">Fin de journée (23h59)</option>
+              <option value="10">10h00</option>
+              <option value="14">14h00</option>
+              <option value="18">18h00</option>
+            </select>
+          </div>
+        </div>
+        <div class="tgl-row"><div><div class="tgl-lbl" id="tgl1l">Résumé quotidien</div><div class="tgl-sub" id="tgl1s">Commandes, revenus</div></div><label class="tgl"><input type="checkbox" id="tgl-daily" checked/><span class="tgl-sl"></span></label></div>
+        <div class="tgl-row"><div><div class="tgl-lbl" id="tgl2l">Alerte par commande</div><div class="tgl-sub" id="tgl2s">Email à chaque ticket</div></div><label class="tgl"><input type="checkbox" id="tgl-per"/><span class="tgl-sl"></span></label></div>
+        <div class="tgl-row"><div><div class="tgl-lbl" id="tgl3l">Alertes connexion</div><div class="tgl-sub" id="tgl3s">Email à la connexion serveur</div></div><label class="tgl"><input type="checkbox" id="tgl-staff"/><span class="tgl-sl"></span></label></div>
+        <button class="btn-sm acc" style="margin-top:14px;" onclick="saveEmail()" id="ow-save-email">Sauvegarder</button>
+        <button class="btn-sm" style="margin-top:8px;margin-left:8px;" onclick="testEmail()" id="ow-test-email">Test</button>
       </div>
     </div>
+
+    <!-- SETTINGS SECTION -->
+    <div class="sec">
+      <h2 id="ow-h6">Paramètres</h2>
+      <div class="settings-box">
+        <h3>☕ Café &amp; Reçu</h3>
+        <div class="frow c2" style="margin-bottom:10px;">
+          <div class="fg"><label>Nom du café (affiché sur le reçu)</label>
+            <input type="text" id="inp-shopname" placeholder="Mon Café" autocomplete="off" autocorrect="off"/>
+          </div>
+          <div class="fg"><label>Nom WiFi</label>
+            <input type="text" id="inp-wifi-name" placeholder="CafeAtlas" autocomplete="off"/>
+          </div>
+        </div>
+        <div class="frow c2" style="margin-bottom:10px;">
+          <div class="fg"><label>Mot de passe WiFi</label>
+            <input type="text" id="inp-wifi-pass" placeholder="1234" autocomplete="off"/>
+          </div>
+        </div>
+        <button class="btn-sm acc" style="font-size:14px;padding:10px 22px;" onclick="saveShopInfo()">💾 Sauvegarder</button>
+        <div id="shop-save-msg" style="color:var(--green);font-size:13px;margin-top:8px;min-height:18px;"></div>
+      </div>
+      <div class="settings-box">
+        <h3>🔑 Compte propriétaire</h3>
+        <div class="frow c3">
+          <div class="fg"><label>Identifiant</label><input type="text" id="inp-ouser" autocomplete="off"/></div>
+          <div class="fg"><label>Nouveau mot de passe</label><input type="password" id="inp-opass" placeholder="Laisser vide pour garder"/></div>
+          <div class="fg"><label>Confirmer</label><input type="password" id="inp-opass2"/></div>
+        </div>
+        <button class="btn-sm acc" style="font-size:14px;padding:10px 22px;" onclick="saveAccount()">💾 Sauvegarder</button>
+        <div id="acc-save-msg" style="color:var(--green);font-size:13px;margin-top:8px;min-height:18px;"></div>
+      </div>
+
+    </div>
+
+  </div><!-- end ow-body -->
+</div><!-- end #sow -->
+
     <div class="hist-overlay" id="top-overlay">
       <div class="hist-box">
         <div class="hist-hdr">
@@ -785,11 +962,7 @@ body.ar .lk-timer{right:auto;left:16px;}
         <div id="acc-save-msg" style="color:var(--green);font-size:13px;margin-top:8px;min-height:18px;"></div>
       </div>
 
-      <div class="settings-box">
-        <h3 style="color:var(--red);">⚠ Réinitialisation</h3>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Efface toutes les données (personnel, menu, commandes, paramètres).</p>
-        <button class="btn-sm" style="border-color:var(--red);color:var(--red);" onclick="resetAll()">Effacer toutes les données</button>
-      </div>
+
 
     </div>
   </div>
@@ -842,7 +1015,7 @@ fr:{
   shopSaved:'Nom du café sauvegardé ✓',
   accSaved:'Compte sauvegardé ✓',
   passMismatch:'Les mots de passe ne correspondent pas.',
-  todaySales:'Ventes du jour', ordersCount:'Commandes',
+  lpAll:'Tout', todaySales:'Ventes du jour', ordersCount:'Commandes',
   histBtn:'📅 Historique', histSub:'Toutes les périodes',
   topBtn:'🏆 Top articles', topSub:'Les plus vendus',
   histTitle:'📅 Historique des ventes', topTitle:'🏆 Articles les plus vendus',
@@ -908,7 +1081,7 @@ ar:{
   shopSaved:'تم حفظ اسم المقهى ✓',
   accSaved:'تم حفظ الحساب ✓',
   passMismatch:'كلمتا المرور غير متطابقتين.',
-  todaySales:'مبيعات اليوم', ordersCount:'الطلبات',
+  lpAll:'الكل', todaySales:'مبيعات اليوم', ordersCount:'الطلبات',
   histBtn:'📅 السجل', histSub:'جميع الفترات',
   topBtn:'🏆 الأكثر مبيعاً', topSub:'المنتجات الرائجة',
   histTitle:'📅 سجل المبيعات', topTitle:'🏆 الأكثر مبيعاً',
@@ -968,6 +1141,7 @@ const TID = {
   'tgl1l':'tgl1l','tgl1s':'tgl1s','tgl2l':'tgl2l','tgl2s':'tgl2s','tgl3l':'tgl3l','tgl3s':'tgl3s',
   'ow-save-email':'owSaveEmail','ow-test-email':'owTestEmail',
   'lbl-today-sales':'todaySales','lbl-orders-count':'ordersCount',
+  'lp-today':'optToday','lp-week':'optWeek','lp-month':'optMonth','lp-all':'lpAll',
   'lbl-hist-btn':'histBtn','lbl-hist-sub':'histSub',
   'lbl-top-btn':'topBtn','lbl-top-sub':'topSub',
   'lbl-hist-title':'histTitle','lbl-top-title':'topTitle',
@@ -990,14 +1164,15 @@ function applyT(){
   if(si) si.innerHTML=t('tpSrv')+': <span id="srv-name">'+(S.server?srvName(S.server):'—')+'</span>';
   // Keep logos updated (café name doesn't change with lang but ensures consistency)
   if(typeof updateLogoDisplays==='function') updateLogoDisplays();
-  // Re-render staff grid so status badges translate
+  // Re-render staff grid and log so names/dates translate
   if(document.getElementById('sow')?.classList.contains('active') && typeof renderStaffGrid==='function') renderStaffGrid();
+  if(document.getElementById('sow')?.classList.contains('active') && typeof renderLog==='function') renderLog();
 }
 
 // ════════════════════════════════════════════════
 // STATE — single source of truth
 // ════════════════════════════════════════════════
-const STORE_KEY = 'cfpos_v1';
+const STORE_KEY = 'cfpos_v2';
 
 const DEFAULTS = {
   shopName: 'Café Atlas',
@@ -1330,7 +1505,8 @@ function updateCountdown(){
 // OWNER DASHBOARD
 // ════════════════════════════════════════════════
 function loadOwnerDash(){
-  const logs=S.orderLog.filter(o=>!o.cancelled);
+  const today = new Date().toISOString().slice(0,10);
+  const logs=S.orderLog.filter(o=>!o.cancelled && o.dateKey===today);
   document.getElementById('st-ord').textContent=logs.length;
   document.getElementById('st-rev').textContent=logs.reduce((a,o)=>a+o.sub,0).toFixed(2)+' DH';
   document.getElementById('st-itm').textContent=logs.reduce((a,o)=>a+o.items.reduce((b,i)=>b+i.qty,0),0);
@@ -1459,40 +1635,78 @@ function toggleSrvHistory(){
 function renderSrvHistory(){
   const el = document.getElementById('srv-hist-body');
   if(!el || !S.server) return;
-  const today = new Date().toISOString().slice(0,10);
   const myId   = S.server.id;
   const myName = S.server.name;
 
-  // Strict match: serverId must match OR (no serverId AND server name matches exactly)
+  const todayKey = new Date().toISOString().slice(0,10);
   const myOrders = S.orderLog.filter(o=>{
-    if(o.dateKey !== today) return false;
-    if(o.serverId != null) return o.serverId === myId;   // ID match (preferred)
-    return o.server === myName;                           // name fallback for old orders
-  });
+    if(o.serverId != null) return o.serverId === myId;
+    return o.server === myName;
+  }).map(o=>({...o, dateKey: o.dateKey || todayKey})); // fallback missing dateKey to today
 
   if(!myOrders.length){
-    el.innerHTML=`<div style="color:var(--text3);font-size:13px;padding:8px 4px;">Aucune commande aujourd'hui.</div>`;
+    el.innerHTML='<div style="color:var(--text3);font-size:13px;padding:8px 4px;">Aucune commande.</div>';
     return;
   }
-  const active = myOrders.filter(o=>!o.cancelled);
-  const total  = active.reduce((a,o)=>a+o.total,0);
-  el.innerHTML=`
-    <div style="font-size:12px;color:var(--text3);padding:6px 4px 8px;display:flex;justify-content:space-between;">
-      <span>${active.length} commande${active.length>1?'s':''}</span>
-      <span style="color:var(--green);font-weight:700;">${total.toFixed(2)} DH</span>
-    </div>
-    ${myOrders.map(o=>`
-      <div style="padding:7px 8px;border-radius:var(--rs);margin-bottom:6px;background:${o.cancelled?'rgba(224,82,82,.06)':'var(--bg3)'};border:1px solid ${o.cancelled?'rgba(224,82,82,.2)':'var(--border)'};font-size:12px;">
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
-          <span style="font-weight:600;color:${o.cancelled?'var(--red)':'var(--text)'};">#${o.num}</span>
-          <span style="color:var(--text3);">${o.time}</span>
-        </div>
-        <div style="color:var(--text2);${o.cancelled?'text-decoration:line-through;':''}">${o.items.map(i=>`${i.qty}× ${i.namefr||i.name||'?'}`).join(', ')}</div>
-        <div style="display:flex;justify-content:space-between;margin-top:4px;">
-          <span style="font-size:11px;color:${o.cancelled?'var(--red)':'var(--text3)'};">${o.cancelled?'✕ '+(o.cancelReason||'Annulée'):''}</span>
-          <span style="font-weight:700;color:${o.cancelled?'var(--text3)':'var(--green)'};">${o.total.toFixed(2)} DH</span>
-        </div>
-      </div>`).join('')}`;
+
+  // Group by date
+  const byDate = {};
+  myOrders.forEach(o=>{
+    const dk = o.dateKey||'unknown';
+    if(!byDate[dk]) byDate[dk]=[];
+    byDate[dk].push(o);
+  });
+  const sortedDates = Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
+
+  const daysF  =['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  const daysA  =['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const monF   =['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  const monA   =['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  const today  = new Date().toISOString().slice(0,10);
+  const isAr   = lang==='ar';
+
+  function fmtDate(dk){
+    if(!dk||dk==='unknown') return '—';
+    if(dk===today) return isAr?'اليوم':"Aujourd'hui";
+    const d=new Date(dk+'T00:00:00');
+    const yr = d.getFullYear()===new Date().getFullYear()?'':' '+d.getFullYear();
+    return (isAr?daysA:daysF)[d.getDay()]+' '+d.getDate()+' '+(isAr?monA:monF)[d.getMonth()]+yr;
+  }
+
+  const allActive = myOrders.filter(o=>!o.cancelled);
+  const grandTotal = allActive.reduce((a,o)=>a+o.total,0);
+
+  let html = '<div style="font-size:12px;color:var(--text3);padding:6px 4px 10px;display:flex;justify-content:space-between;border-bottom:1px solid var(--border);margin-bottom:8px;">';
+  html += '<span>'+allActive.length+' commande'+(allActive.length>1?'s':'')+'</span>';
+  html += '<span style="color:var(--green);font-weight:700;">'+grandTotal.toFixed(2)+' DH</span></div>';
+
+  sortedDates.forEach(dk=>{
+    const orders = byDate[dk];
+    const actOrd = orders.filter(o=>!o.cancelled);
+    const dayTot = actOrd.reduce((a,o)=>a+o.total,0);
+    html += '<div style="margin-bottom:14px;">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;padding:5px 0;border-bottom:1px solid var(--border);">';
+    html += '<span style="font-size:12px;font-weight:700;color:var(--accent);">'+fmtDate(dk)+'</span>';
+    html += '<span style="font-size:12px;font-weight:700;color:var(--green);">'+dayTot.toFixed(2)+' DH · '+actOrd.length+' cmd</span></div>';
+    orders.forEach(o=>{
+      const bg    = o.cancelled?'rgba(224,82,82,.06)':'var(--bg3)';
+      const brd   = o.cancelled?'rgba(224,82,82,.2)':'var(--border)';
+      const nc    = o.cancelled?'var(--red)':'var(--text)';
+      const struck= o.cancelled?'text-decoration:line-through;':'';      const itms  = o.items.map(i=>i.qty+'× '+(i.namefr||i.name||'?')).join(', ');
+      html += '<div style="padding:7px 8px;border-radius:var(--rs);margin-bottom:5px;background:'+bg+';border:1px solid '+brd+';font-size:12px;">';
+      html += '<div style="display:flex;justify-content:space-between;margin-bottom:3px;">';
+      html += '<span style="font-weight:600;color:'+nc+';">#'+o.num+'</span>';
+      html += '<span style="color:var(--text3);">'+o.time+'</span></div>';
+      html += '<div style="color:var(--text2);'+struck+'">'+itms+'</div>';
+      html += '<div style="display:flex;justify-content:space-between;margin-top:4px;">';
+      const rsn = o.cancelled?'✕ '+(o.cancelReason||'Annulée'):'';
+      const tc  = o.cancelled?'var(--text3)':'var(--green)';
+      html += '<span style="font-size:11px;color:'+(o.cancelled?'var(--red)':'var(--text3)')+';">'+rsn+'</span>';
+      html += '<span style="font-weight:700;color:'+tc+';">'+o.total.toFixed(2)+' DH</span></div></div>';
+    });
+    html += '</div>';
+  });
+  el.innerHTML = html;
 }
 
 // ── Order Cancellation ──────────────────────────────
@@ -1658,65 +1872,99 @@ function renderHistory(){
 // ── Order Log ──────────────────────────────────
 function resetFilter(){
   document.getElementById('filter-server').value='';
-  renderLog();
+  setLogPeriod('today');
 }
 
+let logPeriod = 'today';
+function setLogPeriod(p){
+  logPeriod = p;
+  document.querySelectorAll('.log-period-btn').forEach(b=>b.classList.toggle('on', b.getAttribute('data-period')===p));
+  renderLog();
+}
+function getLogDateRange(){
+  const now = new Date();
+  const todayKey = now.toISOString().slice(0,10);
+  if(logPeriod==='today') return {from:todayKey, to:todayKey};
+  if(logPeriod==='week'){
+    const d=new Date(now); d.setDate(d.getDate()-d.getDay()+1);
+    return {from:d.toISOString().slice(0,10), to:todayKey};
+  }
+  if(logPeriod==='month') return {from:todayKey.slice(0,7)+'-01', to:todayKey};
+  return {from:'2000-01-01', to:todayKey};
+}
+function getServerDisplayName(nameFr){
+  if(lang !== 'ar') return nameFr;
+  const srv = S.servers.find(s=>s.name===nameFr);
+  return (srv && srv.nameAr) ? srv.nameAr : nameFr;
+}
+function fmtLogDate(dk){
+  if(!dk) return '—';
+  const today = new Date().toISOString().slice(0,10);
+  if(dk===today) return lang==='ar'?'اليوم':"Aujourd'hui";
+  const d = new Date(dk+'T00:00:00');
+  const dF=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  const dA=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const mF=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  const mA=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  const isAr=lang==='ar';
+  return (isAr?dA:dF)[d.getDay()]+' '+d.getDate()+' '+(isAr?mA:mF)[d.getMonth()];
+}
 function renderLog(){
   const today = new Date().toISOString().slice(0,10);
   const filterServer = document.getElementById('filter-server').value;
-
-  // All today's orders (unfiltered) for the banner
-  const allToday = S.orderLog.filter(o=> o.dateKey === today && !o.cancelled);
+  const {from, to} = getLogDateRange();
+  const allToday = S.orderLog.filter(o=> o.dateKey && o.dateKey===today && !o.cancelled);
   const todayTotalEl = document.getElementById('today-total');
   const todayCountEl = document.getElementById('today-count');
   if(todayTotalEl) todayTotalEl.textContent = allToday.reduce((a,o)=>a+o.total,0).toFixed(2)+' DH';
   if(todayCountEl) todayCountEl.textContent = allToday.length;
-
-  // Filtered for the log
   let logs = S.orderLog.filter(o=>{
-    if(o.dateKey !== today) return false;
+    const dk = o.dateKey||today;
+    if(dk < from || dk > to) return false;
     if(filterServer && o.server !== filterServer) return false;
-    return true; // include cancelled so they show with strikethrough
+    return true;
   });
-
   const lel = document.getElementById('log-list');
   if(!logs.length){ lel.innerHTML=`<div class="nodata">${t('noOrders')}</div>`; return; }
-
-  // Group by server name only — one row per server
   const groups = {};
   logs.forEach(o=>{
     const key = o.server||'?';
-    if(!groups[key]) groups[key]={ server:o.server, orders:[], total:0 };
-    groups[key].orders.push(o);
-    groups[key].total += o.total;
+    if(!groups[key]) groups[key]={ server:o.server, orders:[], total:0, count:0 };
+    groups[key].orders.push({...o, dateKey: o.dateKey||today});
+    if(!o.cancelled){ groups[key].total += o.total; groups[key].count++; }
   });
-  // Orders already in reverse-chronological (newest first) since orderLog uses unshift
-
-  lel.innerHTML = Object.values(groups).map(g=>`
-    <div class="srv-group">
+  lel.innerHTML = Object.values(groups).map(g=>{
+    const byDate = {};
+    g.orders.forEach(o=>{ const dk=o.dateKey||today; if(!byDate[dk]) byDate[dk]=[]; byDate[dk].push(o); });
+    const sortedDates = Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
+    const chipsHtml = sortedDates.map(dk=>{
+      const dateOrds = byDate[dk];
+      const dateLbl = logPeriod==='today' ? '' :
+        `<div class="date-group-hdr">${fmtLogDate(dk)}</div>`;
+      const chips = dateOrds.map(o=>{
+        const canc = o.cancelled;
+        return `<div class="order-chip ${canc?'cancelled':''}" id="chip-${o.num}">
+          <div class="chip-top"><span class="chip-num">#${o.num}</span><span class="chip-time">${o.time}</span></div>
+          <div class="chip-items ${canc?'struck':''}">${o.items.map(i=>`${i.qty}× ${i.namefr||i.name||'?'}`).join(', ')}</div>
+          ${canc
+            ? `<div class="chip-cancelled-lbl">${t('cancelledLbl')}${o.cancelReason?' — '+o.cancelReason:''}</div>`
+            : `<div class="chip-total">${o.total.toFixed(2)} DH</div><button class="chip-cancel" onclick="cancelOrderFromLog(${o.num})">${t('ownerCancelBtn')}</button>`
+          }
+        </div>`;
+      }).join('');
+      return dateLbl
+        ? `<div style="display:flex;flex-direction:column;margin-right:10px;flex-shrink:0;">${dateLbl}<div style="display:flex;gap:8px;">${chips}</div></div>`
+        : chips;
+    }).join('');
+    return `<div class="srv-group">
       <div class="srv-group-hdr">
-        <div class="srv-group-name">${g.server}</div>
-        <div style="display:flex;align-items:center;gap:16px;">
-          <div class="srv-group-meta">${g.orders.length} commande${g.orders.length>1?'s':''}</div>
-          <div class="srv-group-total">${g.total.toFixed(2)} DH</div>
-        </div>
+        <div class="srv-group-name">${getServerDisplayName(g.server)}</div>
+        <div class="srv-group-meta">${g.count} commande${g.count>1?'s':''}</div>
+        <div class="srv-group-total">${g.total.toFixed(2)} DH</div>
       </div>
-      <div class="orders-row">
-        ${g.orders.map(o=>`
-          <div class="order-chip ${o.cancelled?'cancelled':''}" id="chip-${o.num}">
-            <div class="chip-top">
-              <span class="chip-num">#${o.num}</span>
-              <span class="chip-time">${o.dateKey||''} ${o.time}</span>
-            </div>
-            <div class="chip-items ${o.cancelled?'struck':''}">${o.items.map(i=>`${i.qty}× ${i.namefr||i.name||'?'}`).join(', ')}</div>
-            ${o.cancelled
-              ? `<div class="chip-cancelled-lbl">${t('cancelledLbl')}${o.cancelReason?' — '+o.cancelReason:''}</div>`
-              : `<div class="chip-total">${o.total.toFixed(2)} DH</div>
-                 <button class="chip-cancel" onclick="cancelOrderFromLog(${o.num})">${t('ownerCancelBtn')}</button>`
-            }
-          </div>`).join('')}
-      </div>
-    </div>`).join('');
+      <div class="orders-row">${chipsHtml}</div>
+    </div>`;
+  }).join('');
 }
 
 // ── Staff ──────────────────────────────────────
@@ -1981,6 +2229,40 @@ show('sw');
         </div>
       </div>
     </div>
+
+
+<!-- END SHIFT OVERLAY (global) -->
+<div class="hist-overlay" id="endshift-overlay">
+  <div class="hist-box" style="width:340px;max-width:95vw;">
+    <div class="hist-hdr">
+      <div class="hist-title" id="es-title">⏹ Fin de service</div>
+      <button class="hist-close" onclick="cancelEndShift()">✕</button>
+    </div>
+    <div style="padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px;">
+      <div style="font-size:14px;color:var(--text2);text-align:center;" id="es-sub">Entrez votre PIN pour confirmer</div>
+      <div style="display:flex;gap:12px;">
+        <div class="lk-dot" id="es-d0"></div>
+        <div class="lk-dot" id="es-d1"></div>
+        <div class="lk-dot" id="es-d2"></div>
+        <div class="lk-dot" id="es-d3"></div>
+      </div>
+      <div style="color:var(--red);font-size:13px;min-height:18px;" id="es-err"></div>
+      <div class="lk-numpad">
+        <button class="lkb" onclick="esPin('1')">1</button>
+        <button class="lkb" onclick="esPin('2')">2</button>
+        <button class="lkb" onclick="esPin('3')">3</button>
+        <button class="lkb" onclick="esPin('4')">4</button>
+        <button class="lkb" onclick="esPin('5')">5</button>
+        <button class="lkb" onclick="esPin('6')">6</button>
+        <button class="lkb" onclick="esPin('7')">7</button>
+        <button class="lkb" onclick="esPin('8')">8</button>
+        <button class="lkb" onclick="esPin('9')">9</button>
+        <button class="lkb del z" onclick="esDel()">⌫</button>
+        <button class="lkb" onclick="esPin('0')">0</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
