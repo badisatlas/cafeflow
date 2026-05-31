@@ -410,6 +410,115 @@ body.ar .lk-timer{right:auto;left:16px;}
   #clk,#clk2{display:none;}
 }
 </style>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+  import { getFirestore, doc, setDoc, getDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBVK4lPEg4QNP2p8Fmy0P7NKPy6WCQETIM",
+    authDomain: "khenifra1-a9837.firebaseapp.com",
+    projectId: "khenifra1-a9837",
+    storageBucket: "khenifra1-a9837.firebasestorage.app",
+    messagingSenderId: "695900276201",
+    appId: "1:695900276201:web:f14c5b8b5ea72299397778"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+  const REF = doc(db, 'cafes', 'cafe-atlas');
+
+  function stripImages(menu){ return (menu||[]).map(i=>({...i,img:null})); }
+
+  function mergeOrders(local, remote){
+    const all = [...(local||[])];
+    (remote||[]).forEach(ro=>{ if(!all.find(lo=>lo.num===ro.num)) all.push(ro); });
+    return all.sort((a,b)=>(b.num||0)-(a.num||0)).slice(0,500);
+  }
+
+  function mergeState(local, remote){
+    return {
+      ...local,
+      shopName:   remote.shopName   ?? local.shopName,
+      wifiName:   remote.wifiName   ?? local.wifiName,
+      wifiPass:   remote.wifiPass   ?? local.wifiPass,
+      owner:      remote.owner      || local.owner,
+      servers:    remote.servers    || local.servers,
+      menu:       remote.menu       || local.menu,
+      nextSrvId:  remote.nextSrvId  || local.nextSrvId,
+      nextMenuId: remote.nextMenuId || local.nextMenuId,
+      orderLog:   mergeOrders(local.orderLog, remote.orderLog),
+    };
+  }
+
+  window._fbReady = false;
+
+  window.syncToFirebase = async function(){
+    try{
+      const raw = localStorage.getItem('cfpos_v2'); if(!raw) return;
+      const d = JSON.parse(raw);
+      await setDoc(REF, {
+        shopName:   d.shopName   || '',
+        wifiName:   d.wifiName   || '',
+        wifiPass:   d.wifiPass   || '',
+        owner:      d.owner      || {},
+        servers:    d.servers    || [],
+        menu:       stripImages(d.menu),
+        orderLog:  (d.orderLog   || []).slice(0,500),
+        nextSrvId:  d.nextSrvId  || 10,
+        nextMenuId: d.nextMenuId || 100,
+        lastSync:   new Date().toISOString()
+      });
+      setSyncStatus('☁ Synced', '#4cff7a');
+    }catch(e){ setSyncStatus('⚠ Offline', '#e8a04a'); console.warn('FB push failed',e); }
+  };
+
+  window.syncFromFirebase = async function(){
+    try{
+      const snap = await getDoc(REF); if(!snap.exists()) return;
+      const raw = localStorage.getItem('cfpos_v2');
+      const local = raw ? JSON.parse(raw) : {};
+      const merged = mergeState(local, snap.data());
+      localStorage.setItem('cfpos_v2', JSON.stringify(merged));
+      setSyncStatus('☁ Synced', '#4cff7a');
+      return true;
+    }catch(e){ setSyncStatus('⚠ Offline', '#e8a04a'); return false; }
+  };
+
+  window.startFirebaseListener = function(cb){
+    return onSnapshot(REF, snap=>{
+      if(!snap.exists()) return;
+      const raw = localStorage.getItem('cfpos_v2');
+      const local = raw ? JSON.parse(raw) : {};
+      const merged = mergeState(local, snap.data());
+      localStorage.setItem('cfpos_v2', JSON.stringify(merged));
+      setSyncStatus('☁ Live', '#4cff7a');
+      if(typeof cb==='function') cb();
+    }, e=>{ setSyncStatus('⚠ Offline', '#e8a04a'); });
+  };
+
+  function setSyncStatus(msg, color){
+    const el = document.getElementById('sync-status');
+    if(el){ el.textContent=msg; el.style.color=color; }
+  }
+
+  // Auto pull on page load then start live listener
+  document.addEventListener('DOMContentLoaded', async ()=>{
+    setSyncStatus('↻ Syncing...', '#e8a04a');
+    await window.syncFromFirebase();
+    window._fbReady = true;
+    // Refresh UI after pull
+    if(typeof loadData==='function') loadData();
+    if(typeof loadOwnerDash==='function'){ loadOwnerDash(); if(typeof renderLog==='function') renderLog(); }
+    if(typeof renderAll==='function') renderAll();
+    // Start live listener for owner app
+    if(typeof renderAll==='function'){
+      window.startFirebaseListener(()=>{ if(typeof renderAll==='function') renderAll(); });
+    }
+  });
+</script>
+
 </head>
 <body class="">
 
@@ -503,6 +612,7 @@ body.ar .lk-timer{right:auto;left:16px;}
     <!-- Right: langs + end shift -->
     <div class="tbar-r" style="flex:1;justify-content:flex-end;">
       <div id="clk"></div>
+      <span id="sync-status" style="font-size:11px;color:#4cff7a;opacity:.7;"></span>
       <div class="tbar-langs">
         <button class="lbtn" data-l="fr" onclick="setLang('fr')">FR</button>
         <button class="lbtn" data-l="ar" onclick="setLang('ar')">ع</button>
@@ -1239,6 +1349,7 @@ function saveData(){
       emailSettings: S.emailSettings,
     };
     localStorage.setItem(STORE_KEY, JSON.stringify(toSave));
+    if(typeof syncToFirebase==='function') syncToFirebase();
   }catch(e){ console.warn('Save failed',e); }
 }
 
