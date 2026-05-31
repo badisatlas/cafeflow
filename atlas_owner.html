@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Atlas Admin">
+<meta name="theme-color" content="#e8a04a">
+<title>Café Atlas — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0e0c;--bg2:#1a1916;--bg3:#242220;
+  --surface:#2a2825;--surface2:#323028;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --text:#f0ece4;--text2:#a09890;--text3:#6a6258;
+  --accent:#e8a04a;--green:#4cff7a;--red:#e05252;
+  --r:12px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
+
+/* LOGIN */
+#screen-login{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px;gap:16px;}
+.login-logo{font-family:'DM Serif Display',serif;font-size:36px;color:var(--accent);text-align:center;}
+.login-sub{font-size:14px;color:var(--text2);text-align:center;margin-top:-8px;}
+.login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:28px 24px;width:100%;max-width:400px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:11px;color:var(--text2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em;}
+.fg input{width:100%;padding:13px 14px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-size:16px;font-family:inherit;outline:none;}
+.fg input:focus{border-color:var(--accent);}
+.btn-p{width:100%;padding:14px;background:var(--accent);color:#1a1400;border:none;border-radius:var(--rs);font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;}
+.login-err{color:var(--red);font-size:13px;text-align:center;min-height:18px;margin-top:8px;}
+.lang-row{display:flex;gap:8px;justify-content:center;}
+.lbtn{padding:6px 16px;border-radius:16px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;font-family:inherit;}
+.lbtn.on{background:var(--accent);border-color:var(--accent);color:#1a1400;font-weight:700;}
+
+/* DASHBOARD */
+#screen-dash{display:none;flex-direction:column;min-height:100vh;}
+.top-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.top-logo{font-family:'DM Serif Display',serif;font-size:22px;color:var(--accent);}
+.top-r{display:flex;gap:8px;align-items:center;}
+.tbtn{padding:7px 12px;border-radius:var(--rs);border:1px solid var(--border2);background:transparent;color:var(--text);font-family:inherit;font-size:12px;cursor:pointer;}
+.tbtn.red{border-color:var(--red);color:var(--red);}
+.dash-body{padding:16px;display:flex;flex-direction:column;gap:16px;padding-bottom:40px;}
+
+/* STAT CARDS */
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;}
+.stat-card h3{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.stat-card .val{font-size:24px;font-weight:700;}
+.val.green{color:var(--green);}
+.val.amber{color:var(--accent);}
+
+/* SECTION */
+.sec{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.sec-hdr{padding:14px 16px;border-bottom:1px solid var(--border);}
+.sec-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--accent);}
+.sec-body{padding:14px 16px;}
+
+/* PERIOD TABS */
+.period-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.ptab{padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;font-size:12px;cursor:pointer;white-space:nowrap;}
+.ptab.on{background:var(--accent);border-color:var(--accent);color:#1a1400;font-weight:600;}
+
+/* HISTORY STATS */
+.hist-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.hs-card{background:var(--bg3);border-radius:var(--rs);padding:10px 12px;text-align:center;}
+.hs-card h4{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+.hs-card .hv{font-size:18px;font-weight:700;}
+
+/* ORDER LOG */
+.log-item{padding:10px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start;}
+.log-item:last-child{border-bottom:none;}
+.li-time{font-size:11px;color:var(--text3);white-space:nowrap;min-width:44px;}
+.li-body{flex:1;font-size:13px;}
+.li-srv{color:var(--accent);font-weight:600;}
+.li-items{font-size:12px;color:var(--text2);margin-top:2px;}
+.li-cancelled{font-size:11px;color:var(--red);margin-top:2px;}
+.li-amt{font-size:14px;font-weight:700;color:var(--green);white-space:nowrap;}
+.li-amt.cancelled{color:var(--text3);text-decoration:line-through;}
+
+/* TOP ITEMS */
+.top-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.top-item:last-child{border-bottom:none;}
+.ti-rank{font-size:18px;min-width:28px;text-align:center;}
+.ti-name{flex:1;font-size:14px;font-weight:500;}
+.ti-bar-wrap{width:60px;background:var(--surface);border-radius:4px;height:6px;}
+.ti-bar{height:6px;background:linear-gradient(90deg,var(--green),var(--accent));border-radius:4px;}
+.ti-qty{font-size:13px;font-weight:700;color:var(--green);min-width:30px;text-align:right;}
+.ti-rev{font-size:12px;color:var(--accent);min-width:60px;text-align:right;}
+
+/* STAFF */
+.staff-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.staff-item:last-child{border-bottom:none;}
+.si-av{width:38px;height:38px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--accent);flex-shrink:0;}
+.si-info{flex:1;}
+.si-name{font-size:14px;font-weight:600;}
+.si-pin{font-size:12px;color:var(--text3);}
+.si-badge{padding:4px 10px;border-radius:16px;font-size:11px;font-weight:700;white-space:nowrap;}
+.si-badge.on{background:rgba(76,255,122,.15);color:#4cff7a;border:1px solid #4cff7a;}
+.si-badge.off{background:rgba(224,82,82,.12);color:var(--red);border:1px solid var(--red);}
+
+/* MENU LIST */
+.menu-item-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.menu-item-row:last-child{border-bottom:none;}
+.mi-thumb{width:44px;height:44px;border-radius:8px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.mi-thumb img{width:44px;height:44px;border-radius:8px;object-fit:cover;}
+.mi-info{flex:1;min-width:0;}
+.mi-name{font-size:13px;font-weight:600;}
+.mi-meta{font-size:12px;color:var(--text3);}
+.del-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.del-btn:hover,.del-btn:active{border-color:var(--red);color:var(--red);}
+
+/* FORMS */
+.add-form{background:var(--bg3);border-radius:var(--rs);padding:14px;margin-bottom:12px;}
+.add-form h4{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.form-row.c1{grid-template-columns:1fr;}
+.fg2{display:flex;flex-direction:column;gap:4px;}
+.fg2 label{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;}
+.fg2 input,.fg2 select{padding:10px 12px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-size:14px;font-family:inherit;outline:none;width:100%;}
+.fg2 input:focus,.fg2 select:focus{border-color:var(--accent);}
+.fg2 select option{background:var(--bg3);}
+.btn-acc{padding:10px 20px;background:var(--accent);border:none;border-radius:var(--rs);color:#1a1400;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;}
+.ferr{color:var(--red);font-size:13px;min-height:18px;margin-top:6px;}
+.fsucc{color:var(--green);font-size:13px;min-height:18px;margin-top:6px;}
+.dz{border:2px dashed var(--border2);border-radius:var(--rs);padding:14px;text-align:center;cursor:pointer;background:var(--bg);position:relative;margin-bottom:10px;}
+.dz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.dz-text{font-size:12px;color:var(--text2);}
+.dz-preview{width:60px;height:60px;border-radius:8px;object-fit:cover;margin:8px auto 0;display:none;border:1px solid var(--border2);}
+.settings-block{background:var(--bg3);border-radius:var(--rs);padding:14px;margin-bottom:12px;}
+.settings-block h4{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;}
+
+.nodata{color:var(--text3);font-size:14px;padding:16px 0;text-align:center;}
+.clk{font-size:11px;color:var(--text3);}
+.custom-dates{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.custom-dates input{flex:1;min-width:130px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-size:14px;font-family:inherit;outline:none;}
+
+@media(max-width:400px){
+  .hist-stats{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+  import { getFirestore, doc, setDoc, getDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBVK4lPEg4QNP2p8Fmy0P7NKPy6WCQETIM",
+    authDomain: "khenifra1-a9837.firebaseapp.com",
+    projectId: "khenifra1-a9837",
+    storageBucket: "khenifra1-a9837.firebasestorage.app",
+    messagingSenderId: "695900276201",
+    appId: "1:695900276201:web:f14c5b8b5ea72299397778"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+  const REF = doc(db, 'cafes', 'cafe-atlas');
+
+  function stripImages(menu){ return (menu||[]).map(i=>({...i,img:null})); }
+
+  function mergeOrders(local, remote){
+    const all = [...(local||[])];
+    (remote||[]).forEach(ro=>{ if(!all.find(lo=>lo.num===ro.num)) all.push(ro); });
+    return all.sort((a,b)=>(b.num||0)-(a.num||0)).slice(0,500);
+  }
+
+  function mergeState(local, remote){
+    return {
+      ...local,
+      shopName:   remote.shopName   ?? local.shopName,
+      wifiName:   remote.wifiName   ?? local.wifiName,
+      wifiPass:   remote.wifiPass   ?? local.wifiPass,
+      owner:      remote.owner      || local.owner,
+      servers:    remote.servers    || local.servers,
+      menu:       remote.menu       || local.menu,
+      nextSrvId:  remote.nextSrvId  || local.nextSrvId,
+      nextMenuId: remote.nextMenuId || local.nextMenuId,
+      orderLog:   mergeOrders(local.orderLog, remote.orderLog),
+    };
+  }
+
+  window._fbReady = false;
+
+  window.syncToFirebase = async function(){
+    try{
+      const raw = localStorage.getItem('cfpos_v2'); if(!raw) return;
+      const d = JSON.parse(raw);
+      await setDoc(REF, {
+        shopName:   d.shopName   || '',
+        wifiName:   d.wifiName   || '',
+        wifiPass:   d.wifiPass   || '',
+        owner:      d.owner      || {},
+        servers:    d.servers    || [],
+        menu:       stripImages(d.menu),
+        orderLog:  (d.orderLog   || []).slice(0,500),
+        nextSrvId:  d.nextSrvId  || 10,
+        nextMenuId: d.nextMenuId || 100,
+        lastSync:   new Date().toISOString()
+      });
+      setSyncStatus('☁ Synced', '#4cff7a');
+    }catch(e){ setSyncStatus('⚠ Offline', '#e8a04a'); console.warn('FB push failed',e); }
+  };
+
+  window.syncFromFirebase = async function(){
+    try{
+      const snap = await getDoc(REF); if(!snap.exists()) return;
+      const raw = localStorage.getItem('cfpos_v2');
+      const local = raw ? JSON.parse(raw) : {};
+      const merged = mergeState(local, snap.data());
+      localStorage.setItem('cfpos_v2', JSON.stringify(merged));
+      setSyncStatus('☁ Synced', '#4cff7a');
+      return true;
+    }catch(e){ setSyncStatus('⚠ Offline', '#e8a04a'); return false; }
+  };
+
+  window.startFirebaseListener = function(cb){
+    return onSnapshot(REF, snap=>{
+      if(!snap.exists()) return;
+      const raw = localStorage.getItem('cfpos_v2');
+      const local = raw ? JSON.parse(raw) : {};
+      const merged = mergeState(local, snap.data());
+      localStorage.setItem('cfpos_v2', JSON.stringify(merged));
+      setSyncStatus('☁ Live', '#4cff7a');
+      if(typeof cb==='function') cb();
+    }, e=>{ setSyncStatus('⚠ Offline', '#e8a04a'); });
+  };
+
+  function setSyncStatus(msg, color){
+    const el = document.getElementById('sync-status');
+    if(el){ el.textContent=msg; el.style.color=color; }
+  }
+
+  // Auto pull on page load then start live listener
+  document.addEventListener('DOMContentLoaded', async ()=>{
+    setSyncStatus('↻ Syncing...', '#e8a04a');
+    await window.syncFromFirebase();
+    window._fbReady = true;
+    // Refresh UI after pull
+    if(typeof loadData==='function') loadData();
+    if(typeof loadOwnerDash==='function'){ loadOwnerDash(); if(typeof renderLog==='function') renderLog(); }
+    if(typeof renderAll==='function') renderAll();
+    // Start live listener for owner app
+    if(typeof renderAll==='function'){
+      window.startFirebaseListener(()=>{ if(typeof renderAll==='function') renderAll(); });
+    }
+  });
+</script>
+
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="screen-login">
+  <div class="login-logo">Café Atlas</div>
+  <div class="login-sub" id="sub-text">Espace Propriétaire</div>
+  <div class="lang-row">
+    <button class="lbtn on" data-l="fr" onclick="setLang('fr')">FR</button>
+    <button class="lbtn" data-l="ar" onclick="setLang('ar')">ع</button>
+  </div>
+  <div class="login-box">
+    <div class="fg"><label id="lbl-user">Identifiant</label>
+      <input type="text" id="inp-user" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <div class="fg"><label id="lbl-pass">Mot de passe</label>
+      <input type="password" id="inp-pass" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <button class="btn-p" id="btn-login" onclick="doLogin()">Se connecter</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="screen-dash">
+  <div class="top-bar">
+    <div class="top-logo">Café Atlas</div>
+    <div class="top-r">
+      <span class="clk" id="clk"></span>
+      <span id="sync-status" style="font-size:11px;color:#4cff7a;"></span>
+      <button class="lbtn" data-l="fr" onclick="setLang('fr')" style="padding:5px 10px;font-size:11px;">FR</button>
+      <button class="lbtn" data-l="ar" onclick="setLang('ar')" style="padding:5px 10px;font-size:11px;">ع</button>
+      <button class="tbtn red" id="btn-logout" onclick="doLogout()">Déconnexion</button>
+    </div>
+  </div>
+
+  <div class="dash-body">
+
+    <!-- Today stats -->
+    <div class="stat-row">
+      <div class="stat-card"><h3 id="lbl-sales">Ventes aujourd'hui</h3><div class="val green" id="today-sales">0 DH</div></div>
+      <div class="stat-card"><h3 id="lbl-orders">Commandes</h3><div class="val amber" id="today-orders">0</div></div>
+      <div class="stat-card"><h3 id="lbl-items">Articles vendus</h3><div class="val" id="today-items">0</div></div>
+      <div class="stat-card"><h3 id="lbl-active">Serveurs actifs</h3><div class="val" id="today-staff">0</div></div>
+    </div>
+
+    <!-- History -->
+    <div class="sec">
+      <div class="sec-hdr"><div class="sec-title" id="lbl-history">Historique</div></div>
+      <div class="sec-body">
+        <div class="period-tabs">
+          <button class="ptab on" data-p="today" onclick="setPeriod('today')" id="pt-today">Aujourd'hui</button>
+          <button class="ptab" data-p="week" onclick="setPeriod('week')" id="pt-week">Cette semaine</button>
+          <button class="ptab" data-p="month" onclick="setPeriod('month')" id="pt-month">Ce mois</button>
+          <button class="ptab" data-p="custom" onclick="setPeriod('custom')" id="pt-custom">Personnalisé</button>
+        </div>
+        <div class="custom-dates" id="custom-dates" style="display:none;">
+          <input type="date" id="hist-from" onchange="renderHistory()"/>
+          <input type="date" id="hist-to" onchange="renderHistory()"/>
+        </div>
+        <div class="hist-stats" id="hist-stats"></div>
+      </div>
+    </div>
+
+    <!-- Top items -->
+    <div class="sec">
+      <div class="sec-hdr"><div class="sec-title" id="lbl-top">🏆 Top articles</div></div>
+      <div class="sec-body" id="top-body"></div>
+    </div>
+
+    <!-- Order log -->
+    <div class="sec">
+      <div class="sec-hdr"><div class="sec-title" id="lbl-log">Journal</div></div>
+      <div class="sec-body" id="log-body"></div>
+    </div>
+
+    <!-- Staff -->
+    <div class="sec">
+      <div class="sec-hdr"><div class="sec-title" id="lbl-staff">Personnel</div></div>
+      <div class="sec-body">
+        <div class="add-form">
+          <h4 id="lbl-add-srv">Ajouter un serveur</h4>
+          <div class="form-row">
+            <div class="fg2"><label>Nom (FR)</label><input type="text" id="ns-name" autocomplete="off" placeholder="Mahmoud"/></div>
+            <div class="fg2"><label>الاسم (AR)</label><input type="text" id="ns-namear" dir="rtl" autocomplete="off" placeholder="محمود"/></div>
+          </div>
+          <div class="form-row c1">
+            <div class="fg2"><label id="lbl-pin">PIN (4 chiffres)</label>
+              <input type="tel" id="ns-pin" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234" style="letter-spacing:6px;"/>
+            </div>
+          </div>
+          <button class="btn-acc" onclick="addServer()" id="btn-add-srv">+ Ajouter</button>
+          <div class="ferr" id="srv-err"></div>
+        </div>
+        <div id="staff-body"></div>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="sec">
+      <div class="sec-hdr"><div class="sec-title" id="lbl-menu">Menu</div></div>
+      <div class="sec-body">
+        <div class="add-form">
+          <h4 id="lbl-add-item">Ajouter un article</h4>
+          <div class="dz" id="img-dz">
+            <input type="file" id="img-file" accept="image/*" onchange="imgChosen(event)"/>
+            <div class="dz-text" id="dz-text">📷 Photo (optionnel — glisser ou cliquer)</div>
+            <img class="dz-preview" id="dz-preview"/>
+          </div>
+          <div class="form-row">
+            <div class="fg2"><label>Nom (FR)</label><input type="text" id="ni-namefr" placeholder="Latte" autocomplete="off"/></div>
+            <div class="fg2"><label>اسم (AR)</label><input type="text" id="ni-namear" placeholder="لاتيه" dir="rtl" autocomplete="off"/></div>
+          </div>
+          <div class="form-row">
+            <div class="fg2"><label id="lbl-price">Prix (DH)</label><input type="number" id="ni-price" step="0.01" min="0" placeholder="4.50"/></div>
+            <div class="fg2"><label id="lbl-cat">Catégorie</label>
+              <select id="ni-cat"><option>Café</option><option>Thé</option><option>Froids</option><option>Food</option><option>Pâtisseries</option><option>Extras</option></select>
+            </div>
+          </div>
+          <button class="btn-acc" onclick="addMenuItem()" id="btn-add-item">+ Ajouter</button>
+          <div class="ferr" id="menu-err"></div>
+        </div>
+        <div id="menu-list"></div>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="sec">
+      <div class="sec-hdr"><div class="sec-title" id="lbl-settings">Paramètres</div></div>
+      <div class="sec-body">
+        <div class="settings-block">
+          <h4>☕ Café &amp; Reçu</h4>
+          <div class="form-row c1"><div class="fg2"><label id="lbl-shopname">Nom du café</label><input type="text" id="inp-shopname" autocomplete="off"/></div></div>
+          <div class="form-row">
+            <div class="fg2"><label id="lbl-wifiname">Nom WiFi</label><input type="text" id="inp-wifiname" autocomplete="off"/></div>
+            <div class="fg2"><label id="lbl-wifipass">Mot de passe WiFi</label><input type="text" id="inp-wifipass" autocomplete="off"/></div>
+          </div>
+          <button class="btn-acc" onclick="saveCafeInfo()" id="btn-save-cafe">💾 Sauvegarder</button>
+          <div class="fsucc" id="cafe-save-msg"></div>
+        </div>
+        <div class="settings-block">
+          <h4>🔑 Compte propriétaire</h4>
+          <div class="form-row c1"><div class="fg2"><label id="lbl-owuser">Identifiant</label><input type="text" id="inp-owuser" autocomplete="off"/></div></div>
+          <div class="form-row">
+            <div class="fg2"><label id="lbl-owpass">Nouveau mot de passe</label><input type="password" id="inp-owpass" placeholder="Laisser vide pour garder"/></div>
+            <div class="fg2"><label id="lbl-owpass2">Confirmer</label><input type="password" id="inp-owpass2"/></div>
+          </div>
+          <button class="btn-acc" onclick="saveAccount()" id="btn-save-account">💾 Sauvegarder</button>
+          <div class="fsucc" id="acc-save-msg"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const TR={
+fr:{
+  subText:'Espace Propriétaire',lblUser:'Identifiant',lblPass:'Mot de passe',
+  btnLogin:'Se connecter',wrongLogin:'Identifiant ou mot de passe incorrect.',
+  btnLogout:'Déconnexion',
+  lblSales:"Ventes aujourd'hui",lblOrders:'Commandes',lblItems:'Articles vendus',lblActive:'Serveurs actifs',
+  lblHistory:'Historique',ptToday:"Aujourd'hui",ptWeek:'Cette semaine',ptMonth:'Ce mois',ptCustom:'Personnalisé',
+  lblTop:'🏆 Top articles',lblLog:'Journal',lblStaff:'Personnel',lblMenu:'Menu',lblSettings:'Paramètres',
+  totalOrders:'Commandes',totalSales:'Ventes',totalItems:'Articles',
+  noOrders:'Aucune commande.',noItems:'Aucun article.',
+  active:'● Actif',inactive:'● Inactif',cancelled:'✕ Annulée',
+  addSrv:'Ajouter un serveur',pinLabel:'PIN (4 chiffres)',addSrvBtn:'+ Ajouter',
+  fillFields:'Remplissez les champs requis.',pinInvalid:'PIN doit avoir 4 chiffres.',
+  pinExists:'PIN déjà utilisé.',srvAdded:'Serveur ajouté ✓',removeSrvQ:'Supprimer ce serveur ?',
+  addItem:'Ajouter un article',priceLabel:'Prix (DH)',catLabel:'Catégorie',addItemBtn:'+ Ajouter',
+  fillItem:'Remplissez nom et prix.',itemAdded:'Ajouté ✓',removeItemQ:'Supprimer cet article ?',
+  shopNameLbl:'Nom du café',wifiNameLbl:'Nom WiFi',wifiPassLbl:'Mot de passe WiFi',
+  saveBtn:'💾 Sauvegarder',saved:'Sauvegardé ✓',
+  owUserLbl:'Identifiant',newPassLbl:'Nouveau mot de passe',confirmLbl:'Confirmer',
+  passMismatch:'Mots de passe différents.',
+},
+ar:{
+  subText:'لوحة تحكم المالك',lblUser:'اسم المستخدم',lblPass:'كلمة المرور',
+  btnLogin:'تسجيل الدخول',wrongLogin:'اسم المستخدم أو كلمة المرور غير صحيحة.',
+  btnLogout:'تسجيل الخروج',
+  lblSales:'مبيعات اليوم',lblOrders:'الطلبات',lblItems:'الأصناف المباعة',lblActive:'الموظفون النشطون',
+  lblHistory:'السجل',ptToday:'اليوم',ptWeek:'هذا الأسبوع',ptMonth:'هذا الشهر',ptCustom:'مخصص',
+  lblTop:'🏆 الأكثر مبيعاً',lblLog:'سجل الطلبات',lblStaff:'الموظفون',lblMenu:'القائمة',lblSettings:'الإعدادات',
+  totalOrders:'الطلبات',totalSales:'المبيعات',totalItems:'الأصناف',
+  noOrders:'لا توجد طلبات.',noItems:'لا توجد أصناف.',
+  active:'● نشط',inactive:'● غير نشط',cancelled:'✕ ملغى',
+  addSrv:'إضافة نادل',pinLabel:'PIN (4 أرقام)',addSrvBtn:'+ إضافة',
+  fillFields:'أدخل جميع الحقول.',pinInvalid:'PIN يجب 4 أرقام.',
+  pinExists:'PIN مستخدم.',srvAdded:'تمت الإضافة ✓',removeSrvQ:'إزالة هذا النادل؟',
+  addItem:'إضافة عنصر',priceLabel:'السعر (DH)',catLabel:'الفئة',addItemBtn:'+ إضافة',
+  fillItem:'أدخل الاسم والسعر.',itemAdded:'أضيف ✓',removeItemQ:'إزالة هذا العنصر؟',
+  shopNameLbl:'اسم المقهى',wifiNameLbl:'اسم WiFi',wifiPassLbl:'كلمة مرور WiFi',
+  saveBtn:'💾 حفظ',saved:'تم الحفظ ✓',
+  owUserLbl:'اسم المستخدم',newPassLbl:'كلمة مرور جديدة',confirmLbl:'تأكيد',
+  passMismatch:'كلمتا المرور غير متطابقتين.',
+}};
+let lang='fr';
+function t(k){return(TR[lang]&&TR[lang][k])||TR.fr[k]||k;}
+function setLang(l){
+  lang=l;
+  document.documentElement.lang=l;
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.body.classList.toggle('ar',l==='ar');
+  document.querySelectorAll('[data-l]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-l')===l));
+  applyT(); renderAll();
+}
+const TID={
+  'sub-text':'subText','lbl-user':'lblUser','lbl-pass':'lblPass','btn-login':'btnLogin',
+  'btn-logout':'btnLogout',
+  'lbl-sales':'lblSales','lbl-orders':'lblOrders','lbl-items':'lblItems','lbl-active':'lblActive',
+  'lbl-history':'lblHistory','pt-today':'ptToday','pt-week':'ptWeek','pt-month':'ptMonth','pt-custom':'ptCustom',
+  'lbl-top':'lblTop','lbl-log':'lblLog','lbl-staff':'lblStaff','lbl-menu':'lblMenu','lbl-settings':'lblSettings',
+  'lbl-add-srv':'addSrv','lbl-pin':'pinLabel','btn-add-srv':'addSrvBtn',
+  'lbl-add-item':'addItem','lbl-price':'priceLabel','lbl-cat':'catLabel','btn-add-item':'addItemBtn',
+  'lbl-shopname':'shopNameLbl','lbl-wifiname':'wifiNameLbl','lbl-wifipass':'wifiPassLbl',
+  'btn-save-cafe':'saveBtn','btn-save-account':'saveBtn',
+  'lbl-owuser':'owUserLbl','lbl-owpass':'newPassLbl','lbl-owpass2':'confirmLbl',
+};
+function applyT(){for(const[id,k] of Object.entries(TID)){const el=document.getElementById(id);if(el)el.textContent=t(k);}}
+
+const STORE_KEY='cfpos_v2';
+let S=null;
+function loadState(){
+  try{const raw=localStorage.getItem(STORE_KEY);if(raw)S=JSON.parse(raw);}catch(e){}
+  if(!S)S={owner:{username:'admin',password:'admin'},servers:[],orderLog:[],menu:[],shopName:'',wifiName:'',wifiPass:''};
+  if(!S.servers)S.servers=[];if(!S.orderLog)S.orderLog=[];if(!S.menu)S.menu=[];
+}
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(S));if(typeof syncToFirebase==='function')syncToFirebase();}catch(e){}}
+
+function doLogin(){
+  loadState();
+  const u=document.getElementById('inp-user').value.trim();
+  const p=document.getElementById('inp-pass').value;
+  if(u===S.owner.username&&p===S.owner.password){
+    document.getElementById('screen-login').style.display='none';
+    document.getElementById('screen-dash').style.display='flex';
+    renderAll(); loadSettings(); startClock();
+  } else {document.getElementById('login-err').textContent=t('wrongLogin');}
+}
+function doLogout(){
+  document.getElementById('screen-dash').style.display='none';
+  document.getElementById('screen-login').style.display='flex';
+  document.getElementById('inp-user').value='';
+  document.getElementById('inp-pass').value='';
+  document.getElementById('login-err').textContent='';
+}
+
+let period='today';
+function setPeriod(p){
+  period=p;
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.toggle('on',b.getAttribute('data-p')===p));
+  document.getElementById('custom-dates').style.display=p==='custom'?'flex':'none';
+  if(p!=='custom'){renderHistory();renderTopItems();renderLog();renderMenuList();}
+}
+function getRange(){
+  const now=new Date(),today=now.toISOString().slice(0,10);
+  if(period==='today')return{from:today,to:today};
+  if(period==='week'){const d=new Date(now);d.setDate(d.getDate()-d.getDay()+1);return{from:d.toISOString().slice(0,10),to:today};}
+  if(period==='month')return{from:today.slice(0,7)+'-01',to:today};
+  return{from:document.getElementById('hist-from').value||'2000-01-01',to:document.getElementById('hist-to').value||today};
+}
+
+function renderAll(){
+  loadState();
+  renderStats(); renderHistory(); renderTopItems(); renderLog(); renderStaff(); renderMenuList();
+}
+function renderStats(){
+  const today=new Date().toISOString().slice(0,10);
+  const logs=S.orderLog.filter(o=>o.dateKey&&o.dateKey===today&&!o.cancelled);
+  document.getElementById('today-sales').textContent=logs.reduce((a,o)=>a+o.total,0).toFixed(2)+' DH';
+  document.getElementById('today-orders').textContent=logs.length;
+  document.getElementById('today-items').textContent=logs.reduce((a,o)=>a+o.items.reduce((b,i)=>b+i.qty,0),0);
+  document.getElementById('today-staff').textContent=S.servers.filter(s=>s.online).length;
+}
+function renderHistory(){
+  const{from,to}=getRange();
+  const logs=S.orderLog.filter(o=>o.dateKey&&o.dateKey>=from&&o.dateKey<=to&&!o.cancelled);
+  document.getElementById('hist-stats').innerHTML=`
+    <div class="hs-card"><h4>${t('totalOrders')}</h4><div class="hv amber">${logs.length}</div></div>
+    <div class="hs-card"><h4>${t('totalSales')}</h4><div class="hv green">${logs.reduce((a,o)=>a+o.total,0).toFixed(2)} DH</div></div>
+    <div class="hs-card"><h4>${t('totalItems')}</h4><div class="hv">${logs.reduce((a,o)=>a+o.items.reduce((b,i)=>b+i.qty,0),0)}</div></div>`;
+}
+function renderTopItems(){
+  const{from,to}=getRange();
+  const logs=S.orderLog.filter(o=>o.dateKey&&o.dateKey>=from&&o.dateKey<=to&&!o.cancelled);
+  const items={};
+  logs.forEach(o=>o.items.forEach(i=>{
+    const k=i.id||i.namefr||i.name;
+    if(!items[k])items[k]={name:lang==='ar'&&i.namear?i.namear:i.namefr||i.name||'?',qty:0,rev:0};
+    items[k].qty+=i.qty||1;items[k].rev+=(i.price||0)*(i.qty||1);
+  }));
+  const sorted=Object.values(items).sort((a,b)=>b.qty-a.qty);
+  const maxQ=sorted[0]?.qty||1;
+  const el=document.getElementById('top-body');
+  if(!sorted.length){el.innerHTML=`<div class="nodata">${t('noItems')}</div>`;return;}
+  const medals=['🥇','🥈','🥉'];
+  el.innerHTML=sorted.slice(0,10).map((item,i)=>`
+    <div class="top-item">
+      <div class="ti-rank">${i<3?medals[i]:i+1}</div>
+      <div class="ti-name">${item.name}</div>
+      <div class="ti-bar-wrap"><div class="ti-bar" style="width:${Math.round(item.qty/maxQ*100)}%"></div></div>
+      <div class="ti-qty">${item.qty}</div>
+      <div class="ti-rev">${item.rev.toFixed(2)} DH</div>
+    </div>`).join('');
+}
+function renderLog(){
+  const{from,to}=getRange();
+  const logs=S.orderLog.filter(o=>{const dk=o.dateKey||new Date().toISOString().slice(0,10);return dk>=from&&dk<=to;});
+  const el=document.getElementById('log-body');
+  if(!logs.length){el.innerHTML=`<div class="nodata">${t('noOrders')}</div>`;return;}
+  el.innerHTML=logs.slice(0,50).map(o=>`
+    <div class="log-item">
+      <div class="li-time">${o.time||''}<br><span style="font-size:10px;color:var(--text3);">${o.dateKey||''}</span></div>
+      <div class="li-body">
+        <div class="li-srv">${getSrvName(o.server)}</div>
+        <div class="li-items">${o.items.map(i=>`${i.qty}× ${lang==='ar'&&i.namear?i.namear:i.namefr||i.name||'?'}`).join(', ')}</div>
+        ${o.cancelled?`<div class="li-cancelled">${t('cancelled')}${o.cancelReason?' — '+o.cancelReason:''}</div>`:''}
+      </div>
+      <div class="li-amt ${o.cancelled?'cancelled':''}">${o.total.toFixed(2)} DH</div>
+    </div>`).join('');
+}
+function getSrvName(n){
+  if(lang!=='ar')return n||'—';
+  const s=S.servers.find(x=>x.name===n);return(s&&s.nameAr)?s.nameAr:n||'—';
+}
+function renderStaff(){
+  const el=document.getElementById('staff-body');
+  if(!S.servers.length){el.innerHTML='<div class="nodata">—</div>';return;}
+  el.innerHTML=S.servers.map((s,i)=>`
+    <div class="staff-item">
+      <div class="si-av">${(s.name||'?').split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+      <div class="si-info"><div class="si-name">${lang==='ar'&&s.nameAr?s.nameAr:s.name}</div><div class="si-pin">PIN: ${s.pin}</div></div>
+      <div class="si-badge ${s.online?'on':'off'}">${s.online?t('active'):t('inactive')}</div>
+      <button class="del-btn" onclick="removeServer(${i})">✕</button>
+    </div>`).join('');
+}
+function addServer(){
+  const name=(document.getElementById('ns-name').value||'').trim();
+  const nameAr=(document.getElementById('ns-namear').value||'').trim();
+  const pin=(document.getElementById('ns-pin').value||'').trim();
+  const err=document.getElementById('srv-err');
+  err.textContent='';
+  if(!name||!pin){err.textContent=t('fillFields');return;}
+  if(!/^\d{4}$/.test(pin)){err.textContent=t('pinInvalid');return;}
+  if(S.servers.find(s=>s.pin===pin)){err.textContent=t('pinExists');return;}
+  const maxId=S.servers.reduce((a,s)=>Math.max(a,s.id||0),9);
+  S.servers.push({id:maxId+1,name,nameAr,pin,online:false});
+  saveState();renderStaff();
+  document.getElementById('ns-name').value='';document.getElementById('ns-namear').value='';document.getElementById('ns-pin').value='';
+  err.style.color='var(--green)';err.textContent=t('srvAdded');setTimeout(()=>{err.textContent='';err.style.color='var(--red)';},2000);
+}
+function removeServer(i){
+  if(!confirm(t('removeSrvQ')))return;
+  S.servers.splice(i,1);saveState();renderStaff();
+}
+let pendingImg=null;
+function imgChosen(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{pendingImg=ev.target.result;const p=document.getElementById('dz-preview');p.src=pendingImg;p.style.display='block';document.getElementById('dz-text').textContent=file.name;};
+  r.readAsDataURL(file);
+}
+function renderMenuList(){
+  const el=document.getElementById('menu-list');if(!el)return;
+  if(!S.menu.length){el.innerHTML='<div class="nodata">—</div>';return;}
+  el.innerHTML=S.menu.map((item,i)=>`
+    <div class="menu-item-row">
+      <div class="mi-thumb">${item.img?`<img src="${item.img}"/>`:(item.emoji||'☕')}</div>
+      <div class="mi-info">
+        <div class="mi-name">${item.namefr||item.name||'?'}${item.namear?' / '+item.namear:''}</div>
+        <div class="mi-meta">${(item.price||0).toFixed(2)} DH${item.cat?' · '+item.cat:''}</div>
+      </div>
+      <button class="del-btn" onclick="removeMenuItem(${i})">✕</button>
+    </div>`).join('');
+}
+function addMenuItem(){
+  const namefr=(document.getElementById('ni-namefr').value||'').trim();
+  const namear=(document.getElementById('ni-namear').value||'').trim();
+  const price=parseFloat(document.getElementById('ni-price').value);
+  const cat=document.getElementById('ni-cat').value;
+  const err=document.getElementById('menu-err');
+  if(!namefr||isNaN(price)){err.textContent=t('fillItem');return;}
+  err.textContent='';
+  const maxId=S.menu.reduce((a,i)=>Math.max(a,i.id||0),99);
+  S.menu.push({id:maxId+1,emoji:'☕',namefr,namear,price,cat,descfr:'',descar:'',img:pendingImg||null});
+  saveState();renderMenuList();
+  document.getElementById('ni-namefr').value='';document.getElementById('ni-namear').value='';document.getElementById('ni-price').value='';
+  pendingImg=null;document.getElementById('dz-preview').style.display='none';document.getElementById('dz-text').textContent='📷 Photo (optionnel — glisser ou cliquer)';document.getElementById('img-file').value='';
+  err.style.color='var(--green)';err.textContent=t('itemAdded');setTimeout(()=>{err.textContent='';err.style.color='var(--red)';},2000);
+}
+function removeMenuItem(i){
+  if(!confirm(t('removeItemQ')))return;
+  S.menu.splice(i,1);saveState();renderMenuList();
+}
+function loadSettings(){
+  document.getElementById('inp-shopname').value=S.shopName||'Café Atlas';
+  document.getElementById('inp-wifiname').value=S.wifiName||'';
+  document.getElementById('inp-wifipass').value=S.wifiPass||'';
+  document.getElementById('inp-owuser').value=S.owner.username||'';
+  document.getElementById('inp-owpass').value='';
+  document.getElementById('inp-owpass2').value='';
+}
+function saveCafeInfo(){
+  S.shopName=(document.getElementById('inp-shopname').value||'').trim();
+  S.wifiName=(document.getElementById('inp-wifiname').value||'').trim();
+  S.wifiPass=(document.getElementById('inp-wifipass').value||'').trim();
+  saveState();
+  const el=document.getElementById('cafe-save-msg');el.textContent=t('saved');setTimeout(()=>el.textContent='',2500);
+}
+function saveAccount(){
+  const u=(document.getElementById('inp-owuser').value||'').trim();
+  const p=document.getElementById('inp-owpass').value;
+  const p2=document.getElementById('inp-owpass2').value;
+  const el=document.getElementById('acc-save-msg');el.style.color='var(--green)';
+  if(!u){el.style.color='var(--red)';el.textContent=t('fillFields');return;}
+  if(p||p2){if(p!==p2){el.style.color='var(--red)';el.textContent=t('passMismatch');return;}S.owner.password=p;}
+  S.owner.username=u;saveState();
+  el.textContent=t('saved');setTimeout(()=>el.textContent='',2500);
+}
+function startClock(){
+  function tick(){
+    const now=new Date();
+    const dF=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+    const dA=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+    const d=lang==='ar'?dA[now.getDay()]:dF[now.getDay()];
+    const time=now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    const el=document.getElementById('clk');if(el)el.textContent=d+' '+time;
+  }
+  tick();setInterval(tick,30000);
+}
+applyT();
+</script>
+</body>
+</html>
