@@ -603,9 +603,9 @@ body.ar .lk-timer{right:auto;left:16px;}
         localStorage.removeItem(LS_KEY);
         return false;
       }
-      // Document doesn't exist yet — allow (first time setup)
-      localStorage.setItem(LS_KEY, Date.now().toString());
-      return true;
+      // Document doesn't exist — LOCKED by default
+      localStorage.removeItem(LS_KEY);
+      return false;
     } catch(e){
       // Offline — check grace period
       const last = parseInt(localStorage.getItem(LS_KEY) || '0');
