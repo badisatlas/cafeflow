@@ -519,6 +519,110 @@ body.ar .lk-timer{right:auto;left:16px;}
   });
 </script>
 
+
+<!-- License Check -->
+<script type="module">
+  import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBVK4lPEg4QNP2p8Fmy0P7NKPy6WCQETIM",
+    authDomain: "khenifra1-a9837.firebaseapp.com",
+    projectId: "khenifra1-a9837",
+    storageBucket: "khenifra1-a9837.firebasestorage.app",
+    messagingSenderId: "695900276201",
+    appId: "1:695900276201:web:f14c5b8b5ea72299397778"
+  };
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  const CAFE_ID     = 'cafe-atlas';
+  const ADMIN_CODE  = 'atlasvista2017';
+  const GRACE_DAYS  = 7;
+  const LS_KEY      = 'lic_verified';
+  const LS_UNLOCKED = 'lic_unlocked';
+
+  const MSG = {
+    fr: 'Licence expirée. Contactez votre développeur.',
+    ar: 'انتهت صلاحية الترخيص. تواصل مع المطور.',
+    en: 'License expired. Contact your developer.',
+    btn: { fr:'Réessayer', ar:'إعادة المحاولة', en:'Retry' },
+    code: { fr:'Code admin (optionnel)', ar:'رمز المسؤول (اختياري)', en:'Admin code (optional)' }
+  };
+
+  function showLockScreen(){
+    document.body.innerHTML = `
+      <div style="min-height:100vh;background:#0f0e0c;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;">
+        <div style="background:#1a1916;border:1px solid rgba(255,255,255,0.14);border-radius:20px;padding:36px 28px;max-width:360px;width:90%;text-align:center;">
+          <div style="font-size:48px;margin-bottom:16px;">🔐</div>
+          <div style="font-size:16px;color:#f0ece4;font-weight:600;margin-bottom:8px;">${MSG.fr}</div>
+          <div style="font-size:14px;color:#a09890;margin-bottom:6px;">${MSG.en}</div>
+          <div style="font-size:14px;color:#a09890;margin-bottom:24px;">${MSG.ar}</div>
+          <input type="password" id="admin-inp" placeholder="${MSG.code.fr} / ${MSG.code.en}"
+            style="width:100%;padding:12px;background:#242220;border:1px solid rgba(255,255,255,0.14);border-radius:8px;color:#f0ece4;font-size:14px;font-family:inherit;outline:none;margin-bottom:10px;text-align:center;"/>
+          <div style="color:#e05252;font-size:12px;min-height:16px;margin-bottom:10px;" id="admin-err"></div>
+          <button onclick="checkAdminCode()"
+            style="width:100%;padding:12px;background:#e8a04a;border:none;border-radius:8px;color:#1a1400;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;">
+            ${MSG.btn.fr} / ${MSG.btn.en}
+          </button>
+        </div>
+      </div>`;
+
+    window.checkAdminCode = function(){
+      const val = document.getElementById('admin-inp').value.trim();
+      if(val === ADMIN_CODE){
+        localStorage.setItem(LS_UNLOCKED, 'true');
+        localStorage.setItem(LS_KEY, Date.now().toString());
+        location.reload();
+      } else if(val) {
+        document.getElementById('admin-err').textContent = 'Code incorrect.';
+      } else {
+        // Retry license check
+        location.reload();
+      }
+    };
+
+    document.getElementById('admin-inp').addEventListener('keydown', e=>{
+      if(e.key==='Enter') window.checkAdminCode();
+    });
+  }
+
+  async function checkLicense(){
+    // Admin unlock bypasses everything
+    if(localStorage.getItem(LS_UNLOCKED)==='true') return true;
+
+    // Try online check first
+    try{
+      const snap = await getDoc(doc(db, 'licenses', CAFE_ID));
+      if(snap.exists() && snap.data().active === true){
+        localStorage.setItem(LS_KEY, Date.now().toString());
+        return true;
+      } else if(snap.exists() && snap.data().active === false){
+        // Explicitly disabled — lock immediately
+        localStorage.removeItem(LS_KEY);
+        return false;
+      }
+      // Document doesn't exist yet — allow (first time setup)
+      localStorage.setItem(LS_KEY, Date.now().toString());
+      return true;
+    } catch(e){
+      // Offline — check grace period
+      const last = parseInt(localStorage.getItem(LS_KEY) || '0');
+      if(!last) return false; // Never verified online before
+      const daysSince = (Date.now() - last) / (1000 * 60 * 60 * 24);
+      return daysSince <= 7;
+    }
+  }
+
+  // Run license check immediately — block app if invalid
+  window.addEventListener('load', async ()=>{
+    const valid = await checkLicense();
+    if(!valid){ document.body.style.visibility='visible'; showLockScreen(); return; }
+    document.body.style.visibility='visible';
+  });
+</script>
+
 </head>
 <body class="">
 
