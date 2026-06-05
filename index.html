@@ -677,7 +677,7 @@ body.ar .lk-timer{right:auto;left:16px;}
 <div id="sw" class="screen active">
   <!-- Top bar: café name + language -->
   <div class="sw-top">
-    <div class="sw-logo" id="logo-welcome">CaféFlow</div>
+    <div class="sw-logo" id="logo-welcome">Café Atlas</div>
     <div class="sw-langs">
       <button class="lbtn on" data-l="fr" onclick="setLang('fr')">FR</button>
       <button class="lbtn" data-l="ar" onclick="setLang('ar')">ع</button>
@@ -728,7 +728,7 @@ body.ar .lk-timer{right:auto;left:16px;}
 <!-- OWNER LOGIN -->
 <div id="sol" class="screen">
   <div class="lbox">
-    <div class="lbox-logo" id="logo-login">CaféFlow</div>
+    <div class="lbox-logo" id="logo-login">Café Atlas</div>
     <div class="lbox-sub" id="olt-sub">Accès propriétaire</div>
     <div class="fg"><label id="olt-user">Identifiant</label>
       <input type="text" id="o-user" autocomplete="off" onkeydown="if(event.key==='Enter')doOwnerLogin()"/>
@@ -747,7 +747,7 @@ body.ar .lk-timer{right:auto;left:16px;}
   <div class="topbar">
     <!-- Left: café name -->
     <div style="flex:1;">
-      <div class="tbar-logo" id="logo-pos">CaféFlow</div>
+      <div class="tbar-logo" id="logo-pos">Café Atlas</div>
     </div>
     <!-- Center: server name + countdown + lock -->
     <div style="display:flex;align-items:center;gap:14px;justify-content:center;flex:1;">
@@ -786,8 +786,8 @@ body.ar .lk-timer{right:auto;left:16px;}
         <div id="srv-hist-body" style="display:none;padding:10px 4px 4px;scrollbar-width:thin;">
           <!-- Tabs -->
           <div style="display:flex;gap:8px;margin-bottom:10px;">
-            <button id="srv-tab-today" onclick="setSrvTab('today')" style="flex:1;padding:9px;border-radius:var(--rs);border:2px solid var(--accent);background:var(--accent);color:#1a1400;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;">Aujourd'hui</button>
-            <button id="srv-tab-cal" onclick="setSrvTab('cal')" style="flex:1;padding:9px;border-radius:var(--rs);border:2px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;">📅 Choisir date</button>
+            <button id="srv-tab-today" onclick="setSrvTab('today')" style="flex:1;padding:9px;border-radius:var(--rs);border:2px solid var(--accent);background:var(--accent);color:#1a1400;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;"><span id="srv-tab-today-lbl">Aujourd'hui</span></button>
+            <button id="srv-tab-cal" onclick="setSrvTab('cal')" style="flex:1;padding:9px;border-radius:var(--rs);border:2px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;"><span id="srv-tab-cal-lbl">📅 Choisir date</span></button>
           </div>
           <!-- Calendar date picker (hidden by default) -->
           <div id="srv-cal-wrap" style="display:none;margin-bottom:10px;">
@@ -885,8 +885,8 @@ body.ar .lk-timer{right:auto;left:16px;}
   <div class="rc-wrap">
     <div class="rc-body" id="rc-body"></div>
     <div class="rc-act">
-      <button class="rcbtn bk" onclick="closeReceipt()">← Retour</button>
-      <button class="rcbtn pr" onclick="window.print()">🖨 Imprimer</button>
+      <button class="rcbtn bk" id="rc-back-btn" onclick="closeReceipt()">← Retour</button>
+      <button class="rcbtn pr" id="rc-print-btn" onclick="window.print()">🖨 Imprimer</button>
     </div>
     <div style="padding:0 14px 14px;background:#f7f7f7;">
       <button id="rc-cancel-btn" onclick="cancelLastOrder()" style="width:100%;padding:10px;border:1.5px solid #e05252;background:transparent;color:#e05252;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">✕ Annuler cette commande</button>
@@ -899,7 +899,7 @@ body.ar .lk-timer{right:auto;left:16px;}
 <div id="sow" class="screen">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:14px;">
-      <div class="tbar-logo" id="logo-owner">CaféFlow</div>
+      <div class="tbar-logo" id="logo-owner">Café Atlas</div>
       <span style="color:var(--text2);font-size:14px;" id="ow-dash-lbl">Tableau de bord</span>
     </div>
     <div id="clk2"></div>
@@ -953,7 +953,7 @@ body.ar .lk-timer{right:auto;left:16px;}
       </div>
       <div class="log-filter" style="margin-bottom:14px;">
         <select id="filter-server" onchange="renderLog()" style="min-width:180px;">
-          <option value="">Tous les serveurs</option>
+          <option value="" id="filter-all-opt">Tous les serveurs</option>
         </select>
         <button class="log-filter-btn reset" onclick="resetFilter()">✕ Tout</button>
       </div>
@@ -1266,7 +1266,7 @@ fr:{
   noItems:'Ajoutez des articles.', clearQ:'Effacer la commande ?',
   lkSub:'Entrez votre PIN', lkEnd:'Fin de service →',
   lkOwnTitle:'Accès propriétaire', lkOwnSub:'Touchez pour vous connecter',
-  rcBack:'← Retour',
+  rcBack:'← Retour', rcPrint:'🖨 Imprimer',
   thankYou:'Merci pour votre commande !',
   orderNum:'Commande n°', date:'Date', time:'Heure', server:'Serveur', total:'TOTAL',
   owDash:'Tableau de bord', owLogout:'Déconnexion',
@@ -1291,7 +1291,8 @@ fr:{
   shopSaved:'Nom du café sauvegardé ✓',
   accSaved:'Compte sauvegardé ✓',
   passMismatch:'Les mots de passe ne correspondent pas.',
-  lpAll:'Tout', todaySales:'Ventes du jour', ordersCount:'Commandes',
+  lpAll:'Tout', allServers:'Tous les serveurs', resetFilter:'✕ Tout', srvHistLbl:'Historique de mes commandes', srvTabToday:"Aujourd'hui", srvTabCal:'📅 Choisir date',
+  todaySales:'Ventes du jour', ordersCount:'Commandes',
   histBtn:'📅 Historique', histSub:'Toutes les périodes',
   topBtn:'🏆 Top articles', topSub:'Les plus vendus',
   histTitle:'📅 Historique des ventes', topTitle:'🏆 Articles les plus vendus',
@@ -1333,7 +1334,7 @@ ar:{
   noItems:'أضف عناصر أولاً.', clearQ:'مسح الطلب الحالي؟',
   lkSub:'أدخل PIN للمتابعة', lkEnd:'إنهاء الوردية →',
   lkOwnTitle:'وصول المالك', lkOwnSub:'اضغط لتسجيل الدخول',
-  rcBack:'→ رجوع',
+  rcBack:'→ رجوع', rcPrint:'🖨 طباعة',
   thankYou:'شكراً لطلبك!',
   orderNum:'طلب رقم', date:'التاريخ', time:'الوقت', server:'النادل', total:'الإجمالي',
   owDash:'لوحة التحكم', owLogout:'تسجيل الخروج',
@@ -1357,7 +1358,8 @@ ar:{
   shopSaved:'تم حفظ اسم المقهى ✓',
   accSaved:'تم حفظ الحساب ✓',
   passMismatch:'كلمتا المرور غير متطابقتين.',
-  lpAll:'الكل', todaySales:'مبيعات اليوم', ordersCount:'الطلبات',
+  lpAll:'الكل', allServers:'كل النوادل', resetFilter:'✕ الكل', srvHistLbl:'سجل طلباتي', srvTabToday:'اليوم', srvTabCal:'📅 اختر تاريخ',
+  todaySales:'مبيعات اليوم', ordersCount:'الطلبات',
   histBtn:'📅 السجل', histSub:'جميع الفترات',
   topBtn:'🏆 الأكثر مبيعاً', topSub:'المنتجات الرائجة',
   histTitle:'📅 سجل المبيعات', topTitle:'🏆 الأكثر مبيعاً',
@@ -1407,6 +1409,7 @@ const TID = {
   'olt-sub':'oltSub','olt-user':'oltUser','olt-pass':'oltPass','olt-btn':'oltBtn',
   'tp-end':'endShift','op-title':'opTitle','op-tot-lbl':'opTot',
   'op-clear':'clearBtn','op-print':'printBtn',
+  'rc-back-btn':'rcBack','rc-print-btn':'rcPrint','rc-cancel-btn':'cancelOrder',
   'lk-sub':'lkSub','lk-own-title':'lkOwnTitle','lk-own-sub':'lkOwnSub',
   'ow-dash-lbl':'owDash','ow-logout':'owLogout',
   'ow-h1':'owH1','ow-h2':'owH2','ow-h3':'owH3','ow-h4':'owH4','ow-h5':'owH5','ow-h6':'owH6',
@@ -1417,7 +1420,10 @@ const TID = {
   'tgl1l':'tgl1l','tgl1s':'tgl1s','tgl2l':'tgl2l','tgl2s':'tgl2s','tgl3l':'tgl3l','tgl3s':'tgl3s',
   'ow-save-email':'owSaveEmail','ow-test-email':'owTestEmail',
   'lbl-today-sales':'todaySales','lbl-orders-count':'ordersCount',
+  'btn-save-cafe':'saveBtn','btn-save-account':'saveBtn',
+  'filter-all-opt':'allServers',
   'lp-today':'optToday','lp-week':'optWeek','lp-month':'optMonth','lp-all':'lpAll',
+  'srv-hist-lbl':'srvHistLbl','srv-tab-today-lbl':'srvTabToday','srv-tab-cal-lbl':'srvTabCal',
   'lbl-hist-btn':'histBtn','lbl-hist-sub':'histSub',
   'lbl-top-btn':'topBtn','lbl-top-sub':'topSub',
   'lbl-hist-title':'histTitle','lbl-top-title':'topTitle',
@@ -1442,7 +1448,7 @@ function applyT(){
   if(typeof updateLogoDisplays==='function') updateLogoDisplays();
   // Re-render staff grid and log so names/dates translate
   if(document.getElementById('sow')?.classList.contains('active') && typeof renderStaffGrid==='function') renderStaffGrid();
-  if(document.getElementById('sow')?.classList.contains('active') && typeof renderLog==='function') renderLog();
+  if(document.getElementById('sow')?.classList.contains('active') && typeof renderLog==='function'){loadOwnerDash(); renderLog();}
 }
 
 // ════════════════════════════════════════════════
@@ -1795,8 +1801,9 @@ function loadOwnerDash(){
   // Populate server filter dropdown
   const srvSel = document.getElementById('filter-server');
   const prevSrv = srvSel.value;
-  srvSel.innerHTML = '<option value="">Tous les serveurs</option>' +
-    [...new Set(S.orderLog.map(o=>o.server))].map(n=>`<option value="${n}" ${n===prevSrv?'selected':''}>${n}</option>`).join('');
+  const allSrvNames = [...new Set(S.orderLog.map(o=>o.server))];
+  srvSel.innerHTML = '<option value="" id="filter-all-opt">'+t('allServers')+'</option>' +
+    allSrvNames.map(n=>`<option value="${n}" ${n===prevSrv?'selected':''}>${getServerDisplayName(n)}</option>`).join('');
 
   renderLog();
   renderStaffGrid();
