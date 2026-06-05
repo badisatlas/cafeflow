@@ -426,7 +426,7 @@ body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
 
 <!-- LOGIN -->
 <div id="screen-login">
-  <div class="login-logo">Café Atlas</div>
+  <div class="login-logo" id="logo-login">Café Atlas</div>
   <div class="login-sub" id="sub-text">Espace Propriétaire</div>
   <div class="lang-row">
     <button class="lbtn on" data-l="fr" onclick="setLang('fr')">FR</button>
@@ -447,7 +447,7 @@ body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
 <!-- DASHBOARD -->
 <div id="screen-dash">
   <div class="top-bar">
-    <div class="top-logo">Café Atlas</div>
+    <div class="top-logo" id="logo-dash">Café Atlas</div>
     <div class="top-r">
       <span class="clk" id="clk"></span>
       <span id="sync-status" style="font-size:11px;color:#4cff7a;"></span>
@@ -554,11 +554,11 @@ body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
       <div class="sec-body">
         <!-- Range tabs -->
         <div class="rng-tabs">
-          <button class="rng-tab on" data-r="3" onclick="setExportRange(3)">3 mois</button>
-          <button class="rng-tab" data-r="6" onclick="setExportRange(6)">6 mois</button>
-          <button class="rng-tab" data-r="12" onclick="setExportRange(12)">12 mois</button>
-          <button class="rng-tab" data-r="0" onclick="setExportRange(0)">Tout</button>
-          <button class="rng-tab" data-r="custom" onclick="setExportRange('custom')">Personnalisé</button>
+          <button class="rng-tab on" data-r="3" onclick="setExportRange(3)" id="rng-3">3 mois</button>
+          <button class="rng-tab" data-r="6" onclick="setExportRange(6)" id="rng-6">6 mois</button>
+          <button class="rng-tab" data-r="12" onclick="setExportRange(12)" id="rng-12">12 mois</button>
+          <button class="rng-tab" data-r="0" onclick="setExportRange(0)" id="rng-0">Tout</button>
+          <button class="rng-tab" data-r="custom" onclick="setExportRange('custom')" id="rng-custom">Personnalisé</button>
         </div>
         <!-- Custom date range -->
         <div id="exp-custom" style="display:none;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
@@ -571,7 +571,7 @@ body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
         <div id="exp-table"></div>
         <!-- Export buttons -->
         <div class="exp-row">
-          <button class="exp-btn xlsx" onclick="exportExcel()">📥 Exporter Excel</button>
+          <button class="exp-btn xlsx" id="btn-export-xl" onclick="exportExcel()">📥 Exporter Excel</button>
         </div>
       </div>
     </div>
@@ -617,7 +617,10 @@ fr:{
   totalOrders:'Commandes',totalSales:'Ventes',totalItems:'Articles',
   noOrders:'Aucune commande.',noItems:'Aucun article.',
   active:'● Actif',inactive:'● Inactif',cancelled:'✕ Annulée',
-  addSrv:'Ajouter un serveur',pinLabel:'PIN (4 chiffres)',addSrvBtn:'+ Ajouter',
+  rng3:'3 mois', rng6:'6 mois', rng12:'12 mois', rngAll:'Tout', rngCustom:'Personnalisé',
+  exportExcelBtn:'📥 Exporter Excel', noExportData:'Aucune donnée pour cette période.',
+  colMonth:'Mois',colOrders:'Commandes',colSales:'Ventes (DH)',colAvg:'Moy/commande',colItems:'Articles',
+  totalRow:'TOTAL', lblExport:'📊 Rapports & Export',pinLabel:'PIN (4 chiffres)',addSrvBtn:'+ Ajouter',
   fillFields:'Remplissez les champs requis.',pinInvalid:'PIN doit avoir 4 chiffres.',
   pinExists:'PIN déjà utilisé.',srvAdded:'Serveur ajouté ✓',removeSrvQ:'Supprimer ce serveur ?',
   addItem:'Ajouter un article',priceLabel:'Prix (DH)',catLabel:'Catégorie',addItemBtn:'+ Ajouter',
@@ -637,7 +640,10 @@ ar:{
   totalOrders:'الطلبات',totalSales:'المبيعات',totalItems:'الأصناف',
   noOrders:'لا توجد طلبات.',noItems:'لا توجد أصناف.',
   active:'● نشط',inactive:'● غير نشط',cancelled:'✕ ملغى',
-  addSrv:'إضافة نادل',pinLabel:'PIN (4 أرقام)',addSrvBtn:'+ إضافة',
+  rng3:'3 أشهر', rng6:'6 أشهر', rng12:'12 شهر', rngAll:'الكل', rngCustom:'مخصص',
+  exportExcelBtn:'📥 تصدير Excel', noExportData:'لا توجد بيانات لهذه الفترة.',
+  colMonth:'الشهر',colOrders:'الطلبات',colSales:'المبيعات (DH)',colAvg:'متوسط/طلب',colItems:'الأصناف',
+  totalRow:'الإجمالي', lblExport:'📊 تقارير وتصدير',pinLabel:'PIN (4 أرقام)',addSrvBtn:'+ إضافة',
   fillFields:'أدخل جميع الحقول.',pinInvalid:'PIN يجب 4 أرقام.',
   pinExists:'PIN مستخدم.',srvAdded:'تمت الإضافة ✓',removeSrvQ:'إزالة هذا النادل؟',
   addItem:'إضافة عنصر',priceLabel:'السعر (DH)',catLabel:'الفئة',addItemBtn:'+ إضافة',
@@ -656,6 +662,9 @@ function setLang(l){
   document.body.classList.toggle('ar',l==='ar');
   document.querySelectorAll('[data-l]').forEach(b=>b.classList.toggle('on',b.getAttribute('data-l')===l));
   applyT(); renderAll();
+  // Update shop name display
+  const shopN = S&&S.shopName?S.shopName:'Café Atlas';
+  ['logo-dash','logo-login'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=shopN;});
 }
 const TID={
   'sub-text':'subText','lbl-user':'lblUser','lbl-pass':'lblPass','btn-login':'btnLogin',
@@ -667,6 +676,8 @@ const TID={
   'lbl-add-item':'addItem','lbl-price':'priceLabel','lbl-cat':'catLabel','btn-add-item':'addItemBtn',
   'lbl-shopname':'shopNameLbl','lbl-wifiname':'wifiNameLbl','lbl-wifipass':'wifiPassLbl',
   'btn-save-cafe':'saveBtn','btn-save-account':'saveBtn',
+  'rng-3':'rng3','rng-6':'rng6','rng-12':'rng12','rng-0':'rngAll','rng-custom':'rngCustom',
+  'lbl-export':'lblExport','btn-export-xl':'exportExcelBtn',
   'lbl-owuser':'owUserLbl','lbl-owpass':'newPassLbl','lbl-owpass2':'confirmLbl',
 };
 function applyT(){for(const[id,k] of Object.entries(TID)){const el=document.getElementById(id);if(el)el.textContent=t(k);}}
