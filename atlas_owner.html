@@ -113,6 +113,10 @@ body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
 .mi-name{font-size:13px;font-weight:600;}
 .mi-meta{font-size:12px;color:var(--text3);}
 .del-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.edit-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--accent);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.edit-btn:hover,.edit-btn:active{border-color:var(--accent);background:rgba(232,160,74,.1);}
+.edit-panel{background:var(--bg3);border:1px solid var(--accent);border-radius:var(--rs);padding:14px;margin-top:8px;display:none;}
+.edit-panel.open{display:block;}
 .del-btn:hover,.del-btn:active{border-color:var(--red);color:var(--red);}
 
 /* FORMS */
@@ -191,7 +195,7 @@ body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
   function mergeState(local, remote){
     return {
       ...local,
-      shopName:   remote.shopName   ?? local.shopName,
+      shopName:   local.shopName || remote.shopName || '',
       wifiName:   remote.wifiName   ?? local.wifiName,
       wifiPass:   remote.wifiPass   ?? local.wifiPass,
       owner:      remote.owner      || local.owner,
@@ -689,7 +693,7 @@ function loadState(){
   if(!S)S={owner:{username:'admin',password:'admin'},servers:[],orderLog:[],menu:[],shopName:'',wifiName:'',wifiPass:''};
   if(!S.servers)S.servers=[];if(!S.orderLog)S.orderLog=[];if(!S.menu)S.menu=[];
 }
-function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(S));if(typeof syncToFirebase==='function')syncToFirebase();}catch(e){}}
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(S));saveImgStore();if(typeof syncToFirebase==='function')syncToFirebase();}catch(e){}}
 
 function doLogin(){
   loadState();
@@ -726,7 +730,11 @@ function getRange(){
 
 function renderAll(){
   loadState();
+  loadImgsBack();
   renderStats(); renderHistory(); renderTopItems(); renderLog(); renderStaff(); renderMenuList(); renderExport();
+  // Always keep logos updated
+  const shopN = S.shopName || 'Café Atlas';
+  ['logo-dash','logo-login'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=shopN;});
 }
 function renderStats(){
   const today=new Date().toISOString().slice(0,10);
@@ -818,6 +826,60 @@ function removeServer(i){
   S.servers.splice(i,1);saveState();renderStaff();
 }
 let pendingImg=null;
+
+// ── Image local store (not synced to Firebase) ────
+const IMG_KEY = 'cfpos_menu_imgs';
+function saveImgStore(){
+  try{
+    const imgs = {};
+    (S.menu||[]).forEach(item=>{ if(item.img && item.id) imgs[item.id]=item.img; });
+    localStorage.setItem(IMG_KEY, JSON.stringify(imgs));
+  }catch(e){}
+}
+function loadImgsBack(){
+  try{
+    const raw=localStorage.getItem(IMG_KEY);
+    if(!raw) return;
+    const imgs=JSON.parse(raw);
+    (S.menu||[]).forEach(item=>{ if(item.id && imgs[item.id]) item.img=imgs[item.id]; });
+  }catch(e){}
+}
+
+
+function toggleEditItem(i){
+  const panel = document.getElementById('mi-edit-'+i);
+  if(!panel) return;
+  panel.classList.toggle('open');
+}
+function editImgChosen(e, i){
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    S.menu[i].img=ev.target.result;
+    saveState();
+    renderMenuList();
+    // Re-open the edit panel after re-render
+    setTimeout(()=>{
+      const p=document.getElementById('mi-edit-'+i);
+      if(p) p.classList.add('open');
+    },50);
+  };
+  r.readAsDataURL(file);
+}
+function saveEditItem(i){
+  const namefr=(document.getElementById('ei-namefr-'+i).value||'').trim();
+  const namear=(document.getElementById('ei-namear-'+i).value||'').trim();
+  const price=parseFloat(document.getElementById('ei-price-'+i).value);
+  const cat=document.getElementById('ei-cat-'+i).value;
+  if(!namefr||isNaN(price)) return;
+  S.menu[i].namefr=namefr; S.menu[i].name=namefr;
+  S.menu[i].namear=namear;
+  S.menu[i].price=price;
+  S.menu[i].cat=cat;
+  saveState();
+  renderMenuList();
+}
+
 function imgChosen(e){
   const file=e.target.files[0];if(!file)return;
   const r=new FileReader();
@@ -828,13 +890,39 @@ function renderMenuList(){
   const el=document.getElementById('menu-list');if(!el)return;
   if(!S.menu.length){el.innerHTML='<div class="nodata">—</div>';return;}
   el.innerHTML=S.menu.map((item,i)=>`
-    <div class="menu-item-row">
+    <div class="menu-item-row" id="mi-row-${i}">
       <div class="mi-thumb">${item.img?`<img src="${item.img}"/>`:(item.emoji||'☕')}</div>
-      <div class="mi-info">
+      <div class="mi-info" style="flex:1;">
         <div class="mi-name">${item.namefr||item.name||'?'}${item.namear?' / '+item.namear:''}</div>
         <div class="mi-meta">${(item.price||0).toFixed(2)} DH${item.cat?' · '+item.cat:''}</div>
       </div>
-      <button class="del-btn" onclick="removeMenuItem(${i})">✕</button>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <button class="edit-btn" onclick="toggleEditItem(${i})" title="Modifier">✏</button>
+        <button class="del-btn" onclick="removeMenuItem(${i})">✕</button>
+      </div>
+    </div>
+    <div class="edit-panel" id="mi-edit-${i}">
+      <div class="form-row" style="margin-bottom:8px;">
+        <div class="fg2"><label>Nom (FR)</label><input type="text" id="ei-namefr-${i}" value="${(item.namefr||item.name||'')}"/></div>
+        <div class="fg2"><label>اسم (AR)</label><input type="text" id="ei-namear-${i}" value="${item.namear||''}" dir="rtl"/></div>
+      </div>
+      <div class="form-row" style="margin-bottom:8px;">
+        <div class="fg2"><label>Prix (DH)</label><input type="number" id="ei-price-${i}" value="${item.price||0}" step="0.01" min="0"/></div>
+        <div class="fg2"><label>Catégorie</label>
+          <select id="ei-cat-${i}">
+            ${['Café','Thé','Froids','Food','Pâtisseries','Extras'].map(c=>`<option ${c===item.cat?'selected':''} value="${c}">${c}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="dz" style="margin-bottom:10px;position:relative;">
+        <input type="file" accept="image/*" onchange="editImgChosen(event,${i})" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;"/>
+        <div style="font-size:12px;color:var(--text2);">📷 Changer la photo</div>
+        ${item.img?`<img src="${item.img}" style="width:50px;height:50px;border-radius:6px;object-fit:cover;margin:6px auto 0;display:block;"/>`:'<div style="font-size:24px;text-align:center;margin-top:4px;">'+(item.emoji||'☕')+'</div>'}
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-acc" style="flex:1;" onclick="saveEditItem(${i})">💾 Sauvegarder</button>
+        <button onclick="toggleEditItem(${i})" style="padding:10px 16px;border-radius:var(--rs);border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;">Annuler</button>
+      </div>
     </div>`).join('');
 }
 function addMenuItem(){
@@ -868,7 +956,13 @@ function saveCafeInfo(){
   S.shopName=(document.getElementById('inp-shopname').value||'').trim();
   S.wifiName=(document.getElementById('inp-wifiname').value||'').trim();
   S.wifiPass=(document.getElementById('inp-wifipass').value||'').trim();
-  saveState();
+  // Save locally first
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(S)); saveImgStore(); }catch(e){}
+  // Update logos immediately
+  const shopN = S.shopName || 'Café Atlas';
+  ['logo-dash','logo-login'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=shopN;});
+  // Push to Firebase
+  if(typeof syncToFirebase==='function') syncToFirebase();
   const el=document.getElementById('cafe-save-msg');el.textContent=t('saved');setTimeout(()=>el.textContent='',2500);
 }
 function saveAccount(){
