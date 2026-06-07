@@ -84,6 +84,26 @@ body.ar{font-family:'Noto Sans Arabic','DM Sans',sans-serif;}
 .hbs-total{font-size:15px;font-weight:700;color:var(--green);}
 .hist-nodata{color:var(--text3);font-size:14px;text-align:center;padding:32px;}
 
+.edit-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--accent);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.edit-btn:hover,.edit-btn:active{border-color:var(--accent);background:rgba(232,160,74,.1);}
+.edit-panel{background:var(--bg3);border:1px solid var(--accent);border-radius:var(--rs);padding:14px;margin-top:8px;display:none;}
+.edit-panel.open{display:block;}
+.month-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px;}
+.month-table th{background:var(--bg3);color:var(--text2);padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);}
+.month-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);}
+.month-table tr:last-child td{border-bottom:none;font-weight:700;color:var(--accent);}
+.month-table .amt{color:var(--green);font-weight:600;}
+.exp-btn{padding:11px 20px;border-radius:var(--rs);border:none;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;}
+.exp-btn.xlsx{background:#1d6f42;color:#fff;}
+.exp-btn.xlsx:hover{background:#22854f;}
+.exp-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.rng-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.rng-tab{padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;font-size:12px;cursor:pointer;}
+.rng-tab.on{background:var(--accent);border-color:var(--accent);color:#1a1400;font-weight:600;}
+.summary-banner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;}
+.sb-card{background:var(--bg3);border-radius:var(--rs);padding:12px 14px;text-align:center;}
+.sb-card h4{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+.sb-val{font-size:20px;font-weight:700;}
 /* PIN */
 #sp{flex-direction:column;align-items:center;justify-content:center;gap:20px;position:relative;}
 .pin-back{position:absolute;top:20px;left:20px;background:transparent;border:1px solid var(--border2);color:var(--text2);padding:8px 16px;border-radius:var(--rs);cursor:pointer;font-family:inherit;font-size:14px;}
@@ -670,6 +690,7 @@ body.ar .lk-timer{right:auto;left:16px;}
   });
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body class="">
 
@@ -1070,6 +1091,30 @@ body.ar .lk-timer{right:auto;left:16px;}
 
     <!-- SETTINGS SECTION -->
     <div class="sec">
+
+    <!-- Export & Reports -->
+    <div class="sec">
+      <div class="sec-hdr"><div class="ow-h ow-h6 a" id="lbl-export" style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--accent);">📊 Rapports & Export</div></div>
+      <div class="sec-body ow-body">
+        <div class="rng-tabs">
+          <button class="rng-tab on" data-r="3" onclick="setExportRange(3)" id="rng-3">3 mois</button>
+          <button class="rng-tab" data-r="6" onclick="setExportRange(6)" id="rng-6">6 mois</button>
+          <button class="rng-tab" data-r="12" onclick="setExportRange(12)" id="rng-12">12 mois</button>
+          <button class="rng-tab" data-r="0" onclick="setExportRange(0)" id="rng-0">Tout</button>
+          <button class="rng-tab" data-r="custom" onclick="setExportRange('custom')" id="rng-custom">Personnalisé</button>
+        </div>
+        <div id="exp-custom" style="display:none;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+          <input type="date" id="exp-from" onchange="renderExport()" style="flex:1;min-width:140px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-size:14px;font-family:inherit;outline:none;"/>
+          <input type="date" id="exp-to" onchange="renderExport()" style="flex:1;min-width:140px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-size:14px;font-family:inherit;outline:none;"/>
+        </div>
+        <div class="summary-banner" id="exp-summary"></div>
+        <div id="exp-table"></div>
+        <div class="exp-row">
+          <button class="exp-btn xlsx" id="btn-export-xl" onclick="exportExcel()">📥 Exporter Excel</button>
+        </div>
+      </div>
+    </div>
+
       <h2 id="ow-h6">Paramètres</h2>
       <div class="settings-box">
         <h3>☕ Café &amp; Reçu</h3>
@@ -1208,6 +1253,30 @@ body.ar .lk-timer{right:auto;left:16px;}
     </div>
 
     <div class="sec">
+
+    <!-- Export & Reports -->
+    <div class="sec">
+      <div class="sec-hdr"><div class="ow-h ow-h6 a" id="lbl-export" style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--accent);">📊 Rapports & Export</div></div>
+      <div class="sec-body ow-body">
+        <div class="rng-tabs">
+          <button class="rng-tab on" data-r="3" onclick="setExportRange(3)" id="rng-3">3 mois</button>
+          <button class="rng-tab" data-r="6" onclick="setExportRange(6)" id="rng-6">6 mois</button>
+          <button class="rng-tab" data-r="12" onclick="setExportRange(12)" id="rng-12">12 mois</button>
+          <button class="rng-tab" data-r="0" onclick="setExportRange(0)" id="rng-0">Tout</button>
+          <button class="rng-tab" data-r="custom" onclick="setExportRange('custom')" id="rng-custom">Personnalisé</button>
+        </div>
+        <div id="exp-custom" style="display:none;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+          <input type="date" id="exp-from" onchange="renderExport()" style="flex:1;min-width:140px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-size:14px;font-family:inherit;outline:none;"/>
+          <input type="date" id="exp-to" onchange="renderExport()" style="flex:1;min-width:140px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-size:14px;font-family:inherit;outline:none;"/>
+        </div>
+        <div class="summary-banner" id="exp-summary"></div>
+        <div id="exp-table"></div>
+        <div class="exp-row">
+          <button class="exp-btn xlsx" id="btn-export-xl" onclick="exportExcel()">📥 Exporter Excel</button>
+        </div>
+      </div>
+    </div>
+
       <h2 id="ow-h6">Paramètres</h2>
 
       <div class="settings-box">
@@ -1291,6 +1360,10 @@ fr:{
   shopSaved:'Nom du café sauvegardé ✓',
   accSaved:'Compte sauvegardé ✓',
   passMismatch:'Les mots de passe ne correspondent pas.',
+  exportExcelBtn:'📥 Exporter Excel', rng3:'3 mois', rng6:'6 mois', rng12:'12 mois', rngAll:'Tout', rngCustom:'Personnalisé',
+  noExportData:'Aucune donnée pour cette période.',
+  colMonth:'Mois',colOrders:'Commandes',colSales:'Ventes (DH)',colAvg:'Moy/commande',colItems:'Articles',totalRow:'TOTAL',
+  lblExport:'📊 Rapports & Export',
   lpAll:'Tout', allServers:'Tous les serveurs', resetFilter:'✕ Tout', srvHistLbl:'Historique de mes commandes', srvTabToday:"Aujourd'hui", srvTabCal:'📅 Choisir date',
   todaySales:'Ventes du jour', ordersCount:'Commandes',
   histBtn:'📅 Historique', histSub:'Toutes les périodes',
@@ -1358,6 +1431,10 @@ ar:{
   shopSaved:'تم حفظ اسم المقهى ✓',
   accSaved:'تم حفظ الحساب ✓',
   passMismatch:'كلمتا المرور غير متطابقتين.',
+  exportExcelBtn:'📥 تصدير Excel', rng3:'3 أشهر', rng6:'6 أشهر', rng12:'12 شهر', rngAll:'الكل', rngCustom:'مخصص',
+  noExportData:'لا توجد بيانات لهذه الفترة.',
+  colMonth:'الشهر',colOrders:'الطلبات',colSales:'المبيعات (DH)',colAvg:'متوسط/طلب',colItems:'الأصناف',totalRow:'الإجمالي',
+  lblExport:'📊 تقارير وتصدير',
   lpAll:'الكل', allServers:'كل النوادل', resetFilter:'✕ الكل', srvHistLbl:'سجل طلباتي', srvTabToday:'اليوم', srvTabCal:'📅 اختر تاريخ',
   todaySales:'مبيعات اليوم', ordersCount:'الطلبات',
   histBtn:'📅 السجل', histSub:'جميع الفترات',
@@ -1427,6 +1504,8 @@ const TID = {
   'lbl-hist-btn':'histBtn','lbl-hist-sub':'histSub',
   'lbl-top-btn':'topBtn','lbl-top-sub':'topSub',
   'lbl-hist-title':'histTitle','lbl-top-title':'topTitle',
+  'lbl-export':'lblExport','btn-export-xl':'exportExcelBtn',
+  'rng-3':'rng3','rng-6':'rng6','rng-12':'rng12','rng-0':'rngAll','rng-custom':'rngCustom',
   'es-title':'endShiftTitle','es-sub':'endShiftPinSub',
   'lk-switch-lbl':'switchServer','lk-switch-title':'switchTitle',
   'lk-switch-sub':'switchSub','lk-cancel-switch':'switchCancel',
@@ -1792,6 +1871,7 @@ function updateCountdown(){
 // OWNER DASHBOARD
 // ════════════════════════════════════════════════
 function loadOwnerDash(){
+  if(typeof loadImgsBack==='function') loadImgsBack();
   const today = new Date().toISOString().slice(0,10);
   const logs=S.orderLog.filter(o=>!o.cancelled && o.dateKey===today);
   document.getElementById('st-ord').textContent=logs.length;
@@ -1808,6 +1888,7 @@ function loadOwnerDash(){
   renderLog();
   renderStaffGrid();
   renderMenuList();
+  if(typeof renderExport==='function') renderExport();
   // Email
   document.getElementById('ow-email').value=S.emailSettings.email||'';
   document.getElementById('ow-rtime').value=S.emailSettings.reportTime||'eod';
@@ -2255,6 +2336,191 @@ function renderLog(){
   }).join('');
 }
 
+
+// ── Ported from owner app ────────────────────────
+const IMG_KEY = 'cfpos_menu_imgs';
+let expRange = 3;
+
+function saveImgStore(){
+  try{
+    const imgs = {};
+    (S.menu||[]).forEach(item=>{ if(item.img && item.id) imgs[item.id]=item.img; });
+    localStorage.setItem(IMG_KEY, JSON.stringify(imgs));
+  }catch(e){}
+}
+
+function loadImgsBack(){
+  try{
+    const raw=localStorage.getItem(IMG_KEY);
+    if(!raw) return;
+    const imgs=JSON.parse(raw);
+    (S.menu||[]).forEach(item=>{ if(item.id && imgs[item.id]) item.img=imgs[item.id]; });
+  }catch(e){}
+}
+
+function toggleEditItem(i){
+  const panel = document.getElementById('mi-edit-'+i);
+  if(!panel) return;
+  panel.classList.toggle('open');
+}
+
+function editImgChosen(e, i){
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    S.menu[i].img=ev.target.result;
+    saveState();
+    renderMenuList();
+    // Re-open the edit panel after re-render
+    setTimeout(()=>{
+      const p=document.getElementById('mi-edit-'+i);
+      if(p) p.classList.add('open');
+    },50);
+  };
+  r.readAsDataURL(file);
+}
+
+function saveEditItem(i){
+  const namefr=(document.getElementById('ei-namefr-'+i).value||'').trim();
+  const namear=(document.getElementById('ei-namear-'+i).value||'').trim();
+  const price=parseFloat(document.getElementById('ei-price-'+i).value);
+  const cat=document.getElementById('ei-cat-'+i).value;
+  if(!namefr||isNaN(price)) return;
+  S.menu[i].namefr=namefr; S.menu[i].name=namefr;
+  S.menu[i].namear=namear;
+  S.menu[i].price=price;
+  S.menu[i].cat=cat;
+  saveState();
+  renderMenuList();
+}
+
+function setExportRange(r){
+  expRange = r;
+  document.querySelectorAll('.rng-tab').forEach(b=>b.classList.toggle('on', b.getAttribute('data-r')==String(r)));
+  const customEl = document.getElementById('exp-custom');
+  if(customEl) customEl.style.display = r==='custom' ? 'flex' : 'none';
+  if(r!=='custom') renderExport();
+}
+
+function getExpRange(){
+  const now = new Date();
+  const todayKey = now.toISOString().slice(0,10);
+  if(expRange==='custom'){
+    return {
+      from: document.getElementById('exp-from').value || '2000-01-01',
+      to:   document.getElementById('exp-to').value   || todayKey
+    };
+  }
+  if(expRange===0) return {from:'2000-01-01', to:todayKey};
+  const d = new Date(now);
+  d.setMonth(d.getMonth() - expRange);
+  return {from: d.toISOString().slice(0,10), to: todayKey};
+}
+
+function getMonthlyData(){
+  const {from, to} = getExpRange();
+  const logs = S.orderLog.filter(o=> o.dateKey && o.dateKey>=from && o.dateKey<=to && !o.cancelled);
+  const months = {};
+  logs.forEach(o=>{
+    const ym = (o.dateKey||'').slice(0,7);
+    if(!ym) return;
+    if(!months[ym]) months[ym]={ym, orders:0, sales:0, items:0};
+    months[ym].orders++;
+    months[ym].sales += o.total||0;
+    months[ym].items += o.items.reduce((a,i)=>a+(i.qty||1),0);
+  });
+  return Object.values(months).sort((a,b)=>a.ym.localeCompare(b.ym));
+}
+
+function fmtYM(ym){
+  const mF=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const mA=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  const [y,m] = ym.split('-');
+  return (lang==='ar'?mA:mF)[parseInt(m)-1]+' '+y;
+}
+
+function renderExport(){
+  const data = getMonthlyData();
+  const sumEl = document.getElementById('exp-summary');
+  const tblEl = document.getElementById('exp-table');
+  if(!sumEl||!tblEl) return;
+  if(!data.length){
+    sumEl.innerHTML='';
+    tblEl.innerHTML='<div class="nodata">'+t('noExportData')+'</div>';
+    return;
+  }
+  const totOrders = data.reduce((a,m)=>a+m.orders,0);
+  const totSales  = data.reduce((a,m)=>a+m.sales,0);
+  const totItems  = data.reduce((a,m)=>a+m.items,0);
+  sumEl.innerHTML=`
+    <div class="sb-card"><h4>${t('colOrders')}</h4><div class="sb-val amber">${totOrders}</div></div>
+    <div class="sb-card"><h4>${t('colSales')}</h4><div class="sb-val green">${totSales.toFixed(2)} DH</div></div>
+    <div class="sb-card"><h4>${t('colItems')}</h4><div class="sb-val">${totItems}</div></div>`;
+  tblEl.innerHTML=`<table class="month-table">
+    <thead><tr>
+      <th>${t('colMonth')}</th><th>${t('colOrders')}</th>
+      <th>${t('colSales')}</th><th>${t('colAvg')}</th><th>${t('colItems')}</th>
+    </tr></thead>
+    <tbody>
+      ${data.map(m=>`<tr>
+        <td>${fmtYM(m.ym)}</td><td>${m.orders}</td>
+        <td class="amt">${m.sales.toFixed(2)} DH</td>
+        <td>${m.orders?(m.sales/m.orders).toFixed(2)+' DH':'—'}</td>
+        <td>${m.items}</td>
+      </tr>`).join('')}
+      <tr><td>${t('totalRow')}</td><td>${totOrders}</td>
+        <td class="amt">${totSales.toFixed(2)} DH</td>
+        <td>${totOrders?(totSales/totOrders).toFixed(2)+' DH':'—'}</td>
+        <td>${totItems}</td>
+      </tr>
+    </tbody></table>`;
+}
+
+function exportExcel(){
+  if(typeof XLSX==='undefined'){ alert('Bibliothèque Excel non chargée. Vérifiez votre connexion internet.'); return; }
+  const data = getMonthlyData();
+  if(!data.length){ alert(t('noExportData')); return; }
+  const {from, to} = getExpRange();
+  const wb = XLSX.utils.book_new();
+
+  // Sheet 1: Monthly summary
+  const rows1 = [
+    ['Café Atlas — Rapport des ventes'],
+    ['Période:', from+' → '+to],
+    ['Généré le:', new Date().toLocaleDateString('fr-FR')],
+    [],
+    [t('colMonth'),t('colOrders'),'Ventes (DH)','Moy/commande (DH)',t('colItems')]
+  ];
+  const totO=data.reduce((a,m)=>a+m.orders,0);
+  const totS=data.reduce((a,m)=>a+m.sales,0);
+  const totI=data.reduce((a,m)=>a+m.items,0);
+  data.forEach(m=>rows1.push([fmtYM(m.ym),m.orders,parseFloat(m.sales.toFixed(2)),m.orders?parseFloat((m.sales/m.orders).toFixed(2)):0,m.items]));
+  rows1.push(['TOTAL',totO,parseFloat(totS.toFixed(2)),totO?parseFloat((totS/totO).toFixed(2)):0,totI]);
+  const ws1=XLSX.utils.aoa_to_sheet(rows1);
+  ws1['!cols']=[{wch:18},{wch:12},{wch:16},{wch:18},{wch:12}];
+  XLSX.utils.book_append_sheet(wb,ws1,'Résumé mensuel');
+
+  // Sheet 2: Order detail
+  const logs=S.orderLog.filter(o=>o.dateKey&&o.dateKey>=from&&o.dateKey<=to&&!o.cancelled);
+  const rows2=[['Date','Heure','#','Serveur','Articles','Total (DH)']];
+  logs.forEach(o=>rows2.push([o.dateKey||'',o.time||'',o.num||'',o.server||'',o.items.map(i=>`${i.qty}x ${i.namefr||i.name||'?'}`).join(', '),parseFloat((o.total||0).toFixed(2))]));
+  const ws2=XLSX.utils.aoa_to_sheet(rows2);
+  ws2['!cols']=[{wch:12},{wch:8},{wch:6},{wch:14},{wch:40},{wch:12}];
+  XLSX.utils.book_append_sheet(wb,ws2,'Détail commandes');
+
+  // Sheet 3: Top items
+  const items={};
+  logs.forEach(o=>o.items.forEach(i=>{const k=i.namefr||i.name||'?';if(!items[k])items[k]={name:k,qty:0,rev:0};items[k].qty+=i.qty||1;items[k].rev+=(i.price||0)*(i.qty||1);}));
+  const rows3=[['Article','Quantité vendue','Revenus (DH)']];
+  Object.values(items).sort((a,b)=>b.qty-a.qty).forEach(i=>rows3.push([i.name,i.qty,parseFloat(i.rev.toFixed(2))]));
+  const ws3=XLSX.utils.aoa_to_sheet(rows3);
+  ws3['!cols']=[{wch:30},{wch:18},{wch:16}];
+  XLSX.utils.book_append_sheet(wb,ws3,'Top articles');
+
+  const name=(S.shopName||'CafeAtlas').replace(/[^a-zA-Z0-9]/g,'_');
+  XLSX.writeFile(wb,`${name}_rapport_${new Date().toISOString().slice(0,10)}.xlsx`);
+}
+
 // ── Staff ──────────────────────────────────────
 function srvName(s){ return lang==='ar' && s.nameAr ? s.nameAr : s.name; }
 
@@ -2340,16 +2606,49 @@ function clearImg(){
 
 // ── Menu ───────────────────────────────────────
 function renderMenuList(){
-  document.getElementById('menu-list').innerHTML=S.menu.map(item=>`
-    <div class="menu-row">
+  const el = document.getElementById('menu-list');
+  if(!el) return;
+  if(!S.menu||!S.menu.length){ el.innerHTML=`<div class="nodata">${t('noItems')}</div>`; return; }
+  el.innerHTML=S.menu.map((item,i)=>`
+    <div class="menu-row" id="mi-row-${i}">
       ${item.img
         ? `<img class="mr-thumb" src="${item.img}" alt="${item.namefr}">`
         : `<div class="mr-emoji">${item.emoji||'☕'}</div>`}
-      <div class="mr-info">
+      <div class="mr-info" style="flex:1;">
         <div class="mr-name">${item.namefr}${item.namear?` / ${item.namear}`:''}</div>
         <div class="mr-meta">${item.price.toFixed(2)} DH</div>
       </div>
-      <button class="delbtn" onclick="removeMenuItem(${item.id})">✕</button>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <button class="edit-btn" onclick="toggleEditItem(${i})" title="Modifier">✏</button>
+        <button class="delbtn" onclick="removeMenuItem(${item.id})">✕</button>
+      </div>
+    </div>
+    <div class="edit-panel" id="mi-edit-${i}">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
+        <div><label style="font-size:11px;color:var(--text2);display:block;margin-bottom:4px;">Nom (FR)</label>
+          <input type="text" id="ei-namefr-${i}" value="${(item.namefr||'').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:13px;font-family:inherit;outline:none;"/></div>
+        <div><label style="font-size:11px;color:var(--text2);display:block;margin-bottom:4px;">اسم (AR)</label>
+          <input type="text" id="ei-namear-${i}" value="${(item.namear||'').replace(/"/g,'&quot;')}" dir="rtl" style="width:100%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:13px;font-family:inherit;outline:none;"/></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;">
+        <div><label style="font-size:11px;color:var(--text2);display:block;margin-bottom:4px;">Prix (DH)</label>
+          <input type="number" id="ei-price-${i}" value="${item.price||0}" step="0.01" min="0" style="width:100%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:13px;font-family:inherit;outline:none;"/></div>
+        <div><label style="font-size:11px;color:var(--text2);display:block;margin-bottom:4px;">Catégorie</label>
+          <select id="ei-cat-${i}" style="width:100%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:13px;font-family:inherit;outline:none;">
+            ${['Café','Thé','Froids','Food','Pâtisseries','Extras'].map(c=>`<option ${c===item.cat?'selected':''} value="${c}">${c}</option>`).join('')}
+          </select></div>
+      </div>
+      <div class="dz" style="margin-bottom:10px;position:relative;">
+        <input type="file" accept="image/*" onchange="editImgChosen(event,${i})" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;"/>
+        <div style="font-size:12px;color:var(--text2);">📷 Changer la photo</div>
+        ${item.img
+          ? `<img src="${item.img}" style="width:50px;height:50px;border-radius:6px;object-fit:cover;margin:6px auto 0;display:block;"/>`
+          : `<div style="font-size:24px;text-align:center;margin-top:4px;">${item.emoji||'☕'}</div>`}
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-sm acc" onclick="saveEditItem(${i})">💾 Sauvegarder</button>
+        <button class="btn-sm" onclick="toggleEditItem(${i})">Annuler</button>
+      </div>
     </div>`).join('');
 }
 function addMenuItem(){
