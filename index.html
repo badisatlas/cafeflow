@@ -2368,10 +2368,9 @@ function editImgChosen(e, i){
   const file=e.target.files[0]; if(!file) return;
   const r=new FileReader();
   r.onload=ev=>{
-    S.menu[i].img=ev.target.result;
-    saveState();
-    renderMenuList();
-    // Re-open the edit panel after re-render
+    if(S.menu[i]) S.menu[i].img=ev.target.result;
+    if(typeof saveImgStore==='function') saveImgStore();
+    saveData(); renderMenuList(); renderMenu();
     setTimeout(()=>{
       const p=document.getElementById('mi-edit-'+i);
       if(p) p.classList.add('open');
@@ -2385,13 +2384,15 @@ function saveEditItem(i){
   const namear=(document.getElementById('ei-namear-'+i).value||'').trim();
   const price=parseFloat(document.getElementById('ei-price-'+i).value);
   const cat=document.getElementById('ei-cat-'+i).value;
-  if(!namefr||isNaN(price)) return;
+  if(!namefr||isNaN(price)){ toast(t('fillFields')); return; }
+  if(!S.menu[i]) return;
   S.menu[i].namefr=namefr; S.menu[i].name=namefr;
   S.menu[i].namear=namear;
   S.menu[i].price=price;
   S.menu[i].cat=cat;
-  saveState();
-  renderMenuList();
+  if(typeof saveImgStore==='function') saveImgStore();
+  saveData(); renderMenuList(); renderMenu();
+  toast(namefr+' — '+t('saved'));
 }
 
 function setExportRange(r){
